@@ -1,2 +1,2 @@
 # STICI-note
-Semantic and Textual Inference Chatbot Interface note is a completely locally executed chabot for querying textual data.
+Semantic and Textual Inference Chatbot Interface (STICI) note is a chatbot interface for querying textual data designed to be completely locally runnable on an M1 macbook.
