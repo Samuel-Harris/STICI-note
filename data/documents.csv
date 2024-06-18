@@ -1,5 +1,5 @@
 index,source_url,text
-1,https://enterthegungeon.fandom.com/wiki/Bullet_Kin,"Bullet Kin
+0,https://enterthegungeon.fandom.com/wiki/Bullet_Kin,"Bullet Kin
 Bullet Kin are one of the most common enemies. They slowly walk towards the player, occasionally firing a single bullet. They can flip tables and use them as cover. They will also deal contact damage if the player touches them.
 
 Occasionally, Bullet Kin will have assault rifles, in which case they will rapidly fire 8 bullets towards the player before reloading. When an assault rifle wielding bullet kin appears, there will often be more in the same room.
@@ -147,7 +147,7 @@ Rooms created by the Drill can have a Red-Caped Bullet Kin spawn inside them, ev
 It's possible for Red-Caped Bullet Kin to appear in the Aimless Void and Secret Floors such as the Oubliette.
 Red-Caped Bullet Kin are not attacked by companions.
 Red-Caped Bullet Kin will teleport away if the room contains an enemy that cannot be killed, such as Gunreapers or Dead Blows."
-2,https://www.dropbox.com/scl/fi/ljtdg6eaucrbf1aksw5rm/c2%20-%20session%2050%20-%20underground.docx?rlkey=ioqwgkd14i5xk20i3fp38nzgs&e=1&dl=0,"---The Paths through the Underground/Underdark---(9 days of travel)
+1,https://www.dropbox.com/scl/fi/ljtdg6eaucrbf1aksw5rm/c2%20-%20session%2050%20-%20underground.docx?rlkey=ioqwgkd14i5xk20i3fp38nzgs&e=1&dl=0,"---The Paths through the Underground/Underdark---(9 days of travel)
 Wandering through the dark tunnels, the rushing sounds of the underground river begin to fade as it diverges from the cavern. You walk on for miles, the smell of hard water and wet earth. Natural chambers and cavern passways are chained together by the stretches of burrowed earth left in the wake of this massive worm-like creature. Clusters of crystal and other beautiful minerals occasionally line the walls and ceilings of the chambers, glittering with the little light you have to shove back the darkness.
 
 Day 1 goes without issue... sleep.
@@ -178,7 +178,7 @@ When seeing the group, they bark and growl. (if noticed, they appear rather fear
 If asked about tunnel “Big worm eat through! Bring ingoeth! In and out, gone quick, leave mess!”
 
 They must parlay with them, avoiding a battle with a significant trade, or intimidation. Otherwise, a fight ensues! Either way, two kobolds are too scared and freeze up. They are brothers Spurt and Bex, scavenger kobolds. They are timid, but know the tunnels well...ish?"
-3,https://bytes-and-nibbles.web.app/bytes/stici-note-part-1-planning-and-prototyping,"Semantic and Textual Inference Chatbot Interface (STICI-Note) - Part 1: Planning and Prototyping
+2,https://bytes-and-nibbles.web.app/bytes/stici-note-part-1-planning-and-prototyping,"Semantic and Textual Inference Chatbot Interface (STICI-Note) - Part 1: Planning and Prototyping
 
 The start of my RAG to riches story
 
@@ -327,8 +327,8 @@ In this blog, I built a locally run prototype for my chatbot for querying unstru
 
 It’s such a shame that after I had done the research and written all of the code, while I was writing this blog, I read about llmware, a very promising Python framework for building RAG pipelines with small models (sound familiar?). It was even chosen for GitHub Accelerator 2024, a competition for open-source projects on GitHub where chosen projects are given funding, mentorship, and access to resources to help them grow their project. Since I had already built the prototype in LangChain, it didn’t make much sense to tear it down and rebuild it in a fancy new framework that wasn’t as tried-and-tested. I’d love to try the framework out one day if I build another RAG application after this one.
 
-In the next part of the STICI-note blog series, I will be building an evaluation suite to test and compare different inference models and vector DB configurations, so stay tuned and follow me on LinkedIn to be notified when it comes out!""
-4,https://github.com/llmware-ai/llmware,""llmware
+In the next part of the STICI-note blog series, I will be building an evaluation suite to test and compare different inference models and vector DB configurations, so stay tuned and follow me on LinkedIn to be notified when it comes out!"
+3,https://github.com/llmware-ai/llmware,"llmware
 
 Building Enterprise RAG Pipelines with Small, Specialized Models
 llmware provides a unified framework for building LLM-based applications (e.g, RAG, Agents), using small, specialized models that can be deployed privately, integrated with enterprise knowledge sources safely and securely, and cost-effectively tuned and adapted for any business process.
@@ -7451,8 +7451,8 @@ Brett Madden, who played Alice Wake in the first game, sadly passed away in Sept
 While the first game was an action-adventure game that implemented horror elements, Alan Wake 2 is a full-blown survival-horror game.
 Unlike the first game that was published by Microsoft Studios, the sequel is published by Epic Games Publishing.
 The game was initially a digital-only release due to various shifts towards a digital-only market. This was also done to keep the price of the game down at launch. However despite initially saying there were no plans for a physical release, in June 2024 along with a trailer and release date announcement of the first DLC it was revealed that a physical version would be released that October, a year after the digital release. Both a physical version of the digital deluxe version (inclusive of the DLC) and a limited run collector's edition were announced.
-The second entry in Remedy's Max Payne series, Max Payne 2: The Fall of Max Payne, also had two playable protagonists (Max Payne and Mona Sax).""
-18,https://www.polygon.com/23691206/best-fantasy-books-sci-fi-2023,""The best sci-fi and fantasy books of 2023
+The second entry in Remedy's Max Payne series, Max Payne 2: The Fall of Max Payne, also had two playable protagonists (Max Payne and Mona Sax)."
+18,https://www.polygon.com/23691206/best-fantasy-books-sci-fi-2023,"The best sci-fi and fantasy books of 2023
 It’s been a stellar year in speculative fiction
 
 By Nicole Clark, Sadie Gennis, and Polygon Staff  Updated Dec 8, 2023, 10:00am EST  34 Comments / 34 New
