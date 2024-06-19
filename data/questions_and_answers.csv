@@ -3,10 +3,15 @@ index,document_index,multisource,question,answer
 1,0,False,"What kind of gun does the bandana bullet kin use?","The bandana bullet kin wields a machine pistol."
 2,0,True,"Which enemy types wield an AK-47?","Assault-rifle wielding Bullet and Tankers wield AK-47s."
 3,0,True,"What makes jammed enemies different?","Jammed Keybullet Kin drop 2 keys instead of 1, jammed Chance Kins have a chance to drop twice the loot, and jammed red-Caped Bullet Kin deal contact damage. Additionally, Jammed Keybullet Kin Jammed variations run faster and will take less time to teleport away from the player if they are not destroyed quickly."
-4,1,False,,
-5,1,False,,
-6,1,True,,
-7,1,True,,
+4,1,False,"What do the giants look like?","One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested."
+5,1,False,"What happens on day 2?","After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn."
+6,1,True,"What enemies are encountered in the second encounter?","26 kobolds and 1 kobold inventor are encountered in the second encounter."
+7,1,True,"What monsters are encountered in this journey?","Ropers, kobolds, kobold inventors, fire giants, and fire giant dreadnoughts."
 8,2,False,,
 9,2,False,,
 10,2,True,,
