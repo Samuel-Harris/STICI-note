@@ -29,10 +29,24 @@ For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres
 13,3,False,"When was UTF-8 support added for European languages?","Wednesday 3rd April in the v0.2.7 Update"
 14,3,True,"What kind of model is the bling-phi-3 model","The bling-phi-3 model is the newest and most accurate BLING/DRAGON model. BLING models are small CPU-based RAG-optimized, instruct-following 1B-3B parameter models. DRAGON models are production-grade RAG-optimized 6-7B parameter models - "Delivering RAG on ..." the leading foundation base models."
 15,3,True,"In which versions were the SLIM models updated?","The SLIM models were updated in versions 0.2.3, 0.2.6, 0.2.12, 0.3.0, and 0.3.1"
-16,4,False,"",
-17,4,False,,
-18,4,True,,
-19,4,True,,
+16,4,False,"How do I make a button?","import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, "Click 'run' to generate a random number")
+
+import random
+random.randint(0, 1000)"
+17,4,False,"When might I use caching?","You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings."
+18,4,True,"What are the ways of grouping UI elements together?","UI elements can be grouped together using the following methods:
+- Create an array of UI elements.
+- Create a dictionary of UI elements.
+- Embed a dynamic number of UI elements in another output.
+- Create a hstack (or vstack) of UI elements with on_change handlers.
+- Create a table column of buttons with on_change handlers
+- Create a form with multiple UI elements."
+19,4,True,"What are the parameters for the mo.ui.text function?","The parameters for mo.ui.text are label and placeholder. These are both optional."
 20,5,False,,
 21,5,False,,
 22,5,True,,
