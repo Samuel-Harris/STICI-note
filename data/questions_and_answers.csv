@@ -12,10 +12,16 @@ The other giant  stands a tall giant in more mobile iron, clutching a dangerous-
 You encounter 2 ropers seeking the next burrowed entrance left by the Kryn."
 6,1,True,"What enemies are encountered in the second encounter?","26 kobolds and 1 kobold inventor are encountered in the second encounter."
 7,1,True,"What monsters are encountered in this journey?","Ropers, kobolds, kobold inventors, fire giants, and fire giant dreadnoughts."
-8,2,False,,
-9,2,False,,
-10,2,True,,
-11,2,True,,
+8,2,False,"What were the requirements for the project?","The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent."
+9,2,False,"What data did was used to test the prototype?","Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype."
+10,2,True,"What framework was chosen to execute the RAG process and what alternatives were considered?","The LangChain framework was used to orchestrate the RAG process. Llamaindex and LitGPT were also considered during development. Llmware was considered after development had finished."
+11,2,True,"Which large language models and vector databases were shortlisted for this project?","The ""tinyllama-1.1b-chat-v1.0 Q6_K"", ""Phi 3 Q4_K_M"", ""bartowski/dolphin-2.8-experiment26-7b-GGUF Q3_K_L"", ""mgonzs13/Mistroll-7B-v2.2-GGU"", and ""QuantFactory/Meta-Llama-3-8B-Instruct Q3_K_M"" large language models and the ""Chroma"", ""Qdrant"", and ""Vespa"" vector databases were shortlisted for this project."
 12,3,False,,
 13,3,False,,
 14,3,True,,
