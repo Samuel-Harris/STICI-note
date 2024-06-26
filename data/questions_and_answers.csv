@@ -47,10 +47,10 @@ random.randint(0, 1000)"
 - Create a table column of buttons with on_change handlers
 - Create a form with multiple UI elements."
 19,4,True,"What are the parameters for the mo.ui.text function?","The parameters for mo.ui.text are label and placeholder. These are both optional."
-20,5,False,,
-21,5,False,,
-22,5,True,,
-23,5,True,,
+20,5,False,"What are the key topics of this article?","The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact""."
+21,5,False,"Do I have to do something all by myself to be acknowledged for it?","You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact."
+22,5,True,"What are the given examples of common challenges?","The given examples of common challenges are: ""you create a comprehensive analysis but nobody is acting on it""; ""you ran an experiment but nobody is using the results""; ""you built a predictive model, but the team you built it for is not using it""; and ""you created a dashboard but nobody is looking at it""."
+23,5,True,"What are the four steps to become more impact-focused?","The four steps to become more impact-focused are: ""Step 1: Understand what impact looks like for your role and measure your success accordingly"", ""Step 2: Ensure your work solves a real business problem"", ""Step 3: Ensure there is buy-in for your work"", and ""Step 4: Focus your time on the highest-impact thing""."
 24,6,False,,
 25,6,False,,
 26,6,True,,
