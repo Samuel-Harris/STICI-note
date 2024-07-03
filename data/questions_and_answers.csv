@@ -59,10 +59,10 @@ random.randint(0, 1000)"
 29,7,False,"Who ambushes the party at Wyrm's lookout?","On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout."
 30,7,True,"What are the emperor's aliases?","The emperor has also known as the ""Dream Guardian"", the ""Dream Visitor"", and ""Balduran""."
 31,7,True,"Who was Duke Stelmane?","Duke Stelmane was a major figure of the Knights of the Shield, a lawful and neutral evil conglomerate of politicians and merchants manipulating events behind the scenes, acting as the Emperor's envoy while it secretly kept her enthralled. Duke Belynne Stelmane dies recently."
-32,8,False,,
-33,8,False,,
-34,8,True,,
-35,8,True,,
+32,8,False,"What did I drink at the pintxo bars?","You drank txakoli at the pintxo bars."
+33,8,False,"Which part of the trip did I like the most?","Your favourite part of the trip was your four days on the Camino"
+34,8,True,"Where was I offered desserts?","You ate a delightful puff pastry and custard-filled local treat, and a slice of Basque cheesecake at Otaegui, and you were beckoned with cake in the camino."
+35,8,True,"What forms of exercise did we do?","You did hiking and surfing."
 36,9,False,,
 37,9,False,,
 38,9,True,,
