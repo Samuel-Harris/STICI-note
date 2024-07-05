@@ -63,10 +63,10 @@ random.randint(0, 1000)"
 33,8,False,"Which part of the trip did I like the most?","Your favourite part of the trip was your four days on the Camino"
 34,8,True,"Where was I offered desserts?","You ate a delightful puff pastry and custard-filled local treat, and a slice of Basque cheesecake at Otaegui, and you were beckoned with cake in the camino."
 35,8,True,"What forms of exercise did we do?","You did hiking and surfing."
-36,9,False,,
-37,9,False,,
-38,9,True,,
-39,9,True,,
+36,9,False,"What is the meaning behind the infrared scenes?", "The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members."
+37,9,False,"How do the people who commit atrocious acts and those that are complicit in these acts differ?","The Zone of Interest does not really differentiate between evil-doers and those supporting such evil."
+38,9,True,"Who is in the family that this film is about?","The film takes the perspective of the Hoss family. The Hoss family consists of: the patriarch Rudolf and his wife, Hedwig;their two sons and three daughters, the youngest still a baby; and Hedwig's mother."
+39,9,True,"What items do Rudolf's family take from the Jews and who takes them?","Rudolf's wife, Hedwig, often receives luxury and expensive items taken from the Jews. On one occasion, she is seen receiving a fancy fur coat with lipstick lying inside one of the pockets. The Rudolf's children are also seen collecting and playing with gold teeth taken from the remains of the dead Jews."
 40,10,False,,
 41,10,False,,
 42,10,True,,
