@@ -71,10 +71,10 @@ random.randint(0, 1000)"
 41,10,False,"What is the proposed change for the British museum","The British Museum should have a Daddy’s section alongside the current Mummy exhibition."
 42,10,True,"What are the proposed changes that affect healthcare?","The proposed changes that affect healthcare are: any possible schemes thought up by Government, Council , NHS etc,  such as closure of Hosptitals, workplace parking levy etc will be preceded with a Public Consultation which we will then ignore; in an effort to reduce the problems faced by the NHS , it is proposed to reduce pregnancy from nine to seven months; and with Government helped finance, AstraZeneca should buy out Pfizer, then, as we would have the rights to Viagra, the economy may stay up longer."
 43,10,True,"What versions of the Manicfesto are there?","There is the Manicfesto proposals, the General Election 2022 Manicfesto, and the General Election 2019 Manicfesto."
-44,11,False,,
-45,11,False,,
-46,11,True,,
-47,11,True,,
+44,11,False,"How much faster is the Tesla A100 compared to the Tesla V100?","When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100."
+45,11,False,"For what work did I receive criticism for my reduction of FLOPS?","You received criticism for your research on sparse network training."
+46,11,True,"Other than this blog post, what has the author written?","The author has also written: a paper about the emergence of instabilities in large language models and a more accessible blog post on the same topic; a LLM.int8() paper; a sparse training blog post; a TPU vs GPU blog post; and a paper about k-bit inference scaling laws."
+47,11,True,"In what contexts is BERT mentioned?","It is mentioned that for BERT large during training, the input and weight matrix of any matrix multiplication fit neatly into the L2 cache of Ada (but not other Us). The author also mentions that they benchmarked the time for 500 mini-batches for BERT Large during inference (excluding the softmax layer) on the 4x RTX 2080 Ti system. They chose BERT Large inference since, from their experience, this is the deep learning model that stresses the GPU the most."
 48,12,False,,
 49,12,False,,
 50,12,True,,
