@@ -89,10 +89,16 @@ let [1, second_element, ..] = list
 53,13,False,,
 54,13,True,,
 55,13,True,,
-56,14,False,,
-57,14,False,,
-58,14,True,,
-59,14,True,,
+56,14,False,"How is the narrator related to Perry","Perry is the narrator's brother"
+57,14,False,"How long has the narrator been sober for?","The author had been sober for seven hundred and thirty days."
+58,14,True,"What things did Jackie remember differently to what she saw?","In her and Perry's childhood home, Jackie didn't remember having a projector room and she remembered the doorway to the kitchen being on the other side of the living room. She also remembered that she had almost killed her brother, Perry, seven hundred and thirty days ago in a car accident, when she actually did kill her brother in that accident."
+59,14,True,"What references to alcohol are there","The narrator, Jackie, had been sober for seven hundred and thirty days. Seven hundred and thirty days ago, Jackie and Perry had gotten into a car accident that almost killed the two because Jackie had been driving after drinking Bacardi Limon.
+
+Jackie saw a translucent memmory of her dad sitting motionless at a table with an empty glass of Apple-Schnapple and an empty bottle of Jim Beam. Jackie also remembered he father giving her beer as a child and her mother ignoring this.
+
+She used the death of her parents as an excuse for her alcoholism for so long, because admitting that they helped create the monster she would eventually become was like a knife to the heart. And knowing she had been too weak to conquer the addiction from her own volition just made the weapon twist in her chest.
+
+Finally, at the end of the story, Jackie licked the cracks on her lips as her eyes closed shut, imagining the oaky comfort of bourbon on her tongue. She felt herself drift, which she thought a good thing, because she needed the rest."
 60,15,False,,
 61,15,False,,
 62,15,True,,
