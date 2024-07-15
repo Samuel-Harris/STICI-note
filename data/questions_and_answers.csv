@@ -115,10 +115,10 @@ Finally, at the end of the story, Jackie licked the cracks on her lips as her ey
 73,18,False,"Who was resurrected with a group of other murder victims?","Lou was resurrected along with a handful of other women murdered by a single serial killer."
 74,18,True,"Which books have dragons in them?","The books 'To Shape a Dragon’s Breath', 'FOURTH WING', and 'Day of the Fallen Night' have dragons in them."
 75,18,True,"Which books contain multiple narratives?","The books 'Same Bed Different Dreams', 'EVERY DROP IS A MAN’S NIGHTMARE', 'The Museum of Human History', 'Witch King', and 'The Terraformers' each use multiple narratives."
-76,19,False,,
-77,19,False,,
-78,19,True,,
-79,19,True,,
+76,19,False,"What categories does this paper split the RAG technique paradigm into?","This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation."
+77,19,False,"In what way can including unrelated documents affect the RAG system?","Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy."
+78,19,True,"What is the recommended way to index text for question-answering?","It is recommended to first apply text normalization processes such as tokenization, stemming, and the removal of stop words to enhance the text’s suitability for indexing. Pretrained LMs can then be used to generate semantic vector representations of texts. These vectors are stored, enabling rapid and precise retrieval from extensive data collections, significantly enhancing retrieval efficiency. Sentence-level indexing is more appropriate than document-level indexing for summarizing documents to precisely locate answers."
+79,19,True,"What are the advantages and disadvantages of the BM25 algorithm?","The advantage of BM25 is that it is efficient. The disadvantage of the BM25 algorithm is that it focuses on term frequency and presence for document algorithm, so it often overlooks the semantic information of queries."
 80,19,False,,
 81,19,False,,
 82,19,True,,
