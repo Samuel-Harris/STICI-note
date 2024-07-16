@@ -3054,463 +3054,827 @@ pub fn main() {
   let kitty = Cat(name: ""Nubi"")
   stroke(kitty)
 }"
-13,https://darknetdiaries.com/transcript/146/,"[START OF RECORDING]
 
+13,https://towardsdatascience.com/gpt-from-scratch-with-mlx-acf2defda30e,"GPT from Scratch with MLX
+Define and train GPT-2 on your MacBook
+Pranav Jadhav
+Towards Data Science
+Pranav Jadhav
+
+·
+Follow
+
+Published in
+Towards Data Science
+
+31 min read
+·
+2 days ago
+
+Table of Contents
+Preparing the data
+Coding GPT-2
+Input Embeddings
+Positional Embeddings
+Self Attention
+Keys, Queries, and Values
+Multi-Head Attention
+MLP
+Block
+Layernorms and Skip Connections
+Forward Pass
+Sampling
+Initialization
+Training Loop
+References
+Preparing the data
+Install mlx and run the following imports.
+
+import mlx.core as mx
+import mlx.nn as nn
+import mlx.optimizers as optim
+import mlx.utils as utils
+import numpy as np
+import math
+The first step to training an LLM is collecting a large corpus of text data and then tokenizing it. Tokenization is the process of mapping text to integers, which can be fed into the LLM. Our training corpus for this model will be the works of Shakespeare concatenated into one file. This is roughly 1 million characters and looks like this:
+
+First Citizen:
+Before we proceed any further, hear me speak.
+
+All:
+Speak, speak.
+
+First Citizen:
+You are all resolved rather to die than to famish?
+
+All:
+Resolved. resolved.
+
+First Citizen:
+First, you know Caius Marcius is chief enemy to the people.
+...
+First, we read the file as a single long string into the text variable. Then we use the set() function to get all the unique characters in the text which will be our vocabulary. By printing vocab you can see all the characters in our vocabulary as one string, and we have a total of 65 characters which till be our tokens.
+
+# Creating the vocabulary
+with open('input.txt', 'r', encoding='utf-8') as f:
+    text = f.read()
+vocab = sorted(list(set(text)))
+vocab_size = len(vocab)
+
+print(''.join(vocab))
+# !$&',-.3:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+print(vocab_size)
+# 65
+Production models will use tokenization algorithms like byte-pair encoding to generate a larger vocabulary of sub-word chunks. Since our focus today is on the architecture, we will continue with character-level tokenization. Next, we will map our vocabulary to integers known as token IDs. Then we can encode our text into tokens and decode them back to a string.
+
+# Create mapping from vocab to integers
+itos = {i:c for i,c in enumerate(vocab)} # int to string
+stoi = {c:i for i,c in enumerate(vocab)} # string to int
+encode = lambda x: [stoi[c] for c in x]
+decode = lambda x: ''.join([itos[i] for i in x])
+
+print(encode(""hello world""))
+# [46, 43, 50, 50, 53, 1, 61, 53, 56, 50, 42]
+print(decode(encode(""hello world"")))
+# hello world
+We use theenumerate() function to iterate over all characters and their index in the vocabulary and create a dictionary itos which maps integers to characters and stoi which maps strings to integers. Then we use these mappings to create our encode and decode functions. Now we can encode the entire text and split training and validation data.
+
+data = encode(text)
+split = int(0.9 * len(data))
+train_data = data[:split]
+val_data = data[split:]
+Currently, our training data is just a very long string of tokens. However, we are trying to train our model to predict the next token some given previous tokens. Therefore our dataset should be comprised of examples where the input is some string of tokens and the label is the correct next token. We need to define a model parameter called context length which is the maximum number of tokens used to predict the next token. Our training examples will be the length of our context length.
+
+Let’s look at the first ctx_len+1 tokens.
+
+ctx_len = 8
+print(train_data[:ctx_len + 1])
+# [18, 47, 56, 57, 58,  1, 15, 47, 58]
+# x: [18, 47, 56, 57, 58,  1, 15, 47] | y: 58
+This is one training example where the input is “18, 47, 56, 57, 58, 1, 15, 47” and the desired output is “58”. This is 8 tokens of context. However, we also want to train the model to predict the next token given only 7, 6, 5 … 0 tokens as context which is needed during generation. Therefore we also consider the 8 sub examples packed into this example:
+
+ctx_len = 8
+print(train_data[:ctx_len + 1])
+# [18, 47, 56, 57, 58,  1, 15, 47, 58]
+# 8 sub examples
+# [18] --> 47
+# [18, 47] --> 56
+# [18, 47, 56] --> 57
+# [18, 47, 56, 57] --> 58
+# [18, 47, 56, 57, 58] --> 1
+# [18, 47, 56, 57, 58, 1] --> 15
+# [18, 47, 56, 57, 58, 1, 15] --> 47
+# [18, 47, 56, 57, 58, 1, 15, 47] --> 58
+Notice that the labels are simply the inputs shifted left.
 
+print(""inputs: "", train_data[:ctx_len])
+print(""labels: "", train_data[1:ctx_len+1]) # labels = inputs indexed 1 higher
+# inputs: [18, 47, 56, 57, 58,  1, 15, 47]
+# labels: [47, 56, 57, 58,  1, 15, 47, 58]
+At index 0 the input is 18 and the label is 47. At index 1 the input is everything before and including index 1 which is [18, 47] and the label is 56, etc. Now that we understand that the labels are simply the input sequence indexed one higher we can build our datasets.
 
-JACK:	So, I was looking through Wikileaks the other day as one does, right, and I came across something that I found rather fascinating. There’s a thing that the CIA developed called Weeping Angel. [MUSIC] So, if you have a Samsung smart TV, there’s a really odd feature in it; it’s called Fake Off. When the TV is on, you can push Mute, 182, then Power, and the TV appears to turn off, but it doesn’t. Now, these smart TVs often have a microphone built in so you can give them voice commands, and when the TV is off, the mic isn’t listening. But when  the TV is in Fake Off, the mic is still active. So, what the CIA did was they developed some kind of spyware for the Samsung smart TV, where it would record the audio from the mic and store it on the TV. So, I imagine a scenario is that a CIA agent would want to plant a listening device in someone’s bedroom and goes in, but then sees — oh, they’ve got a Samsung smart TV, which is already a listening device. No need to leave behind a bug that might get discovered. Let’s just live off the land, as they say. So, the CIA agent uploads the spyware onto the TV and then puts the TV in Fake Off mode and leaves. The TV sits there, recording all the audio in the room, but appears to be off. Then the CIA agent can remotely connect back to the TV and get the audio files or come back into the room later and retrieve them off the TV. It’s wild what spy gear is developed by the federal authorities, isn’t it?
+# Creating training and validation datasets
+ctx_len = 8
+X_train = mx.array([train_data[i:i+ctx_len] for i in range(0, len(train_data) - ctx_len, ctx_len)])
+y_train = mx.array([train_data[i+1:i+ctx_len+1] for i in range(0, len(train_data) - ctx_len, ctx_len)])
+X_val = mx.array([val_data[i:i+ctx_len] for i in range(0, len(val_data) - ctx_len, ctx_len)])
+y_val = mx.array([val_data[i+1:i+ctx_len+1] for i in range(0, len(val_data) - ctx_len, ctx_len)])
+We loop through the data and take chunks of size ctx_len as the inputs (X) and then take the same chunks but at 1 higher index as the labels (y). Then we take these Python lists and create mlx array objects from them. The model internals will be written with mlx so we want our inputs to be mlx arrays.
 
+One more thing. During training we don’t want to feed the model one example at a time, we want to feed it multiple examples in parallel for efficiency. This group of examples is called our batch, and the number of examples in a group is our batch size. Thus we define a function to generate batches for training.
 
+def get_batches(X, y, b_size, shuffle=True):
+    if shuffle:
+        ix = np.arange(X.shape[0])
+        np.random.shuffle(ix)
+        ix = mx.array(ix)
+        X = X[ix]
+        y = y[ix]
+    for i in range(0, X.shape[0], b_size):
+        input = X[i:i+b_size]
+        label = y[i:i+b_size]
+        yield input, label
+If shuffle=True, we shuffle the data by indexing it with a randomly shuffled index. Then we loop through our dataset and return batch-size chunks from input and label datasets. These chunks are known as mini-batches and are just stacked examples that we process in parallel. These mini-batches will be our input to the model during training.
 
-(INTRO):	[INTRO MUSIC] These are true stories from the dark side of the internet. I’m Jack Rhysider. This is Darknet Diaries. [INTRO MUSIC ENDS]
+Here’s an example of a minibatch of 4 examples with context length 8.
 
 
+A single minibatch (image by author)
+This minibatch packs 32 next-token prediction problems. The model will predict the next token for each token in the input and the labels will be used to calculate the loss. Notice that the labels contain the next token for each index of the inputs.
 
-JACK:	Why don’t you start by telling us your name and what do you do?
+You’ll want to keep this picture in your mind because the shapes of these tensors will get hairy. For now, just remember that we will input a tensor of shape (batch_size, ctx_len) to the model.
 
+Coding GPT-2
+Let’s look at the GPT-2 architecture to get an overview of what we are trying to implement.
 
 
-JOSEPH:	My name is Joseph Cox. I’m the author of Dark Wire, and I’m also a co-founder and journalist at 404 Media.
+GPT-2 Architecture (image by author)
+Don’t worry if this looks confusing. We will implement it step by step from bottom to top. Let’s start by implementing the input embeddings.
 
+Input Embeddings
+The purpose of the input embedding layer is to map token IDs to vectors. Each token will be mapped to a vector which will be its representation as it is forwarded through the model. The vectors for each token will accumulate and exchange information as they pass through the model and eventually be used to predict the next token. These vectors are called embeddings.
 
-
-JACK:	What’s 404 doing?
-
-
-
-JOSEPH:	So, 404 is a group of four of us; myself, Jason Kebler, Emanuel Maiberg, and Samantha Cole, and we are all former staff members at Vice’s Motherboard, the technology site. Unfortunately, Vice made some very poor managerial decisions from the executives and that company is now bankrupt. But we left to make our own company where we want to continue doing tech investigations. We want to continue telling stories, and how about we do it in a way where we own the company so we can not only make journalistic decisions and editorial ones, but we can make business ones as well in the hope that we can just keep on doing what we love doing, which is unearthing stories, verifying information, and publishing stuff that’s in the public interest.
-
-
-
-JACK:	Well, you’ve created quite a name for yourself over the years. I always see your name popping up in other books. Like, an article by Joseph Cox said this, or another story here is quoting you in different things. So, just really well done on your journalism. With this latest project you’re working on, Dark Wire — so, I started reading this Dark Wire and I was just like, oh my god, this is amazing, and I was hoping we could talk about it.
-
-
-
-JOSEPH:	Yeah, of course. I mean, I have been working on this book for three, maybe four years at this point, speaking to essentially every sort of person involved whether that’s law enforcement, that’s also a lot of very dangerous people, but I don’t think I’ve ever been more obsessed with a story. I mean, I’m sure of — I’ve never been more obsessed with a story than this one.
-
-
-
-JACK:	Okay, so, this is an incredibly nuanced story which is going to fill your head with a lot of questions. I know it did that to me. But let’s first start with some context. I am not a criminal, but I make a lot of effort to be private and secure, and the first time I made an effort to have a privacy phone was after I read an article by Joseph. He was using an iPod Touch and did all his phone calls over Wifi. The main advantage here is that there’s no SIM card in an iPod Touch. It basically has all the features of an iPhone, just no SIM card. So, that means nobody can SIM-swap you. But also, SIM cards are notorious for beaconing out to cell towers and giving fairly accurate location data to cell phone providers, and that’s even if your phone is always using a VPN, because SIM cards communicate with cell towers using baseband technology, which operates completely outside of VPNs. So, this iPod Touch was the main phone that Joseph was using to keep private.
-
-
-
-JOSEPH:	That’s been my life for years at this point.
-
-
-
-JACK:	Yeah. You use that as a secure phone, right?
-
-
-
-JOSEPH:	Yes. For years I used an iPod Touch. It’s a secure device. Now I’ve moved onto an iPad Mini because the iPod’s no longer supported, unfortunately.
-
-
-
-JACK:	When Apple stopped supporting the iPod Touch, I switched over to GrapheneOS, which is a fork of Android. It’s an open-source project but with a lot more privacy features added in. Unlike Android, they don’t send everything I do back to Google. My messaging app of choice is Signal, which I can also make phone calls with because Signal is end-to-end encrypted, which means the people at Signal can’t see my messages; only the receiver of who I’m chatting with can. I do so much more to remain private online. So you can see Joseph and I, we take our mobile privacy very seriously, and we want the best there is. Then one day, Joseph heard about this new privacy phone called Anom.
-
-
-
-JOSEPH:	[MUSIC] So, I call it an ecrypted phone, which is simultaneously a helpful term but then also not very helpful at all. We don’t really have the terminology for it. But yes, it’s a combination of things. It had a secure communications app that allows you to send end-to-end encrypted messages to one another with photos and voice memos and all of that, very much like a Signal or a modern WhatsApp or a Threema or whatever, right? It also was a custom phone operating system. It is based on — Android, somewhat, is actually a fork of GrapheneOS, the privacy-focused operating system. Apparently Anom had also removed all GPS functionality so that there would be no way for law enforcement or Google or sort of third-party apps to track the location of those devices.
-
-
-
-JACK:	I think the features of Anom are amazing. I mean, it took GrapheneOS, the phone operating system I already use which is considered great already for privacy, and it made it even more locked down? What? The features just kept going. For instance, Anom had its own little end-to-end encryption chat app built in, but it was in a secret spot. The thing is there were all these dummy apps on the phone. Like, if you look at the phone, it has Tinder on there and Candy Crush. They look like normal apps, but they’re just decoys. They didn’t really work. Another app you’d see on the home screen was a calculator app which worked just fine like a regular calculator, except if you were to open the calculator app and punch in a certain code, [MUSIC] that’s when it would open up the secret Anom chat messaging app. It was hidden beneath a few layers of obfuscation.
-
-
-
-JOSEPH:	Which, hey, that’s pretty good if you’re having a private conversation and, I don’t know, an abusive partner snatches your phone, trying to rummage through your messages, or if you’re a criminal a police officer does it or a border official or something like that. So, there’s that. There’s also voice-scrambling. So, you know how on Signal you can send a voice note for one another and that’s very popular on other messaging apps; on Anom, you could do — one way would add either a high-pitched distortion or a low, deep distortion to it as well, and that would mask what your real voice sounded like.
-
-
-
-JACK:	Who is the brain child behind Anom? Who created this thing?
-
-
-
-JOSEPH:	So, Anom was created by someone called Afgoo. I have to be a little bit careful about what I say about them for reasons that we’ll get into, but they are, from what I’ve learned, a pretty sort of nerdy tech expert for the criminal underground. They were connected to a very well-known criminal called Hakan Ayik, who at one point was Australia’s most-wanted man. This Afgoo character sells or did sell phones in this space before eventually deciding, well, I’m gonna go make my own. Like, rather than working underneath other sellers and other encrypted phone companies, I’m gonna create my own tech startup for the criminal underground.
-
-
-
-JACK:	For the criminal underground? Wait a minute. What? All the features of this phone, they’re all fine. None of them are illegal. But if you’re specifically making a phone for criminals, knowingly and purposely helping criminals conduct their crimes, now suddenly what Afgoo was doing was illegal.
-
-
-
-JOSEPH:	Yes, legally it’s very, very messy because it’s not illegal, generally speaking, to sell or use an encrypted messaging app, which is a good thing, to be clear. That should not be illegal. But a lot of these companies in the, I would say, shadier part of the encryption industry, the thing that differentiates them is that they deliberately facilitate crime, as in it’s not like Signal whose users will of course include criminals, or even Apple iMessage or something, just because they’re very popular. One of the taglines was — I think it was ‘designed for criminals by criminals’, which is just asking for trouble, really. But Anom had all of those sorts of bells and whistles you would expect; wiping the phone, all of that sort of thing, and it really positioned itself as sort of the Rolls-Royce of the encrypted phone industry. If you wanted a super-secure device from a company that didn’t care if you were a criminal — if anything, it likes the fact that you’re a criminal — you could turn to Anom.
-
-
-
-JACK:	So, I learned from the book that this is quite a lucrative underground criminal industry. Anom was not the only one here, and you gotta read the book about what happened to all the other encrypted phone companies. Each of the competitors have just as wild and crazy a story of what was going on with Anom, and Joseph does a great job of giving you a tour of this whole criminal encrypted phone industry. But it bugs me because like I said, I’m not a criminal, but I love having a highly-secure phone with the best privacy you can get. So, it’s a weird line for me that this is even a criminal industry.
-
-
-
-It’s kind of like if someone started a hammer company selling hammers, but it was just selling hammers to criminals to kill people with, and it had features on it like ‘non-slip handle for when blood gets on it’ or ‘blunt side for smashing skulls and a fork side for stabbing through stomaches’. Really, it’s just a hammer that’s no different than any other hammer, but it has the sole intention of being for criminals to cause pain and injury, and the company works exclusively with criminals to find ways to improve it. Why? Why not just make a great hammer that the whole world can use? Why make these secure phones for criminals? Privacy and security is important to the whole world, not just criminals. Anyway, so, Anom was this really sleek, super-private phone that you could buy and have ultra-secure chats with others, and it was purpose-made for criminals.
-
-
-
-JOSEPH:	That is basically what Anom was pitching itself as to its customers and even to its sellers. It was saying your messages will be end-to-end encrypted. We can’t see what’s going on. We won’t turn over data to law enforcement. Our servers are outside the reach of the Five Eyes, all of the normal sort of marketing and privacy benefits you would expect, except, of course, that wasn’t true. Anom was doing something else in the background.
-
-
-
-JACK:	So, what were they doing?
-
-
-
-JOSEPH:	[MUSIC] So, it’s very, very interesting on the technical level, and what it is is that Anom basically created a ghost contact that was added to every conversation, and it received a blind carbon copy, a BCC, of every message sent across the platform. So, when Criminal A was talking to Criminal B about a cocaine shipment, that was secretly being sent off to Anom, and the users were none the wiser. It was like having a spy in everybody’s pocket, in their back pocket, looking over their shoulder. They could just see into everything.
-
-
-
-JACK:	So, while it’s true it was end-to-end encrypted, it was also end-to-end encrypted directly to Anom servers.
-
-
-
-JOSEPH:	Yes. It’s almost — is end-to-end-to-end encrypted. There’s another ‘end’ in there.
-
-
-
-JACK:	So, this story just took a ninety-degree turn. The phone was not actually as private as it was advertising itself to be. But hold on tight, because we’re taking another ninety-degree turn right now. You gotta ask yourself, why was Anom wanting copies of every message? No, I don’t think Anom or Afgoo cared about looking at people’s chats. However, Afgoo knew the value of these messages and decided to make a very odd deal to let someone see those chats. I’m not sure how all the logic went down here. We really don’t know how this deal was made, but my best guess is since Afgoo wasn’t a stranger to being a criminal himself and he may have thought this whole encrypted phone business was actually illegal and could go very wrong for him at some point and he needed a plan — I really don’t know. I want to think he was a brilliant businessperson that just played everyone perfectly, but Afgoo’s lawyer advised him to make a deal with the FBI and let them see the encrypted chats. This way, the FBI would appreciate Afgoo and not try to arrest him.
-
-
-
-JOSEPH:	So, why not — Afgoo’s lawyer tells the authorities — would you want to use Anom in your investigations in exchange for leniency if Afgoo ever faces charges, right? It became the ultimate bargaining chip, essentially.
-
-
-
-JACK:	Okay, so, that’s quite a leap. It takes me a beat to just kind of be like, okay, that’s how the new thing’s going, right? It’s a jump.
-
-
-
-JOSEPH:	Yeah, and this is very quickly done in the book, and that’s not because I’m sort of glazing over it. It’s because it just happened really, really quickly, and that’s just the series of events that happened. Now, I don’t know whether that was always the plan or something like that, or was it maybe always in the back of Afgoo’s mind? I don’t know that. But very, very quickly, Anom was put on the table to the FBI back in around 2018, I think is when these conversations were happening.
-
-
-
-JACK:	The FBI and the Australian Federal Police.
-
-
-
-JOSEPH:	Yes, and the Australian Federal Police, for — who for years, they’ve been really stymied by encrypted phones, probably even more than the FBI. In Australia, these sorts of phones are incredibly common among organized crime groups. You’ll have the Italian mafia over there in Australia, them using it, you’ll also have the biker gangs like the Comancheros and the Hell’s Angels. They all use these sorts of phones, and for years, if not more than a decade at this point, the AFP in particular has been running into these phones again and again and again. So, the idea of a backdoor in an encrypted phone is incredibly attractive to them. I mean, what I’ve been told is that when the AFP agents were told about this possibility and the plan to go ahead, they looked like they were kids on Christmas morning.
-
-
-
-JACK:	[MUSIC] So, a deal was made. The FBI and AFP, Australian Federal Police, got access to all the encrypted messages going across Anom. This is where I start to have a million questions. Who the hell is this Afgoo person? An undercover cop acting like a fellow criminal but really working with the feds? What kind of criminal makes deals with the feds like this? If this gets discovered, his whole business is ruined. Or is Afgoo a brilliant businessperson cashing in on both sides of the fence, making money off criminals and federal police at the same time? Maybe he’s playing some 4D chess, trying to be a few moves ahead of everyone. There’s a lot of unanswered questions here, but the AFP were the first to get access to this, and they were looking through the logs and were like, uh, there’s nothing here, because Anom was just a startup company and didn’t have any users yet. With the product all ready and the infrastructure in place, it was time to start marketing the thing. The next plan was figure out how to get these Anom phones in the hands of criminals, specifically criminals, and I guess now I’m starting to see why this phone was purpose-made for criminals; so the FBI and AFP could see what everyone was doing.
-
-
-
-JOSEPH:	So, it starts when Afgoo, the creator of Anom, offers the phones to a particular phone-seller/drug-trafficker in Australia. His name is Domenico Catanzariti, and he used to sell Phantom Secure phones, one of those earlier companies, and when that company was shut down, he obviously doesn’t really have any phones to sell. Well, lo and behold, here comes Afgoo with what looks like it’s gonna be the hottest new phone on the market. [MUSIC] So, they — he provides some of those phones to Catanzariti and just starts using them and just starts talking about them and spreading them around. I think initially the phones were actually just given for free to Catanzariti. It’s almost like a sort of uber technique, Silicon Valley growth technique. I don’t know; just get it out there for free and we’ll figure out the laws, we’ll figure out the market later, but we just want to get devices into people’s hands, basically.
-
-
-
-JACK:	Early users were liking these phones. Word was getting out about them and more orders were being made. Chat messages started to show up, and the AFP could see what was happening.
-
-
-
-JOSEPH:	At least for the Australians, the AFP, it was relatively real time, instantaneous. They could see that, oh, the Comancheros are talking about beating up this guy. Oh, this biker gang is talking about doing a weapons drop-off of high-calibre assault rifles at this time and this location. It was really like peeling back the curtain on these conversations.
-
-
-
-JACK:	Was AFP actually arresting people or were they just watching, trying to figure out what to do at this point?
-
-
-
-JOSEPH:	At the start, the AFP, as far as I know, was simply collecting the intelligence. There is this massive trade-off constantly throughout this entire story which is that, okay, you have a backdoor into a phone, but how do you act on that, do you act on it, and when do you act on the information? Because if you go too loud too quickly, you’re going — it’s going to because obvious to the criminals that something bad is going on, at least for them.
-
-
-
-JACK:	Yeah, yeah. I found this tension while reading the book quite interesting, of, oh my gosh, there’s some crime going on here. We can see it happening. What do we do? Do we bust in? ‘Cause you have to have some sort of good reason how you knew that was happening, and if it was, well, we’ve got access to your chats and your phone, then that’s gonna just ruin the whole company. So, they really have to be very careful, and I’m surprised there wasn’t just some AFP officer like, oh, I’m not gonna be careful; I’m gonna go stop this drug deal, and just not understand the intricacies of it.
-
-
-
-JOSEPH:	Yeah. It got to the point where the people I’ve spoken to, the law enforcement officials around the world, they had to do stuff like basically lie. They had to make up a story where it’s like, okay, we are finally going to strike on this drug lab or this drug warehouse or whatever because it’s so large and we have to act, but we’re going to write the intelligence in such a way that it looks like it’s coming from an informant or a source. There’s gonna be no mention of Anom, no mention of a backdoor, and from a law enforcement perspective, that’s great. Okay, we managed to get the drugs and arrest the people or whatever while without revealing the secret about Anom. On the flip side, there is a justice issue there. That’s basically parallel construction. It’s very complicated. It gets very nuanced. But I do think that civil libertarians would be a little bit aghast at sort of the trade-offs that were being made here on a daily basis.
-
-
-
-JACK:	I think everyone’s aghast at the whole story.
-
-
-
-JOSEPH:	[LAUGHING] Yes, okay.
-
-
-
-JACK:	Yeah, because here’s a situation where the federal police are lying on the record about where they’re getting their intelligence from. Are the citizens of that country okay with that? Here in the US, during court, you’re asked to swear that you’re telling the truth. The cops weren’t telling the truth here. Or, I guess not yet telling the truth. We learn later how they did get this information, but the evidence in these earlier cases did not mention Anom. But additionally, they were working with this criminal, Afgoo, to get these messages. I call him a criminal because if someone makes an app exclusively for criminals to conduct crimes with, then historically, that’s criminal behavior. So, who’s Afgoo and when did the police start making business deals with criminals? Is there proper oversight here? Is this within best practices for the feds? Point to the policy that allows this. This just isn’t sitting right with me. You might say to me, Jack, the ends justify the means. If all this results in a takedown of a lot of criminals, then it’s okay for them to lie and do back-alley deals with criminals.
-
-
-
-Really? [MUSIC] What about Fast and the Furious? This was a real operation done by the ATF, Alcohol, Tobacco, and Firearms, where they set up weapons deals with criminals so they could track where these weapons are going and ultimately try to arrest a bunch of weapon-sellers. Yeah, well, it all went wrong. The ATF made weapons deals but lost track of the guns that were sold. They didn’t make significant arrests and basically armed the very criminals they were trying to find and arrest. This ultimately resulted in a border patrol agent getting killed, and at the scene of the crime was one of the guns the ATF sold to criminals. The ends did not justify the means here. The Fast and the Furious operation was a big mishap, and it showed how the ATF was operating without proper strategy or oversight or following policies put in place. Wait, what is the deal? Did the FBI take ownership of it, or how did they…? Was there a licensing…?
-
-
-
-JOSEPH:	Yes, licensing Anom and stuff, it is — so, the deal itself is between Afgoo and the US authorities and got paid something like $120,000 and then $60,000 for travel expenses, I think it’s how it’s phrased in some of the documents. But Anom basically became an FBI tech company. From what I’ve been told from people with direct involvement, the FBI was picking up the bill. They were paying for infrastructure, they were paying for hardware, Android hardware for the phones — for the app to be flashed on. They were running a tech company, and I think that’s just the craziest thing here. Beyond that, they were running a tech company for criminals.
-
-
-
-JACK:	Yeah, and it’s fascinating, too, that Afgoo was somehow able to control the company in a way that all the developers and suppliers and shippers and every — even the distributors had no idea that the FBI or AFP was involved, right, or even that there was a man in the middle. What was the thought going on in the developer’s head? Did they know that they were building man-in-the-middle encrypted — end-to-end encryption, or what was — what did they think?
-
-
-
-JOSEPH:	So, yeah, I’ve spoken to people who actually coded the app and basically made the phone, and these were completely ordinary developers. One I spoke to who I call Athit in the book — I used a different name just to protect their identity, but they found a freelancing gig online about the secure communications app. They get involved and they’re doing normal coding like they’ve done a million times before for an Android app, and what they’re told is that we make this app and we sell it to businesses. We sell it to corporations to protect their communications, and as part of that, companies like to be able to audit their messages, and that’s very common in banking, very common in finance, all of that sort of thing, for legal reasons.
-
-
-
-JACK:	Yeah, I found that part to be interesting. I didn’t realize how common that was. So, the other day I was looking to see if Google has any sort of end-to-end encryption in their chats, and I didn’t think they did, but they’re like, yeah, we do. I was like, well, shoot, sign me up. It’s like, well, what we have is for businesses, for enterprise, and the way we have it set up is that the admin of the account can see all the messages that your users are sending encrypted. I was like, what? Hold on a second. Why would you have a man-in-the-middle of an encrypted thing? Then I read your book and I was like, oh, this is more common than I realize, where companies do — for instance, I think you mentioned federal agencies have to be able to pull up any communications; e-mails, chats, messages and stuff in case there’s indictments or subpoenas, what was talked about federally, or even state agencies. At least in the US here, this stuff has to be archived. If it’s encrypted, you can’t archive it in a proper way, so there is a reason to get in and take a look. I don’t know, this kind of just surprised me.
-
-
-
-JOSEPH:	Yeah, I mean, Customs and Border Protection, part of DHS, they use Wickr, the encrypted app that many people will be familiar with, but they use an enterprise or government version, which, yes, it’s encrypted, but it has that extra archiving function. The developers of Anom, that’s what they thought they were building. They thought they were building a communications platform for businesses to, yes, talk somewhat securely, but have the messages archived so then, for whatever reason, the administrator can go through them at a later date. That’s what they thought they were doing. What they weren’t told was that the phones were being sold to criminals and the archiving feature is actually for the FBI. Afgoo left that bit out when telling the developers about that, and I mean, just very briefly on there. Like, the compartmentalization that Afgoo did I think is very interesting, as in, there were the people designing the app and they were sort of in their own silo, there were then people making the custom fork of GrapheneOS, the Android operating system, and there was those people, and then somewhere else there were the criminal re-sellers on the ground. These groups never really communicated with one another, and I’m surprised it didn’t leak, to be perfectly honest. I’m genuinely surprised, but somehow it managed to stay a secret at least for a long time.
-
-
-
-JACK:	Too many secrets; Setec Astronomy. I mean, think about it; the criminals think they’re the ones being the most secretive here. They’ve got these super-private Anom phones which you need a PIN to unlock and then go through a dummy calculator app to punch in a secret code to get into the chat apps that are end-to-end encrypted, right? Then they’re doing things like disguising their voice and having disappearing messages and being super secretive about their crimes, trusting Anom with all their secrets. Then there’s Afgoo who is secretly scooping up all these messages and lying to his developers of who these customers are. Then there’s the FBI and AFP who are secretly reading them all and secretly making business deals with Afgoo. I mean, did you know that the FBI was operating a tech startup which was a phone purposely built for criminals to use to message each other? Secrets were kept from you in this story, too. [MUSIC] Wow. Criminals had no idea they were being played, so Anom phones just kept spreading. They ended up making their way to some criminals in Europe, and things really started to heat up there.
-
-
-
-JOSEPH:	The phones start popping up in Europe, and that’s when broadly the Swedish police get involved, and then also the Dutch. They are the two main European agencies that first come forward, because that’s simply where the phones are ending up. Obviously the AFP doesn’t really have jurisdiction over Sweden or the Netherlands, and the FBI, although they are reading the messages by this point, they’re not in English, for a start, and the FBI can’t really go over and start arresting people in the Netherlands, and nor should they. So, they decide to share some of the intelligence with their Swedish and their Dutch counterparts, and it starts to mirror what’s going on in Australia with more intelligence-gathering and the rest here and the rest there. But it’s still very much under wraps even though more and more cops are being looped in.
-
-
-
-JACK:	Some crazy things started happening with Anom at this point. It takes more and more ninety-degree turns. I’m not even going to get into what happened in Europe or South America or Turkey. I’ll simply say that there were a few criminals that loved this Anom phone so much that they tried to purchase ownership of the company and eventually just started calling themselves the CEO of Anom, which when a major underground criminal is saying he’s the CEO of Anom, it really legitimizes the phone for other criminals to want to buy it. So, the Anom phones were starting to grow wings and take on a life of their own in Europe.
-
-
-
-JOSEPH:	At this point I’ve read I think tens if not hundreds of thousands of Anom messages and messages from other providers as well, and what emerges through reading those is that a lot of people who sell these encrypted phones in a particular market or territory, they treat it like having a drug territory, like in the same way that somebody may be a — the wholesale distributor for a certain part of Sweden or maybe Antwerp or something like that. These phone dealers treat their product in the same sort of way.
-
-
-
-JACK:	So, I want to shift gears here to the FBI. So, I got a lot of questions about what the FBI’s doing here. First of all, the FBI handles internal threats to the United States. They’re not the CIA which is doing international investigations. So, I don’t even understand why the FBI would be looking at foreign messages in the first place.
-
-
-
-JOSEPH:	Yeah, I think this is something that a lot of people reading the book are gonna have an issue with, basically. I think that’s the only way to put it, which is like, why is this US law enforcement agency intercepting and reading messages from all over the world? The best answer I have is that — well, there’s two. There’s sort of the legal one which is that the Fourth Amendment only protects people on American soil, right, where you have to get a search-and-seizure warrant to go through communications or a wire-tap order or whatever, right? Not to get too technical. The FBI does not need that for overseas, and that’s basically sort of the loophole that they use, where they were able to go through all of this data. The second one is sort of a — how they see themselves and maybe how they see their ethical obligation as well. But the prosecutors I’ve spoken to who are involved in this case, they just simply see this as a good thing, and they want to go out and they want to shut down all of these criminal gangs. They want to intercept them. I think that there are valid questions about national sovereignty and all of that sort of thing, but that is what the FBI set out to do. [MUSIC] They set out to wire-tap the world, essentially, and they were very, very successful of it.
-
-
-
-JACK:	There’s just so many questions I have. At this point, not many phones were in the US, so the FBI couldn’t really look at US citizens’ chats even if they wanted. But the FBI was heavily involved with Anom creating this startup, basically; funding it, creating the infrastructure, actively monitoring the messages, and it just makes me wonder, have they solved all the cases in the US already? Because to start a tech company and collecting and analyzing and reporting intelligence so that you could give it to other countries, that takes a lot of time and resources. So, whose idea was it to divert FBI resources to focus on stopping crimes in Sweden and Australia?
-
-
-
-JOSEPH:	I mean, it’s partly they’re doing it because they can. They can monitor these communications. They can — yes, they can’t go arrest people themselves, but then they can provide that intelligence to foreign partners. I mean, it’s sort of a overused cliche at this point, the idea of America being the world police or whatever, but there is — there’s an element of that stereotype here, in that the FBI went out and they collect all these messages all around the world even though they couldn’t monitor what was going on in America. This is sort of the future of policing that we’re in now, and there wasn’t really a debate about it. It was just like, one day or several days over the past few years, police have just decided that they’re going to hack or otherwise intercept communications all around the world, basically, and we didn’t really get a chance to talk about that as a society, about whether that’s something we want. Maybe it turns out we do. Like, I don’t know, but we can’t have that conversation unless we know what’s going on, and that’s kind of what I was hoping to do with this book.
-
-
-
-JACK:	Pause and consider this; the FBI’s fundamental mandate is to protect and defend the nation from threats. Defend. However, in this story, they’ve gone on the offence in the name of defense. This difference is worth noticing. I mean, imagine you’re defending yourself in some legal battle and you’re worried you might lose because of some surprise thing the opposition might bring up. So, to defend yourself better, you decide to break into the other lawyer’s office and steal all their notes that they have on the case or hack into their phones and see their chat messages, all so you can better defend yourself? Well, this tactic would be unequivocally unethical, yet the FBI’s strategy here is to penetrate private chats in pursuit of criminal activity. It’s crossing that boundary from passive monitoring to active intrusion, and I think it’s important to be aware when that boundary gets crossed, because we never see them cross it since it’s always done in the shadows. If the FBI were to cross that boundary in the physical world, it would be akin to them secretly breaking into thousands of homes, rummaging through personal belongings because they’re trying to detect crime.
-
-
-
-This wouldn’t be acceptable, so why then should our digital lives be subject to a lower standard of privacy? I guess the FBI uses all kinds of spy gear, though, to cross that threshold all the time, like wire-tapping and planting bugs. They’re always covertly reaching into someone’s communication and taking it. But I think what’s different about this story is the mass-surveillance aspect to it. All messages for all users were being collected and stored. Maybe it wasn’t stored in the FBI’s database exactly, but the FBI was funding this company who was collecting it all. I remember when the Snowden revelations came out. The NSA and GCHQ were trying to collect massive amounts of data flowing over the internet, not targeting a specific person, just grabbing everything, which means a lot of non-criminals were getting their data analyzed. I wonder, is that offensive as well? It’s mass-spying, at least, and I for one don’t approve of governments doing mass-spying on their citizens. But this is a crazy ethical dilemma because what if the mass-spying is just on the criminals?
-
-
-
-JOSEPH:	I think that’s — it’s something that cryptographers and privacy experts I spoke to in the book were worried about, which is that some of them are less worried about the specific case of Anom while some are, to be clear, but they’re more worried about, well, what happens now? If we have a network that’s 90% criminal and 10% normal users, is that a fair target? I don’t know. What happens when it moves to 50/50? There’s a really good quote in there from Matthew Green, the cryptologist, and he says that, well, maybe 50% of the criminals on this network are doing really, really bad stuff like trafficking or whatever, and then 50% are doing, I don’t know, copyright infringement of song lyrics, something that I don’t think many people really care about. In the eyes of law enforcement, is that a fair target? That’s the discussion we’re not having, and we need to have that as quickly as possible because otherwise law enforcements are just gonna go ahead and do it.
-
-
-
-JACK:	People sometimes say to me when we’re talking about government surveillance that they’ve got nothing to hide and they aren’t worried about it. Well, what those people are really saying is that they’re always going to comply with the government no matter what. They’re never going to have dissenting views or protest, and honestly, I’ve never met anyone who 100% agrees with the government no matter the leadership. It’s important that we preserve our freedom to have opposing views without the government watching us, because the thing is if we’re being watched, it changes our actions. Gosh, in this story, the FBI themselves has stuff to hide, and they can’t spy on people in the US without proper warrants and stuff, but they were circumventing this rule by providing intelligence to other countries, and then those countries providing intelligence back to the FBI.
-
-
-
-JOSEPH:	Yeah, yeah. It’s a worry, and that was a big worry in the Snowden ones, and in this case it was like, even though the FBI can look at phones in America, the AFP agreed to keep an eye on the ones on American soil for threats to life. On one hand you could say that, well, it’s good the AFP were monitoring that so nobody got hurt, hopefully. On the other end, well, why didn’t the FBI just get a warrant and do it themselves? Yeah.
-
-
-
-JACK:	We’re gonna take a quick ad break, but stay with us because, well, clearly you can see there’s a ticking time bomb going on at this point. The Anom phones were getting picked up by some criminals in Europe who were taking them to Dubai to try to sell them there.
-
-
-
-JOSEPH:	Some of the phones landed in Dubai and part of the UAE. The UAE is very interesting because it’s one of the very few places that you’re not allowed to just go around and start selling an encrypted phone or an encrypted app. If it is not approved by the government, you can get into a lot of trouble, I guess sort of in the same way as the Russian Federation, right?
-
-
-
-JACK:	Wait, why is encryption a problem there?
-
-
-
-JOSEPH:	It has to be approved by the government. It is basically a combination of a censorship and a surveillance sort of posture, whereas if you were selling an encrypted app that the local authorities and national authorities do not approve of, you’re not allowed to do that. The reason being is that, well, they want to be able to access that, and somebody running around selling Anom phones is not going to get on their good side.
-
-
-
-JACK:	See? It’s not completely out of the question for your government to ban encryption, to force the people of the country to use certain apps so they can see into it. This, I think, is a huge violation of our privacy. Luckily in the United States, we have the Fourth Amendment of the Constitution, which states — I’ll read the whole thing for you. “The right of the people to be secure in their persons, houses, papers, and effects against unreasonable searches and seizures shall not be violated, and no warrants shall issue but upon probable cause supported by oath or affirmation, and particularly describing the place to be searched and the person or things to be seized.” The Fourth Amendment is needed to maintain a balance between national security interests and individual rights. It’s a tool to make sure that the government actions are subject to oversight and grounded in legitimate need.
-
-
-
-If we eliminate that protection, it creates a really dangerous power dynamic and a slippery slope towards a government that could abuse its power with no accountability. If the US government did some kind of mass-surveillance and was searching through all that data without a warrant, it seems to me it would be in direct violation of the US Constitution, and yet, here’s a situation where the FBI was running a tech startup with the entire goal to be snooping on other users’ chats, watching every message to see if there was criminal activity. There’s no targeted search here. No individual warrants were being made at this point. They were analyzing all the chat messages going through Anom. Is this in violation of the Fourth Amendment? I can make a case that it was, and the FBI had that in their head, too, so they were trying hard not to peek into any American’s messages. [MUSIC] The data was available in Anom’s database, but they had to program their system to only show them foreign chats.
-
-
-
-JOSEPH:	I mean, I walked through the same rooms that the FBI was reading the Anom messages in. I’ve obtained screenshots of what the FBI interface looked like, so I feel like I can put myself in the head of some of these FBI agents, ‘cause I’ve also read a ton of these messages as well, right? The system itself is called Hola iBot. You log in; initially it was just from the San Diego FBI Field Office, but then they made it remote as well for the European partners. Also because of COVID, people couldn’t go to the office as much. You log in, and there’s sort of a green-and-black interface. You can click on an individual Anom user and it will show sort of a constellation of all of their contacts. There will be a circle in the middle and there will be another circle with the person they spoke to, and then another circle which shows the group chat. You can then zero in on those.
-
-
-
-It’s almost like a Maltego sort of interface. Then once you go to a specific user, you can see all of their messages. You can see all of their photos. Rather handily, there was also AI-powered summaries of what was being spoken about, powered, at least in some way, by Amazon. The FBI used some Amazon capability there. So, you can look on the right-side of the screen and it’s like, Jerry is talking about a cocaine deal or whatever it is. Sometimes it’s that blunt, which was just always hilarious to me. But when it gets to the point where there are millions and then tens of millions of messages, the FBI had to turn to some of these AI capabilities, ‘cause otherwise they’re gonna be swimming in data, and by the end, they were absolutely swimming in data. There was a real danger that if they did not analyze every single message — well, what would happen if the one message about a death threat got through and then somebody died? That was a constant threat and it really, really ramped up as Anom became especially more popular.
-
-
-
-JACK:	This tool that they were using, was it developed by Anom or developed by FBI?
-
-
-
-JOSEPH:	Hola iBot was developed by FBI computer scientists. It was made in-house as basically the surveillance interface of Anom.
-
-
-
-JACK:	It sounds pretty advanced to be able to have this graphical view of who’s connected to who and then also use AI to search for — ‘cause a lot of the criminals are using code words for different drug names and all this kind of stuff thinking they’re outsmarting the police, but they’re able to find all that.
-
-
-
-JOSEPH:	Yeah. If you think about it — imagine a normal wire tap in LA or something and it’s one guy talking to another guy on a normal phone, and they’re talking about a drug deal. If you’re the FBI or whoever, you have to figure out who these people are, and that might be tricky, as you say. Maybe they’re using code names. Maybe they’re using pseudonyms. Then you go about and you maybe get phone location data; you figure out who they are or whatever. Now imagine doing that for something like 12,000 people in 150 different countries. It’s like, I almost can’t picture the task in front of them, and that’s why they had to turn to these pretty sophisticated systems for figuring out not just what people are saying, but who the hell these people even are. They would do that and they would even put the stereotypical graphs on the wall in the FBI with the layouts of the different criminal organizations. In some cases, the FBI doesn’t even know who these people are at first. They’re just like, well, we have a new crime syndicate on the platform. Let’s start mapping out how they’re related to one another.
-
-
-
-JACK:	So, you said we’re looking for that threat to life? Or what was their — what was really what they were — like, let’s not let this slip through and really trying to focus on…?
-
-
-
-JOSEPH:	Yeah, so, as well as the drug trafficking, the main thing that flowed across Anom were what the FBI calls threat to life, and this is where a criminal organization or just an individual criminal will want to harm, torture, or in many cases kill somebody else. This happened across Anom constantly to the point where one of the FBI agents who was reading the Anom messages at first, his task was just to go through every single image that was sent across the platform, and often these were weapons or locations or targets. The way it was described to me is that it’s trying to figure out a puzzle, basically, as quickly as possible. You have to take all these disparate pieces of information, and maybe you only have a photo of a weapon, so that indicates there’s probably going to be violence here. Or maybe you only have a photo of the location and it’s like, well, something’s gonna happen there, and the FBI would have to very, very quickly, as best as they could, figure out this puzzle, give information to foreign authorities who could then act on it, and then maybe save people or maybe not. I don’t think it was always successful, but they did save lives in the process as well.
-
-
-
-JACK:	It’s gotta be really complex, because when you just see two criminals talk to each other over messaging, they’re gonna easily say, I’m gonna kill you, man, and that doesn’t necessarily mean he’s gonna kill him. But it’s just one of these — this is the way our lingo is. Then the opposite is when you’re saying, okay, listen, we really need to off this one person, there’s also all kinds of coded messages in there. Just be like, alright, minus one this guy. They’re like, minus one? What does minus one mean? Oh, it means get him — kill him, right? So, you have to decode this. That must be incredibly difficult.
-
-
-
-JOSEPH:	Yeah, there’s a lot of posturing in there through the Anom messages I’ve read where there are people doing exactly that. Like, oh, I’m gonna effing kill him or whatever, and then you’ll come across messages where they are talking specifically about getting a getaway car to drive away from the restaurant after they’ve killed somebody, then they need to rent an air B&B to hide the assassin in. When it starts to get specific and granular, at least to me, that’s when it’s like, oh, okay, we need to actually take this seriously, and that’s what the Swedish authorities did, the Dutch as well, and especially the FBI.
-
-
-
-JACK:	Yeah, and it’s also wild because typically what we’re talking when we’re looking at the — or, I know when I was reading the book, it seemed like this is criminal-on-criminal, gang-on-gang activity, right? So, trying to save the life of a criminal is sometimes a strange moral situation you’re dealing with here.
-
-
-
-JOSEPH:	Yeah. It puts the FBI in a complicated ethical spot and it puts the agents — the foreign agencies in the same spot as well. What started to happen was that the FBI or its partners would intercept communications about a threat to life, the authorities would then act on it — they would somehow stop the killing and that could be in various ways — but then what would happen would be that the criminals would continue talking and they would go, huh, how do the authorities know we were going to kill this guy? They wouldn’t assume it was Anom; they would assume there was a mole or a rat in their organization, and then they would try to kill that person. So, then the FBI has another threat to life, and it almost became this endless cycle or spiral where it just started to become exceptionally difficult for the FBI to maintain tempo, is the way they described it.
-
-
-
-JACK:	There’s so many ethical and moral dilemmas here. Just imagine the AI tool that’s out there scouring messages, looking for threats to life, but the tool has to be trained to ignore it if it’s an American.
-
-
-
-JOSEPH:	Anom phones, as I found through reporting this book, they absolutely landed on American soil. There were Anom phones being used inside the United States. There was a plan to start — for the FBI to start reading those messages.
-
-
-
-JACK:	But it was very difficult for them to figure out what to do with all this information they collected.
-
-
-
-JOSEPH:	They are basically stonewalled into being able to look at US communications. There just didn’t seem to be the appetite to go after people inside the states even though the prosecutors and the agents on the case very, very much wanted to. They were ready to do it. They were collaborating with the field office in Los Angeles as well. It was just a matter of basically pulling the switch, but higher-ups at the DOJ shut that down, essentially.
-
-
-
-JACK:	What do these chats look like? Does the FBI go to Congress or what and say, hey, we’ve got this…? Okay, sit down because I’ve got some crazy story to tell you. We’ve got this mass-surveillance tool that we somehow bought from some guy…[LAUGHS]
-
-
-
-JOSEPH:	Right.
-
-
-
-JACK:	…and it’s now — we now have view into the whole criminal world here in the US and — or a large — a portion of it. We would like to do a mass-arrest because we can see this and — but we don’t have the warrant. We need your help. What does that…? Do you have any understanding of what those conversations were like?
-
-
-
-JOSEPH:	Yeah. So, what happened when it was first approved for the FBI to gain access to the messages in general was that most drug prosecutors in San Diego in the specific meeting I describe, they were like, no, this is a ridiculous idea. You can’t do this. Then the most senior official…
-
-
-
-JACK:	[CROSSTALK]
-
-
-
-JOSEPH:	Go ahead.
-
-
-
-JACK:	On top of that they were like, well, don’t even look at the US chats, right? Just look the other way because we don’t have approval to even look at it.
-
-
-
-JOSEPH:	Yes, exactly. They were like, please don’t look at the US messages. We will figure that out later. What happened was was that he prosecutors on that, they send their request to a specific part of the DOJ called the Office of Enforcement Operations, and they’re the ones who basically approve every wire tap. If you want a wire tap in the US, they have to approve it. The prosecutors on the Anom case sent that and OEO just sat on it for months and months and months. There was clearly this divide between sort of the cowboys on the Anom case and then the scene — the more senior people in the DOJ who were just like, we’re absolutely not approving this. Anom obviously grew to a massive size even without that, but it could have grown even bigger with potentially even more disastrous consequences.
-
-
-
-JACK:	Yeah, but like we’ve been talking, it induces so many ethical dilemmas within law enforcement of, well, do we need a wire tap for this and all this kind of stuff. What’s allowed and what’s not allowed? Then they’re just like, screw it, we’re gonna just get all the data and we’ll figure out what’s allowed later. It seems weird to go that direction.
-
-
-
-JOSEPH:	Yeah, I absolutely think there should be a debate around whether secretly running a tech company should be allowed. There should be a debate on whether we want to be able to hack into entire telecommunications providers. Maybe the end result of that conversation is that we as a society are okay with the trade-offs, but I don’t think ordinary members of the public, one, first — even know this is basically happening, and second of all, aren’t aware of what those trade-offs even are. How can we even have that conversation when this is basically done in the shadows and then everybody moves on?
-
-
-
-JACK:	Yeah, and I also just realized how, if the FBI is running a tech company that is a communication platform which is facilitating the murder and drug deal — are they responsible for — well, we’re the ones who made this communication possible. We’re the ones who put the phone in your hand to make this even happen. Is there some responsibility there?
-
-
-
-JOSEPH:	I mean, there’s no two ways about it; the FBI facilitated crime with the development and the ongoing maintenance and the secret running of Anom. The FBI was a tech backbone of organized crime. Now, yes, of course they also had the surveillance capability as well, but they were selling a product to criminals, and the criminals were making great use of it.
-
-
-
-JACK:	It’s like the ends justify the means in some way.
-
-
-
-JOSEPH:	I think that is how people who worked in the operation would phrase it, and as for the ethical responsibility, from everybody I’ve spoken to, they did take the ethical consideration seriously. Like, we’re running this communications platform and that’s why, if a murder does flow across the chats, we need to respond to it aggressively and quickly. Now, that didn’t always work out, unfortunately, but that was the approach they were coming from. By the end of the day, those messages were still on FBI chatter.
-
-
-
-JACK:	Gosh, I think about Afgoo again. He was making a phone for criminals, right? He was working with criminals, listening to their requests and adding in features like a remote-wipe ability. So, because Afgoo was making this for criminals, it meant he was a criminal, clearly, right? Yet it was the FBI who was the true owners of this company. So, what does that make the FBI if they were making something purposely for criminals to use? The implications of this story just keep going and going. I’m telling you, I have a million questions. I just love this book. [MUSIC] June 7, 2021…
-
-
-
-JOSEPH:	Yes.
-
-
-
-JACK:	What happens on this day?
-
-
-
-JOSEPH:	Sure. So, the FBI and its foreign partners, they decide on a date, June 7, 2021. The reason for that is that the country that was sort of part of the technical infrastructure, Lithuania, their court order was running out. But basically, Anom was just getting too unwieldy. It was starting to get out of the FBI’s control. Sellers were pushing into countries as they wished. Every time the FBI asked for more resources to monitor the messages, which was eventually like a hundred and thirty FBI agents in total, then more messages came and they had to ask for more resources. There had to be an end point, and that was basically the date that was picked before it went over the edge. I spoke to multiple law enforcement officials who were part of that day, and the pressure and the stress they felt was incredible. The way it was set up was that it was almost a global line of dominoes starting in Australia, and they would do their arrests first. It would then move over to Europe, and then they would do their arrests, and then eventually when people woke up on the West Coast in San Diego, the FBI would come forward and they would take credit for running Anom. It was the single largest law enforcement action in any one day. Something like 10,000 police officers were involved in that one day in this world-spanning, relay race, domino track of activity.
-
-
-
-RANDY:	Good morning. I am Randy Grossman. I’m the Acting United States Attorney for the Southern District of California. Welcome. Thank you for being here. We’re here today to announce the unsealing of a federal indictment by a grand jury in the Southern District of California, which charges seventeen foreign nationals in facilitating drug trafficking, money laundering, and obstruction of justice. This is part of a worldwide law enforcement operation that has resulted in hundreds of arrests for drug trafficking, money laundering, firearms violations, and crimes of violence. These international arrests and the US charges were possible because of a San Diego-based FBI investigation like none other in history. This investigation, called Operation Trojan Shield, shined a light into the shadowy industry of hardened encrypted devices.
-
-
-
-For the first time, the FBI developed and operated its own hardened encrypted device company called Anom, A-N-O-M. As we allege in our indictment, criminal organizations and the individual defendants that we have charged purchased and distributed Anom devices in an effort to secretly plan and execute their crimes. In fact, Anom’s distributors, administrators, and agents had so much confidency in the secrecy of their devices that they openly marketed them to other potential users as designed by criminals for criminals. But the devices were actually operated by the FBI. The worldwide implications of this investigation are staggering. In total, the criminals sold more than 12,000 Anom encrypted devices and services to more than three hundred criminal syndicates operating in over a hundred different countries. This was an unprecedented operation in terms of its massive scale, innovative strategy, international coordination, and investigative achievement. Operation Trojan Shield has shattered any confidence criminals may have through the use of hardened encrypted devices.
-
-
-
-JACK:	Shattered any confidence that criminals may have in the use of encrypted devices? Hm, I’m not sure this is a good take, because what about me who just wants a hardened encrypted device for, you know, privacy and security?
-
-
-
-JOSEPH:	Yeah, if you’re an ordinary person and you’re trying to figure out whether an app is legitimate or not, it can be really, really hard to tell. Yes, you’d look at the owners and all of that sort of thing, and maybe some researchers dig through the code or whatever it is, but even beyond that, even beyond looking for specific answers, it’s just that we know the FBI is prepared to do it now, which changes the conversation.
-
-
-
-JACK:	Someone even asked the FBI at the press briefing about this.
-
-
-
-SPEAKER1:	Well, I’m wondering, is this something you can replicate and do again?
-
-
-
-SPEAKER2:	So, who knows, right? This will lead all of our criminals guessing of what company out there is actually a true secure company and which is run by potentially the government. So, we obviously have the technical capability and obviously the international partners to work these types of cases in the future.
-
-
-
-JOSEPH:	I basically believe the FBI is absolutely exploring more of this. [MUSIC] To get some of the information in the book, I snuck into a law-enforcement-only conference in Vancouver where two of the agents were talking, and towards the end of that talk, one of them said they look forward to what the next version of Operation Trojan Shield, which is the Anom operation, looks like. That’s not an agency saying, okay, job well done; let’s all go home. That’s an agency looking for an even bigger thing to do next. As well as Anom, there was the Sky hack, there was the EncroChat hack as well. Absolutely law enforcement are continuing to push down this root. I mean, some of the police officers I even spoke to told me that. The Dutch authorities told me we are doing this right now.
-
-
-
-JACK:	Dang. See? This is why I love Joseph so much. He’s sneaking into law enforcement conferences to get the story. We’ve skipped over so much of the book. I purposely left out some of my favorite parts of the book just so you can enjoy it still. This story goes deeper and deeper and deeper, and so, you should do yourself a favor and go read Dark Wire by Joseph Cox.
-
-
-
-(OUTRO):	[OUTRO MUSIC] A big thank you to Joseph Cox for sharing this story with us. You can find a link to his book, Dark Wire, in the show notes. Again, it’s highly recommended. This episode was created by me, the bit-bumbler, Jack rhysider. Our editor is the silicon sorcerer, Tristan Ledger. Mixing is done by Proximity Sound, and our interim music is done by the mysterious Breakmaster Cylinder. One time I went into a client’s data center to do some work on their servers, and I found a computer that was so old, it’s IP address was 1. Just the number 1. This is Darknet Diaries.
-
-
-
-[END OF RECORDING]"
+The simplest way to map token IDs to vectors is through a lookup table. We create a matrix of size (vocab_size, n_emb) where each row is the embedding vector for the corresponding token. This matrix is known as the embedding weights.
+
+
+Embedding Layer (image by author)
+The diagram shows an example embedding layer of size (65, 6). This means there are 65 tokens in the vocabulary and each one will be represented by a length 6 embedding vector. The inputted sequence will be used to index the embedding weights to get the vector corresponding to each token. Remember the minibatches we input into the model? Originally the minibatch is size (batch_size, ctx_len). After passing through the embedding layer it is size (batch_size, ctx_len, n_emb). Instead of each token being a single integer, each token is now a vector of length n_emb.
+
+Let’s define the embedding layer in code now.
+
+n_emb = 6 # You can add these hyperparams at the top of your file
+class GPT(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.wte = nn.Embedding(vocab_size, n_emb)
+We will define a class to organize our implementation. We subclass nn.Module to take advantage of mlx’s features. Then in the init function, we call the superclass constructor and initialize our token embedding layer called wte .
+
+Positional Embeddings
+Next up is the positional embeddings. The purpose of positional embeddings is to encode information about the position of each token in the sequence. This can be added to our input embeddings to get a complete representation of each token that contains information about the token’s position in the sequence.
+
+class GPT(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.wte = nn.Embedding(vocab_size, n_emb) # token embeddings
+        self.wpe = nn.Embedding(ctx_len, n_emb) # position embeddings
+The position embeddings work the same as token embeddings, except instead of having a row for each token we have a row for each possible position index. This means our embedding weights will be of shape (ctx_len, n_emb). Now we implement the __call__ function in our GPT class. This function will contain the forward pass of the model.
+
+# Tensor shapes commented
+def __call__(self, x):
+    B, T = x.shape # (B = batch_size, T = ctx_len)
+    tok_emb = self.wte(x) # (B, T, n_emb)
+    pos_emb = self.wpe(mx.arange(T)) # (T, n_emb)
+    x = tok_emb + pos_emb # (B, T, n_emb)
+First, we break out the dimensions of our input into variables B and T for easy handling. In sequence modeling contexts B and T are usually used as shorthand for “batch” and “time” dimensions. In this case, the “time” dimension of our sequence is the context length.
+
+Next, we calculate token and position embeddings. Notice that for the position embeddings, our input is mx.arange(T) . This will output an array of consecutive integers from 0 to T-1 which is exactly what we want because those are the positions we want to embed. After passing that through the embedding layer we will have a tensor of shape (T, n_emb) because the embedding layer plucks out the n_emb length vector for each of the T positions. Note that even though pos_emb is not the same shape as tok_emb we can add the two because mlx will broadcast, or replicate pos_emb across the batch dimension to allow elementwise addition. Finally, we perform the addition to get the new representations of the tokens with positional information.
+
+Self-Attention
+So far the representation vectors for each token have been calculated independently. They have not had the opportunity to exchange any information. This is intuitively bad in language modeling because the meaning and usage of words depend on the surrounding context. Self-attention is how we incorporate information from previous tokens into a given token.
+
+First, let’s consider a naive approach. What if we simply represented each token as the average of its representation vector and the vectors of all the tokens before it? This achieves our goal of packing information from previous tokens into the representation for a given token. Here’s what it would look like.
+
+
+image by author
+But self-attention doesn’t involve writing a for-loop. The key insight is we can achieve this previous token averaging with matrix multiplication!
+
+
+image by author
+By multiplying our input sequence on the left by a special matrix we get the desired result. This matrix is known as the attention weights. Notice that each row of the attention weight matrix specificies “how much” of each other token goes into the representation for any given token. For example in row two, we have [0.5, 0.5, 0, 0]. This means that row two of the result will be 0.5*token1 + 0.5*token2 + 0*token3 + 0*token4 , or the average of token1 and token2. Note that the attention weights are a lower-triangular matrix (zeros in upper right entries). This ensures that future tokens will not be included in the representation of a given token. This ensures that tokens can only communicate with the previous tokens because during generation the model will only have access to previous tokens.
+
+Let’s look at how we can construct the attention weight matrix.
+
+
+image by author
+Notice that if we create an array of zeros with -inf in the upper right entries and then perform row-wise softmax we get the desired attention weights. A good exercise is to step through the softmax calculation for a row to see how this works. The takeaway is that we can take some array of size (ctx_len, ctx_len) and softmax each row to get attention weights that sum to one.
+
+Now we can leave the realm of naive self-attention. Instead of simply averaging previous tokens, we use arbitrary weighted sums over previous tokens. Notice what happens when we do row-wise softmax of an arbitrary matrix.
+
+
+image by author
+We still get weights that sum to one on each row. During training, we can learn the numbers in the matrix on the left which will specify how much each token goes into the representation for another token. This is how tokens pay “attention” to each other. But we still haven’t understood where this matrix on the left came from. These pre-softmax attention weights are calculated from the tokens themselves, but indirectly through three linear projections.
+
+Keys, Queries, and Values
+
+image by author
+Each token in our sequence emits 3 new vectors. These vectors are called keys, queries, and values. We use the dot product of the query vector of one token and the key vector of another token to quantify the “affinity” those two tokens have. We want to calculate the pairwise affinities of each token with every other token, therefore we multiply the query vector (4x3) with the key vector transposed (3x4) to get the raw attention weights (4x4). Due to the way matrix multiplication works the (i,j) entry in the raw attention weights will be the query of token i dot the key of token j or the “affinity” between the two. Thus we have calculated interactions between every token. However, we don’t want past tokens interacting with future tokens so we apply a mask of -inf to the upper right entries to ensure they will zero out after softmax. Then we perform row-wise softmax to get the final attention weights. Instead of multiplying these weights directly with the input, we multiply them with the value projection. This results in the new representations.
+
+Now that we understand attention conceptually, let’s implement it.
+
+class Attention(nn.Module):
+    def __init__(self, head_size):
+        super().__init__()
+        self.head_size = head_size
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+
+We start by defining the key, query, and value projection layers. Note that instead of going from n_emb to n_emb, we project from n_emb to head_size. This doesn’t change anything, it just means the new representations calculated by attention will be dimension head_size.
+
+class Attention(nn.Module):
+    def __init__(self, head_size):
+        super().__init__()
+        self.head_size = head_size
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+    def __call__(self, x): # shapes commented
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+The forward pass begins by calculating the key, query, and value projections. We also break out the input shape into the variables B, T, and C for future convenience.
+
+class Attention(nn.Module):
+    def __init__(self, head_size):
+        super().__init__()
+        self.head_size = head_size
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
+        # attn_weights.shape = (B, T, T)
+Next, we calculate the attention weights. We only want to transpose the last two dimensions of the key tensor, because the batch dimension is just there so we can forward multiple training examples in parallel. The mlx transpose function expects the new order of the dimensions as input, so we pass it [0, 2, 1] to transpose the last two dimensions. One more thing: we scale the attention weights by the inverse square root of head_size. This is known as scaled attention and the purpose is to ensure that when Q and K are unit variance, attn_weights will be unit variance. If the variance of attn_weights is high, then the softmax will map these small and large values to 0 or 1which results in less complex representations.
+
+The next step is to apply the mask to ensure we are doing causal language modeling i.e. ensuring tokens cannot attend to future tokens.
+
+class Attention(nn.Module):
+    def __init__(self, head_size):
+        super().__init__()
+        self.head_size = head_size
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
+        # attn_weights.shape = (B, T, T)
+We create the mask with a clever broadcasting trick. Let’s say our ctx_len=4 like in the diagrams above. First, we use mx.arange(4) to set the indices variable to [0, 1, 2, 3].
+
+
+image by author
+Then we can index like so indices[:, None] to generate a column vector with the values of indices. Similarly, we can get a row vector using indices[None]. Then when we do the < comparison, mlx broadcasts the vectors because they have mismatching shapes so they can’t be compared elementwise. Broadcasting means mlx will replicate the vectors along the lacking dimension. This results in an elementwise comparison of two (4, 4) matrices which makes sense. Side note: I recommend familiarizing yourself with the details of broadcasting by reading this, it comes up all the time when dealing with tensors.
+
+After the elementwise comparison, we are left with the following tensor:
+
+[[False,  True,  True,  True],
+ [False, False,  True,  True],
+ [False, False, False,  True],
+ [False, False, False, False]]
+Multiplying this tensor by -1e9, we get:
+
+[[-0e+00, -1e+09, -1e+09, -1e+09],
+ [-0e+00, -0e+00, -1e+09, -1e+09],
+ [-0e+00, -0e+00, -0e+00, -1e+09],
+ [-0e+00, -0e+00, -0e+00, -0e+00]]
+Now we have an additive mask. We can add this matrix to our attention weights to make all the upper right entries very large negative numbers. This will cause them to be zeroed out after the softmax operation. Also, note that we add “_” as a prefix to the attribute name _causal_mask which marks it as a private variable. This signals to mlx that it is not a parameter and should not be updated during training.
+
+class Attention(nn.Module):
+    def __init__(self, head_size):
+        super().__init__()
+        self.head_size = head_size
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
+        # attn_weights.shape = (B, T, T)
+        attn_weights = attn_weights + self._causal_mask
+        attn_weights = mx.softmax(attn_weights, axis=-1)
+        o = (attn_weights @ V) # (B, T, head_size)
+Now we can softmax row-wise to get the final attention weights and multiply these weights by the values to get our output. Note we pass axis=-1 to softmax which specifies that we want to softmax across the last dimension which are the rows.
+
+The final step is output linear projection and dropout.
+
+dropout = 0.1 # add this with hyperparams at top of file
+class Attention(nn.Module):
+    def __init__(self, head_size):
+        super().__init__()
+        self.head_size = head_size
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+        self.c_proj = nn.Linear(head_size, n_emb) # output projection
+        self.resid_dropout = nn.Dropout(dropout)
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
+        # attn_weights.shape = (B, T, T)
+        attn_weights = attn_weights + self._causal_mask
+        attn_weights = mx.softmax(attn_weights, axis=-1)
+        o = (attn_weights @ V) # (B, T, head_size)
+        o = self.c_proj(self.resid_dropout(o))
+        return o
+We add two new layers, c_proj and resid_dropout which are the output projection and residual dropout. The output projection is to return the vectors to their original dimension n_emb. The dropout is added for regularization and training stability which is important as we start layering the transformer blocks to get a deep network. And that’s it for implementing one attention head!
+
+Multi-Head Attention
+Instead of having just one attention head LLMs often use multiple attention heads in parallel and concatenate their outputs to create the final representation. For example, let’s say we had one attention head with head_size=64 so the vector it produced for each token was 64 dimensional. We could achieve the same thing with 4 parallel attention heads each with head_size=16 by concatenating their outputs to produce a 16x4 = 64 dimensional output. Multi-head attention allows the model to learn more complex representations because each head learns different projections and attention weights.
+
+n_heads = 4
+class MultiHeadAttention(nn.Module): # naive implementation
+    def __init__(self):
+        super().__init__()
+        self.heads = [Attention(head_size // n_heads) for _ in range(n_heads)]
+    def __call__(self, x):
+        return mx.concatenate([head(x) for head in self.heads], axis=-1)
+The straightforward implementation is to create a list of n_heads attention heads where each one has size equal to our final head size divided by n_heads. Then we concatenate the output of each head over the last axis. However, this implementation is inefficient and does not take advantage of the speed of tensors. Let’s implement multi-head attention with the power of tensors.
+
+head_size = 64 # put at top of file
+class MultiHeadAttention(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+        self.c_proj = nn.Linear(head_size, n_emb) # output projection
+        self.resid_dropout = nn.Dropout(dropout)
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+We start with our single-head attention implementation. The __init__() function has not changed. The forward pass begins as normal with the creation of the key, query, and value projections.
+
+head_size = 64 # put at top of file
+n_heads = 8 # put at top of file
+class MultiHeadAttention(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+        self.c_proj = nn.Linear(head_size, n_emb) # output projection
+        self.resid_dropout = nn.Dropout(dropout)
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        mha_shape = (B, T, n_heads, head_size//n_heads)
+        K = mx.as_strided(K, (mha_shape)) # (B, T, n_heads, head_size//n_heads)
+        Q = mx.as_strided(Q, (mha_shape)) # (B, T, n_heads, head_size//n_heads)
+        V = mx.as_strided(V, (mha_shape)) # (B, T, n_heads, head_size//n_heads)
+The next thing we need to do is introduce a new dimension for the number of heads n_heads . In the naive implementation, we had separate attention objects each with their own key, query, and value tensors but now we have them all in one tensor, therefore we need a dimension for the heads. We define the new shape we want in mha_shape . Then we use mx.as_strided() to reshape each tensor to have the head dimension. This function is equivalent to view from pytorch and tells mlx to treat this array as a different shape. But we still have a problem. Notice that we if try to multiply Q @ K_t (where K_t is K transposed over it’s last 2 dims) to compute attention weights as we did before, we will be multiplying the following shapes:
+
+(B, T, n_heads, head_size//n_heads) @ (B, T, head_size//n_heads, n_heads)
+Result shape: (B, T, n_heads, n_heads)
+This would result in a tensor of shape (B, T, n_heads, n_heads) which is incorrect. With one head our attention weights were shape (B, T, T) which makes sense because it gives us the interaction between each pair of tokens. So now our shape should be the same but with a heads dimension: (B, n_heads, T, T) . We achieve this by transposing the dimensions of keys, queries, and values after we reshape them to make n_heads dimension 1 instead of 2.
+
+head_size = 64 # put at top of file
+n_heads = 8 # put at top of file
+class MultiHeadAttention(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+        self.c_proj = nn.Linear(head_size, n_emb) # output projection
+        self.attn_dropout = nn.Dropout(dropout)
+        self.resid_dropout = nn.Dropout(dropout)
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        mha_shape = (B, T, n_heads, head_size//n_heads)
+        K = mx.as_strided(K, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
+        Q = mx.as_strided(Q, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
+        V = mx.as_strided(V, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
+        attn_weights = (Q @ K.transpose([0, 1, 3, 2])) / math.sqrt(Q.shape[-1]) # (B, n_heads, T, T)
+        attn_weights = attn_weights + self._causal_mask[:T, :T]
+        attn_weights = mx.softmax(attn_weights, axis=-1)
+        attn_weights = self.attn_dropout(attn_weights)
+        o = (attn_weights @ V) # (B, n_heads, T, head_size//n_heads)
+
+Now we can calculate the correction attention weights. Notice that we scale the attention weights by the size of an individual attention head rather than head_size which would be the size after concatenation. We also apply dropout to the attention weights.
+
+Finally, we perform the concatenation and apply the output projection and dropout.
+
+head_size = 64 # put at top of file
+n_heads = 8 # put at top of file
+class MultiHeadAttention(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
+        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
+        indices = mx.arange(ctx_len)
+        mask = indices[:, None] < indices[None] # broadcasting trick
+        self._causal_mask = mask * -1e9
+        self.c_proj = nn.Linear(head_size, n_emb) # output projection
+        self.attn_dropout = nn.Dropout(dropout)
+        self.resid_dropout = nn.Dropout(dropout)
+    def __call__(self, x):
+        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
+        K = self.k_proj(x) # (B, T, head_size)
+        Q = self.q_proj(x) # (B, T, head_size)
+        V = self.v_proj(x) # (B, T, head_size)
+        mha_shape = (B, T, n_heads, head_size//n_heads)
+        K = mx.as_strided(K, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
+        Q = mx.as_strided(Q, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
+        V = mx.as_strided(V, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
+        attn_weights = (Q @ K.transpose([0, 1, 3, 2])) / math.sqrt(Q.shape[-1]) # (B, n_heads, T, T)
+        attn_weights = attn_weights + self._causal_mask[:T, :T]
+        attn_weights = mx.softmax(attn_weights, axis=-1)
+        attn_weights = self.attn_dropout(attn_weights)
+        o = (attn_weights @ V) # (B, n_heads, T, head_size//n_heads)
+        o = o.transpose([0, 2, 1, 3]).reshape((B, T, head_size)) # concat heads
+        o = self.c_proj(self.resid_dropout(o))
+        return o
+Since we have everything in one tensor, we can do some shape manipulation to do the concatenation. First, we move n_heads back to the second to last dimension with the transpose function. Then we reshape back to the original size to undo the splitting into heads we performed earlier. This is the same as concatenating the final vectors from each head. And that’s it for multi-head attention! We’ve gotten through the most intense part of our implementation.
+
+MLP
+The next part of the architecture is the multilayer perception or MLP. This is a fancy way of saying 2 stacked linear layers. There’s not much to be said here, it is a standard neural network.
+
+class MLP(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.c_fc = nn.Linear(n_emb, 4 * n_emb)
+        self.gelu = nn.GELU()
+        self.c_proj = nn.Linear(4 * n_emb, n_emb)
+        self.dropout = nn.Dropout(dropout)
+    def __call__(self, x):
+        x = self.gelu(self.c_fc(x))
+        x = self.c_proj(x)
+        x = self.dropout(x)
+        return x
+We take the input and project it to a higher dimension with c_fc . Then we apply gelu nonlinearity and project it back down to the embedding dimension with c_proj . Finally, we apply dropout and return. The purpose of the MLP is to allow for some computation after the vectors have communicated during attention. We will stack these communication layers (attention) and computation layers (mlp) into a block.
+
+Block
+A GPT block consists of attention followed by an MLP. These blocks will be repeated to make the architecture deep.
+
+class Block(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.mlp = MLP()
+        self.mha = MultiHeadAttention()
+    def __call__(self, x):
+        x = self.mha(x)
+        x = self.mlp(x)
+        return x
+Now, we need to add two more features to improve training stability. Let’s take a look at the architecture diagram again.
+
+Layernorms and Skip Connections
+
+image by author
+We still need to implement the components highlighted in red. The arrows are skip connections. Instead of the input being transformed directly, the effect of the attention and MLP layers is additive. Their result is added to the input instead of directly replacing it. This is good for the training stability of deep networks since in the backward pass, the operands of an addition operation will receive the same gradient as their sum. Gradients can thus flow backwards freely which prevents issues like vanishing/exploding gradients that plague deep networks. Layernorm also helps with training stability by ensuring activations are normally distributed. Here is the final implementation.
+
+class Block(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.mlp = MLP()
+        self.mha = MultiHeadAttention()
+        self.ln_1 = nn.LayerNorm(dims=n_emb)
+        self.ln_2 = nn.LayerNorm(dims=n_emb)
+    def __call__(self, x):
+        x = x + self.mha(self.ln_1(x))
+        x = x + self.mlp(self.ln_2(x))
+        return x
+Layernorm is applied before multi-head attention and MLP. The skip connections are added with x = x + ... making the operations additive.
+
+Forward Pass
+With the Block defined, we can finish the full GPT-2 forward pass.
+
+n_layers = 3 # put at top of file
+class GPT(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.wte = nn.Embedding(vocab_size, n_emb) # token embeddings
+        self.wpe = nn.Embedding(ctx_len, n_emb) # position embeddings
+        self.blocks = nn.Sequential(
+            *[Block() for _ in range(n_layers)],
+        ) # transformer blocks
+        self.ln_f = nn.LayerNorm(dims=n_emb) # final layernorm
+        self.lm_head = nn.Linear(n_emb, vocab_size) # output projection
+    # Tensor shapes commented
+    def __call__(self, x):
+        B, T = x.shape # (B = batch_size, T = ctx_len)
+        tok_emb = self.wte(x) # (B, T, n_emb)
+        pos_emb = self.wpe(mx.arange(T)) # (T, n_emb)
+        x = tok_emb + pos_emb # (B, T, n_emb)
+        x = self.blocks(x) # (B, T, n_emb)
+        x = self.ln_f(x) # (B, T, b_emb)
+        logits = self.lm_head(x) # (B, T, vocab_size)
+        return logits
+We create a container for the blocks using nn.Sequential which takes any input and passes it sequentially through the contained layers. Then we can apply all the blocks with self.blocks(x) . Finally, we apply a layer norm and then the lm_head. The lm_head or language modeling head is just a linear layer that maps from the embedding dimension to the vocab size. The model will output a vector containing some value for each word in our vocabulary, or the logits. We can softmax the logits to get a probability distribution over the vocabulary which we can sample from to get the next token. We will also use the logits to calculate the loss during training. There are just two more things we need to implement before we begin training.
+
+Sampling
+We need to write a generate function to sample from the model once training is complete. The idea is that we start with some sequence of our choice, then we predict the next token and append this to our sequence. Then we feed the new sequence in and predict the next token again. This continues until we decide to stop.
+
+# method of GPT class
+def generate(self, max_new_tokens):
+  ctx = mx.zeros((1, 1), dtype=mx.int32)
+We prompt the model with a single token, zero. Zero is the newline character so it is a natural place to start the generation since we just want to see how Shakespeare-like our model can get. Note that we initialize the shape to (1, 1) to simulate a single batch with a sequence length of one.
+
+# method of GPT class
+def generate(self, max_new_tokens):
+  ctx = mx.zeros((1, 1), dtype=mx.int32)
+  for _ in range(max_new_tokens):
+    logits = self(ctx[:, -ctx_len:]) # pass in last ctx_len characters
+    logits = logits[:, -1, :] # get logits for the next token
+    next_tok = mx.random.categorical(logits, num_samples=1)
+    ctx = mx.concatenate((ctx, next_tok), axis=1)
+return ctx
+Then we get the logits for the next token by passing in the last ctx_len characters to the model. However, our model output is of shape (B, T, vocab_size) since it predicts the next token logits for each token in the input. We use all of that during training, but now we only want the logits for the last token because we can use this to sample a new token. Therefore we index the logits to get the last element in the first dimension which is the sequence dimension. Then we sample the next token using the mx.random.categorical() function which takes the logits and the number of samples we want as input. This function will softmax the logits to turn them into a probability distribution and then randomly sample a token according to the probabilities. Finally, we concatenate the new token to the context and repeat the process max_new_tokens number of times.
+
+Initialization
+The last thing to do is handle weight initialization which is important for training dynamics.
+
+# method of GPT
+def _init_parameters(self):
+    normal_init = nn.init.normal(mean=0.0, std=0.02)
+    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
+First, we define two different nn.init.normal functions. The first one is for initializing all linear and embedding layers. The second one is for initializing linear layers that are specifically residual projections i.e. the last linear layer inside multi-head attention and MLP. The reason for this special initialization is that it checks accumulation along the residual path as model depth increases according to the GPT-2 paper [2].
+
+In mlx we can change the parameters of the model using the mx.update() function. Checking the docs, it expects a complete or partial dictionary of the new model parameters. We can see what this dictionary looks like by printing out self.parameters() inside the GPT class.
+
+{'wte': {'weight': array([[-0.025084, -0.0197523, -0.0341617, ..., -0.0979123, -0.0830218, -0.0784692],
+       [-0.00777913, -0.117002, -0.0310708, ..., 0.0128591, 0.122941, 0.000414443],
+       [0.0240044, -0.0859084, 0.0253116, ..., 0.108967, 0.0767123, 0.0221565],
+       ...,
+       [0.050729, -0.04578, 0.0685943, ..., -0.0496998, -0.00350879, -0.00631825],
+       [0.00518804, 0.0499818, 0.0330045, ..., 0.0300661, 0.0431054, 0.000958906],
+       [-0.0323007, 0.0132046, 0.0208218, ..., -0.0785159, 0.00436121, -0.00726994]], dtype=float32)}, 'wpe': {'weight': array([[0.000797923, -0.0396898, -0.029047, ..., -0.0132273, 0.00684483, -0.0067624],
+       [-0.0247021, -0.0274349, 0.0310587, ..., -0.100099, 0.0301566, -0.0178732],
+       [0.0929172, -0.0468649, 0.0101506, ..., -0.0341086, -0.0516283, 0.0447596],
+       ...,
+       [-0.0508172, 0.0892201, -0.00183612, ..., -0.00341944, 0.023437, 0.0296461],
+       [0.0105829, 0.0688093, 0.146744, ..., -0.0836337, 0.0206679, 0.0184166],
+       [-0.00578717, -0.0606196, -0.0917056, ..., -0.0641549, -0.0490424, 0.0998114]], dtype=float32)}, 'blocks': {'layers': [{'mlp': {'c_fc': {'weight': array([[0.0169199, 0.00264431, 0.0316978, ..., -0.0596867, -0.0153549, 0.0176386],
+       ...
+It’s a nested dictionary containing each model weight as an mx.array. So to initialize the parameters of our model we need to build up a dictionary like this with our new params and pass them to self.update() . We can achieve this as follows:
+
+# method of GPT
+def _init_parameters(self):
+    normal_init = nn.init.normal(mean=0.0, std=0.02)
+    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
+    new_params = []
+    for name, module in self.named_modules():
+        if isinstance(module, nn.layers.linear.Linear):
+            new_params.append((name + '.weight', normal_init(module.weight)))
+        elif isinstance(module, nn.layers.embedding.Embedding):
+            new_params.append((name + '.weight', normal_init(module.weight)
+We maintain a list of tuples called new_params which will contain tuples of (parameter_name, new_value). Next, we loop through each nn.Module object in our model with self.named_modules() which returns tuples of (name, module). If we print out the module names within the loop we see that they look like this:
+
+lm_head
+blocks
+blocks.layers.4
+blocks.layers.3
+blocks.layers.3.ln_2
+blocks.layers.3.ln_1
+blocks.layers.3.mha
+blocks.layers.3.mha.resid_dropout
+blocks.layers.3.mha.c_proj
+blocks.layers.3.mha.attn_dropout
+blocks.layers.3.mha.c_attn
+...
+blocks.layers.0.mlp.dropout
+blocks.layers.0.mlp.c_proj
+blocks.layers.0.mlp.gelu
+blocks.layers.0.mlp.c_fc
+wpe
+wte
+We use the isinstance() function to find the linear and embedding layers and then add them to our list. For example, say we are looping and reach “blocks.layers.0.mlp.c_fc” which is the first linear layer in the MLP. This would trigger the first if statement, and the tuple (""block.layers.0.mlp.c_fc.weight"", [<normally initialized weight here>]) would be added to our list. We have to add “.weight” to the name because we specifically want to initialize the weight in this way, not the bias. Now we need to handle the residual projection initialization.
+
+# method of GPT
+def _init_parameters(self):
+    normal_init = nn.init.normal(mean=0.0, std=0.02)
+    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
+    new_params = []
+    for name, module in self.named_modules():
+        if isinstance(module, nn.layers.linear.Linear):
+            if 'c_proj' in name: # residual projection
+                new_params.append((name + '.weight', residual_init(module.weight)))
+            else:
+                new_params.append((name + '.weight', normal_init(module.weight)))
+        elif isinstance(module, nn.layers.embedding.Embedding):
+            new_params.append((name + '.weight', normal_init(module.weight)))
+After checking if the module is a linear layer, we check if “c_proj” is in the name because that’s how we named the residual projections. Then we can apply the special initialization. Finally, we need to initialize the biases to be zero.
+
+# method of GPT
+def _init_parameters(self):
+    normal_init = nn.init.normal(mean=0.0, std=0.02)
+    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
+    new_params = []
+    for name, module in self.named_modules():
+        if isinstance(module, nn.layers.linear.Linear):
+            if 'c_proj' in name:
+                new_params.append((name + '.weight', residual_init(module.weight)))
+            else:
+                new_params.append((name + '.weight', normal_init(module.weight)))
+            if 'bias' in module:
+                new_params.append((name + '.bias', mx.zeros(module.bias.shape)))
+        elif isinstance(module, nn.layers.embedding.Embedding):
+            new_params.append((name + '.weight', normal_init(module.weight)))
+    self = self.update(utils.tree_unflatten(new_params))
+We add another if statement under our linear branch to check if the nn.Module object has a bias attribute. If it does, we add it to the list initialized to zeros. Finally, we need to transform our list of tuples into a nested dictionary. Luckily mlx has some functions implemented for dealing with parameter dictionaries, and we can use util.tree_unflatten() to convert this list of tuples to a nested parameter dictionary. This is passed into the update method to initialize the parameters. Now we can call _init_parameters() in the constructor.
+
+class GPT(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.wte = nn.Embedding(vocab_size, n_emb) # token embeddings
+        self.wpe = nn.Embedding(ctx_len, n_emb) # position embeddings
+        self.blocks = nn.Sequential(
+            *[Block() for _ in range(n_layers)],
+        ) # transformer blocks
+        self.ln_f = nn.LayerNorm(dims=n_emb) # final layernorm
+        self.lm_head = nn.Linear(n_emb, vocab_size) # output projection
+        self._init_parameters() # <-- initialize params
+        # print total number of params on initialization
+        total_params = sum([p.size for n,p in utils.tree_flatten(self.parameters())])
+        print(f""Total params: {(total_params / 1e6):.3f}M"")
+    # Tensor shapes commented
+    def __call__(self, x):
+        B, T = x.shape # (B = batch_size, T = ctx_len)
+        tok_emb = self.wte(x) # (B, T, n_emb)
+        pos_emb = self.wpe(mx.arange(T)) # (T, n_emb)
+        x = tok_emb + pos_emb # (B, T, n_emb)
+        x = self.blocks(x) # (B, T, n_emb)
+        x = self.ln_f(x) # (B, T, b_emb)
+        logits = self.lm_head(x) # (B, T, vocab_size)
+        return logits
+    def generate(self, max_new_tokens):
+        ctx = mx.zeros((1, 1), dtype=mx.int32)
+        for _ in range(max_new_tokens):
+          logits = self(ctx[:, -ctx_len:]) # pass in last ctx_len characters
+          logits = logits[:, -1, :] # get logits for the next token
+          next_tok = mx.random.categorical(logits, num_samples=1)
+          ctx = mx.concatenate((ctx, next_tok), axis=1)
+        return ctx
+    def _init_parameters(self):
+        normal_init = nn.init.normal(mean=0.0, std=0.02)
+        residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
+        new_params = []
+        for name, module in self.named_modules():
+            if isinstance(module, nn.layers.linear.Linear):
+                if 'c_proj' in name:
+                    new_params.append((name + '.weight', residual_init(module.weight)))
+                else:
+                    new_params.append((name + '.weight', normal_init(module.weight)))
+                if 'bias' in module:
+                    new_params.append((name + '.bias', mx.zeros(module.bias.shape)))
+            elif isinstance(module, nn.layers.embedding.Embedding):
+                new_params.append((name + '.weight', normal_init(module.weight)))
+        self = self.update(utils.tree_unflatten(new_params))
+
+We also add 2 lines of code in the constructor to print the total number of params. Finally, we are ready to build the training loop.
+
+Training Loop
+To train the model we need a loss function. Since we are predicting classes (next token) we use cross-entropy loss.
+
+def loss_fn(model, x, y):
+    logits = model(x)
+    B, T, C = logits.shape # (batch_size, seq_len, vocab_size)
+    logits = logits.reshape(B*T, C)
+    y = y.reshape(B*T)
+    loss = nn.losses.cross_entropy(logits, y, reduction='mean')
+    return loss
+First, we get the logits from the model. Then we reshape logits to make a list of vocab_size length arrays. We also reshape y, the correct token ids, to have the same length. Then we use the built-in cross-entropy loss function to calculate the loss for each example and average them to get a single value.
+
+model = GPT()
+mx.eval(model.parameters()) # Create the model params (mlx is lazy evaluation)
+loss_and_grad = nn.value_and_grad(model, loss_fn)
+lr = 0.1
+optimizer = optim.AdamW(learning_rate=lr)
+Next, we instantiate the model, but since mlx is lazy evaluation it won’t allocate and create the parameters. We need to call mx.eval on the parameters to ensure they get created. Then we can use nn.value_and_grad() to get a function that returns the loss and gradient of model parameters w.r.t the loss. This is all we need to optimize. Finally, we initialize an AdamW optimizer.
+
+A quick note on nn.value_and_grad(). If you are used to PyTorch you might expect us to use loss.backward() which goes through the computation graph and updates the .grad attribute of each tensor in our model. However, mlx automatic differentiation works on functions instead of computation graphs [3]. Therefore, mlx has built-ins that take in a function and return the gradient function such as nn.value_and_grad() .
+
+Now we define the training loop.
+
+num_epochs=20
+batch_size=32
+for epoch in range(num_epochs):
+    model.train(True)
+    running_loss = 0
+    batch_cnt = 0
+    for input, label in get_batches(X_train, y_train, batch_size):
+        batch_cnt += 1
+        loss, grads = loss_and_grad(model, input, label)
+        optimizer.update(model, grads)
+        running_loss += loss.item()
+        # compute new parameters and optimizer state
+        mx.eval(model.parameters(), optimizer.state)
+    avg_train_loss = running_loss / batch_cnt
+    model.train(False) # set eval mode
+    running_loss = 0
+    batch_cnt = 0
+    for input, label in get_batches(X_val, y_val, batch_size):
+        batch_cnt += 1
+        loss = loss_fn(model, input, label)
+        running_loss += loss.item()
+    avg_val_loss = running_loss / batch_cnt
+    print(f""Epoch {epoch:2} | train = {avg_train_loss:.4f} | val = {avg_val_loss:.4f}"")
+The outer loop runs through the epochs. We first set the model to training mode because some modules have different behaviors during training and testing such as dropout. Then we use our get_batches function from earlier to loop through batches of the training data. We get the loss over the batch and the gradient using loss_and_grad . Then we pass the model and gradients to the optimizer to update the model parameters. Finally we call mx.eval (remember mlx does lazy evaluation) to ensure the parameters and optimizer state get updated. Then we calculate the average train loss over the data to print later. This is one pass through the training data. Similarly, we calculate the validation loss and then print the average train and val loss over the epoch.
+
+completion = decode(model.generate(1000)[0].tolist())
+print(completion)
+with open('completions.txt', 'w') as f:
+    f.write(completion)
+Finally, we add some code to generate from our model. Since the generation output is still in the (B, T) shape we have to index it at 0 to make it 1D and then convert it from an mlx array to a Python list. Then we can pass it to our decode function from earlier, and write it to a file.
+
+These are the parameters we will use for training (you can play around with this):
+
+ctx_len = 128
+n_emb = 128
+dropout = 0.1
+head_size = 128
+n_heads = 4
+n_layers = 3
+num_epochs = 20
+batch_size = 64
+lr = 1e-3
+Now we can run the file to start training. With the settings above training took around 10 minutes on my m2 MacBook. I achieved the following training loss last epoch.
+
+Epoch 19 | train = 1.6961 | val = 1.8143
+Let’s look at some output.
+
+GLOUCESTER:
+But accomes mo move it.
+
+KING EDWARD:
+Where our that proclaim that I curse, or I sprithe.
+
+CORIOLANUS:
+Not want:
+His bops to thy father
+At with hath folk; by son and fproathead:
+The good nor may prosperson like it not,
+What, the beggares
+More hath, when that made a,
+Your vainst Citizen:
+Let here are go in queen me and knife
+To my deserved me you promise: not a fettimes,
+That one the will not.
+
+CORIOLANUS:
+And been of queens,
+Thou to do we best!
+
+JULIET:
+Not, brother recourable this doth our accuse
+Into fight!
+Not bad for just 10 minutes of training with a tiny model that is predicting characters! It clearly has the form of Shakespeare, although it is nonsense. The only difference between our model and the real GPT-2 now is scale! Now I encourage you to experiment — try out different settings, maybe tinker with the architecture, and see how low of a loss you can achieve.
+
+References
+[1] Karpathy A (2015).Tiny Shakespeare [Data set]. https://github.com/karpathy/char-rnn (MIT license)
+
+[2] A. Radford, J. Wu, R. Child, D. Luan, D. Amodei, I. Sutskever, Language Models are Unsupervised Multitask Learners (2019), OpenAI
+
+[3] Automatic Differentiation — mlx docs"
 14,https://blog.reedsy.com/short-story/a3gstd/,"My eyes felt like galaxies—holding the swirling glow of countless memories—as I took in our childhood home. Its siding looked like remnants of driftwood after a bonfire. I swore I smelled the smoky char of pine creep into my nostrils. It’s wild how the past stays with you like that. It can feel more visceral and real than the tangible things right in front of you.
 
 “Jesus, it feels like just yesterday.” I placed a trembling hand over my heart, struggling to steady my breath.
@@ -7458,7 +7822,7 @@ It’s been a stellar year in speculative fiction
 By Nicole Clark, Sadie Gennis, and Polygon Staff  Updated Dec 8, 2023, 10:00am EST  34 Comments / 34 New
 If you buy something from a Polygon link, Vox Media may earn a commission. See our ethics statement.
 
-It’sIt’s been another banner year for science fiction and fantasy books. Many of our favorites once again blur the line between sci-fi and fantasy, but this year was a particular standout for books blurring the line between SFF and other genres. This includes everything from historical fiction — both speculative histories and Westerns — to fable retellings to intergenerational sagas in translation.
+It’s been another banner year for science fiction and fantasy books. Many of our favorites once again blur the line between sci-fi and fantasy, but this year was a particular standout for books blurring the line between SFF and other genres. This includes everything from historical fiction — both speculative histories and Westerns — to fable retellings to intergenerational sagas in translation.
 
 Though we seem to have crested the wave of pandemic novels, that sense of dread and discoloration has lingered, written into novels of new forms. There’s a preponderance of post-post-apocalyptic science fiction unpacking lofty ideas like sentience and humanity, often set on different planets or among the stars. It has also been a standout year for supernatural horrors and thrillers, particularly ones that mix queer longing with a dose of body horror. Last but not least, it’s been a great year for kissing books set in fantastical worlds.
 
@@ -9010,823 +9374,3 @@ Ji Ma, Jing Lu, Jianmo Ni, Xuanhui Wang, and
 Michael Bendersky. 2023. Rankt5: Fine-Tuning T5
 for Text Ranking with Ranking Losses. In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information
 Retrieval. ACM."
-20,https://towardsdatascience.com/gpt-from-scratch-with-mlx-acf2defda30e,"GPT from Scratch with MLX
-Define and train GPT-2 on your MacBook
-Pranav Jadhav
-Towards Data Science
-Pranav Jadhav
-
-·
-Follow
-
-Published in
-Towards Data Science
-
-31 min read
-·
-2 days ago
-
-Table of Contents
-Preparing the data
-Coding GPT-2
-Input Embeddings
-Positional Embeddings
-Self Attention
-Keys, Queries, and Values
-Multi-Head Attention
-MLP
-Block
-Layernorms and Skip Connections
-Forward Pass
-Sampling
-Initialization
-Training Loop
-References
-Preparing the data
-Install mlx and run the following imports.
-
-import mlx.core as mx
-import mlx.nn as nn
-import mlx.optimizers as optim
-import mlx.utils as utils
-import numpy as np
-import math
-The first step to training an LLM is collecting a large corpus of text data and then tokenizing it. Tokenization is the process of mapping text to integers, which can be fed into the LLM. Our training corpus for this model will be the works of Shakespeare concatenated into one file. This is roughly 1 million characters and looks like this:
-
-First Citizen:
-Before we proceed any further, hear me speak.
-
-All:
-Speak, speak.
-
-First Citizen:
-You are all resolved rather to die than to famish?
-
-All:
-Resolved. resolved.
-
-First Citizen:
-First, you know Caius Marcius is chief enemy to the people.
-...
-First, we read the file as a single long string into the text variable. Then we use the set() function to get all the unique characters in the text which will be our vocabulary. By printing vocab you can see all the characters in our vocabulary as one string, and we have a total of 65 characters which till be our tokens.
-
-# Creating the vocabulary
-with open('input.txt', 'r', encoding='utf-8') as f:
-    text = f.read()
-vocab = sorted(list(set(text)))
-vocab_size = len(vocab)
-
-print(''.join(vocab))
-# !$&',-.3:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-print(vocab_size)
-# 65
-Production models will use tokenization algorithms like byte-pair encoding to generate a larger vocabulary of sub-word chunks. Since our focus today is on the architecture, we will continue with character-level tokenization. Next, we will map our vocabulary to integers known as token IDs. Then we can encode our text into tokens and decode them back to a string.
-
-# Create mapping from vocab to integers
-itos = {i:c for i,c in enumerate(vocab)} # int to string
-stoi = {c:i for i,c in enumerate(vocab)} # string to int
-encode = lambda x: [stoi[c] for c in x]
-decode = lambda x: ''.join([itos[i] for i in x])
-
-print(encode(""hello world""))
-# [46, 43, 50, 50, 53, 1, 61, 53, 56, 50, 42]
-print(decode(encode(""hello world"")))
-# hello world
-We use theenumerate() function to iterate over all characters and their index in the vocabulary and create a dictionary itos which maps integers to characters and stoi which maps strings to integers. Then we use these mappings to create our encode and decode functions. Now we can encode the entire text and split training and validation data.
-
-data = encode(text)
-split = int(0.9 * len(data))
-train_data = data[:split]
-val_data = data[split:]
-Currently, our training data is just a very long string of tokens. However, we are trying to train our model to predict the next token some given previous tokens. Therefore our dataset should be comprised of examples where the input is some string of tokens and the label is the correct next token. We need to define a model parameter called context length which is the maximum number of tokens used to predict the next token. Our training examples will be the length of our context length.
-
-Let’s look at the first ctx_len+1 tokens.
-
-ctx_len = 8
-print(train_data[:ctx_len + 1])
-# [18, 47, 56, 57, 58,  1, 15, 47, 58]
-# x: [18, 47, 56, 57, 58,  1, 15, 47] | y: 58
-This is one training example where the input is “18, 47, 56, 57, 58, 1, 15, 47” and the desired output is “58”. This is 8 tokens of context. However, we also want to train the model to predict the next token given only 7, 6, 5 … 0 tokens as context which is needed during generation. Therefore we also consider the 8 sub examples packed into this example:
-
-ctx_len = 8
-print(train_data[:ctx_len + 1])
-# [18, 47, 56, 57, 58,  1, 15, 47, 58]
-# 8 sub examples
-# [18] --> 47
-# [18, 47] --> 56
-# [18, 47, 56] --> 57
-# [18, 47, 56, 57] --> 58
-# [18, 47, 56, 57, 58] --> 1
-# [18, 47, 56, 57, 58, 1] --> 15
-# [18, 47, 56, 57, 58, 1, 15] --> 47
-# [18, 47, 56, 57, 58, 1, 15, 47] --> 58
-Notice that the labels are simply the inputs shifted left.
-
-print(""inputs: "", train_data[:ctx_len])
-print(""labels: "", train_data[1:ctx_len+1]) # labels = inputs indexed 1 higher
-# inputs: [18, 47, 56, 57, 58,  1, 15, 47]
-# labels: [47, 56, 57, 58,  1, 15, 47, 58]
-At index 0 the input is 18 and the label is 47. At index 1 the input is everything before and including index 1 which is [18, 47] and the label is 56, etc. Now that we understand that the labels are simply the input sequence indexed one higher we can build our datasets.
-
-# Creating training and validation datasets
-ctx_len = 8
-X_train = mx.array([train_data[i:i+ctx_len] for i in range(0, len(train_data) - ctx_len, ctx_len)])
-y_train = mx.array([train_data[i+1:i+ctx_len+1] for i in range(0, len(train_data) - ctx_len, ctx_len)])
-X_val = mx.array([val_data[i:i+ctx_len] for i in range(0, len(val_data) - ctx_len, ctx_len)])
-y_val = mx.array([val_data[i+1:i+ctx_len+1] for i in range(0, len(val_data) - ctx_len, ctx_len)])
-We loop through the data and take chunks of size ctx_len as the inputs (X) and then take the same chunks but at 1 higher index as the labels (y). Then we take these Python lists and create mlx array objects from them. The model internals will be written with mlx so we want our inputs to be mlx arrays.
-
-One more thing. During training we don’t want to feed the model one example at a time, we want to feed it multiple examples in parallel for efficiency. This group of examples is called our batch, and the number of examples in a group is our batch size. Thus we define a function to generate batches for training.
-
-def get_batches(X, y, b_size, shuffle=True):
-    if shuffle:
-        ix = np.arange(X.shape[0])
-        np.random.shuffle(ix)
-        ix = mx.array(ix)
-        X = X[ix]
-        y = y[ix]
-    for i in range(0, X.shape[0], b_size):
-        input = X[i:i+b_size]
-        label = y[i:i+b_size]
-        yield input, label
-If shuffle=True, we shuffle the data by indexing it with a randomly shuffled index. Then we loop through our dataset and return batch-size chunks from input and label datasets. These chunks are known as mini-batches and are just stacked examples that we process in parallel. These mini-batches will be our input to the model during training.
-
-Here’s an example of a minibatch of 4 examples with context length 8.
-
-
-A single minibatch (image by author)
-This minibatch packs 32 next-token prediction problems. The model will predict the next token for each token in the input and the labels will be used to calculate the loss. Notice that the labels contain the next token for each index of the inputs.
-
-You’ll want to keep this picture in your mind because the shapes of these tensors will get hairy. For now, just remember that we will input a tensor of shape (batch_size, ctx_len) to the model.
-
-Coding GPT-2
-Let’s look at the GPT-2 architecture to get an overview of what we are trying to implement.
-
-
-GPT-2 Architecture (image by author)
-Don’t worry if this looks confusing. We will implement it step by step from bottom to top. Let’s start by implementing the input embeddings.
-
-Input Embeddings
-The purpose of the input embedding layer is to map token IDs to vectors. Each token will be mapped to a vector which will be its representation as it is forwarded through the model. The vectors for each token will accumulate and exchange information as they pass through the model and eventually be used to predict the next token. These vectors are called embeddings.
-
-The simplest way to map token IDs to vectors is through a lookup table. We create a matrix of size (vocab_size, n_emb) where each row is the embedding vector for the corresponding token. This matrix is known as the embedding weights.
-
-
-Embedding Layer (image by author)
-The diagram shows an example embedding layer of size (65, 6). This means there are 65 tokens in the vocabulary and each one will be represented by a length 6 embedding vector. The inputted sequence will be used to index the embedding weights to get the vector corresponding to each token. Remember the minibatches we input into the model? Originally the minibatch is size (batch_size, ctx_len). After passing through the embedding layer it is size (batch_size, ctx_len, n_emb). Instead of each token being a single integer, each token is now a vector of length n_emb.
-
-Let’s define the embedding layer in code now.
-
-n_emb = 6 # You can add these hyperparams at the top of your file
-class GPT(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.wte = nn.Embedding(vocab_size, n_emb)
-We will define a class to organize our implementation. We subclass nn.Module to take advantage of mlx’s features. Then in the init function, we call the superclass constructor and initialize our token embedding layer called wte .
-
-Positional Embeddings
-Next up is the positional embeddings. The purpose of positional embeddings is to encode information about the position of each token in the sequence. This can be added to our input embeddings to get a complete representation of each token that contains information about the token’s position in the sequence.
-
-class GPT(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.wte = nn.Embedding(vocab_size, n_emb) # token embeddings
-        self.wpe = nn.Embedding(ctx_len, n_emb) # position embeddings
-The position embeddings work the same as token embeddings, except instead of having a row for each token we have a row for each possible position index. This means our embedding weights will be of shape (ctx_len, n_emb). Now we implement the __call__ function in our GPT class. This function will contain the forward pass of the model.
-
-# Tensor shapes commented
-def __call__(self, x):
-    B, T = x.shape # (B = batch_size, T = ctx_len)
-    tok_emb = self.wte(x) # (B, T, n_emb)
-    pos_emb = self.wpe(mx.arange(T)) # (T, n_emb)
-    x = tok_emb + pos_emb # (B, T, n_emb)
-First, we break out the dimensions of our input into variables B and T for easy handling. In sequence modeling contexts B and T are usually used as shorthand for “batch” and “time” dimensions. In this case, the “time” dimension of our sequence is the context length.
-
-Next, we calculate token and position embeddings. Notice that for the position embeddings, our input is mx.arange(T) . This will output an array of consecutive integers from 0 to T-1 which is exactly what we want because those are the positions we want to embed. After passing that through the embedding layer we will have a tensor of shape (T, n_emb) because the embedding layer plucks out the n_emb length vector for each of the T positions. Note that even though pos_emb is not the same shape as tok_emb we can add the two because mlx will broadcast, or replicate pos_emb across the batch dimension to allow elementwise addition. Finally, we perform the addition to get the new representations of the tokens with positional information.
-
-Self-Attention
-So far the representation vectors for each token have been calculated independently. They have not had the opportunity to exchange any information. This is intuitively bad in language modeling because the meaning and usage of words depend on the surrounding context. Self-attention is how we incorporate information from previous tokens into a given token.
-
-First, let’s consider a naive approach. What if we simply represented each token as the average of its representation vector and the vectors of all the tokens before it? This achieves our goal of packing information from previous tokens into the representation for a given token. Here’s what it would look like.
-
-
-image by author
-But self-attention doesn’t involve writing a for-loop. The key insight is we can achieve this previous token averaging with matrix multiplication!
-
-
-image by author
-By multiplying our input sequence on the left by a special matrix we get the desired result. This matrix is known as the attention weights. Notice that each row of the attention weight matrix specificies “how much” of each other token goes into the representation for any given token. For example in row two, we have [0.5, 0.5, 0, 0]. This means that row two of the result will be 0.5*token1 + 0.5*token2 + 0*token3 + 0*token4 , or the average of token1 and token2. Note that the attention weights are a lower-triangular matrix (zeros in upper right entries). This ensures that future tokens will not be included in the representation of a given token. This ensures that tokens can only communicate with the previous tokens because during generation the model will only have access to previous tokens.
-
-Let’s look at how we can construct the attention weight matrix.
-
-
-image by author
-Notice that if we create an array of zeros with -inf in the upper right entries and then perform row-wise softmax we get the desired attention weights. A good exercise is to step through the softmax calculation for a row to see how this works. The takeaway is that we can take some array of size (ctx_len, ctx_len) and softmax each row to get attention weights that sum to one.
-
-Now we can leave the realm of naive self-attention. Instead of simply averaging previous tokens, we use arbitrary weighted sums over previous tokens. Notice what happens when we do row-wise softmax of an arbitrary matrix.
-
-
-image by author
-We still get weights that sum to one on each row. During training, we can learn the numbers in the matrix on the left which will specify how much each token goes into the representation for another token. This is how tokens pay “attention” to each other. But we still haven’t understood where this matrix on the left came from. These pre-softmax attention weights are calculated from the tokens themselves, but indirectly through three linear projections.
-
-Keys, Queries, and Values
-
-image by author
-Each token in our sequence emits 3 new vectors. These vectors are called keys, queries, and values. We use the dot product of the query vector of one token and the key vector of another token to quantify the “affinity” those two tokens have. We want to calculate the pairwise affinities of each token with every other token, therefore we multiply the query vector (4x3) with the key vector transposed (3x4) to get the raw attention weights (4x4). Due to the way matrix multiplication works the (i,j) entry in the raw attention weights will be the query of token i dot the key of token j or the “affinity” between the two. Thus we have calculated interactions between every token. However, we don’t want past tokens interacting with future tokens so we apply a mask of -inf to the upper right entries to ensure they will zero out after softmax. Then we perform row-wise softmax to get the final attention weights. Instead of multiplying these weights directly with the input, we multiply them with the value projection. This results in the new representations.
-
-Now that we understand attention conceptually, let’s implement it.
-
-class Attention(nn.Module):
-    def __init__(self, head_size):
-        super().__init__()
-        self.head_size = head_size
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-
-We start by defining the key, query, and value projection layers. Note that instead of going from n_emb to n_emb, we project from n_emb to head_size. This doesn’t change anything, it just means the new representations calculated by attention will be dimension head_size.
-
-class Attention(nn.Module):
-    def __init__(self, head_size):
-        super().__init__()
-        self.head_size = head_size
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-    def __call__(self, x): # shapes commented
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-The forward pass begins by calculating the key, query, and value projections. We also break out the input shape into the variables B, T, and C for future convenience.
-
-class Attention(nn.Module):
-    def __init__(self, head_size):
-        super().__init__()
-        self.head_size = head_size
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
-        # attn_weights.shape = (B, T, T)
-Next, we calculate the attention weights. We only want to transpose the last two dimensions of the key tensor, because the batch dimension is just there so we can forward multiple training examples in parallel. The mlx transpose function expects the new order of the dimensions as input, so we pass it [0, 2, 1] to transpose the last two dimensions. One more thing: we scale the attention weights by the inverse square root of head_size. This is known as scaled attention and the purpose is to ensure that when Q and K are unit variance, attn_weights will be unit variance. If the variance of attn_weights is high, then the softmax will map these small and large values to 0 or 1which results in less complex representations.
-
-The next step is to apply the mask to ensure we are doing causal language modeling i.e. ensuring tokens cannot attend to future tokens.
-
-class Attention(nn.Module):
-    def __init__(self, head_size):
-        super().__init__()
-        self.head_size = head_size
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
-        # attn_weights.shape = (B, T, T)
-We create the mask with a clever broadcasting trick. Let’s say our ctx_len=4 like in the diagrams above. First, we use mx.arange(4) to set the indices variable to [0, 1, 2, 3].
-
-
-image by author
-Then we can index like so indices[:, None] to generate a column vector with the values of indices. Similarly, we can get a row vector using indices[None]. Then when we do the < comparison, mlx broadcasts the vectors because they have mismatching shapes so they can’t be compared elementwise. Broadcasting means mlx will replicate the vectors along the lacking dimension. This results in an elementwise comparison of two (4, 4) matrices which makes sense. Side note: I recommend familiarizing yourself with the details of broadcasting by reading this, it comes up all the time when dealing with tensors.
-
-After the elementwise comparison, we are left with the following tensor:
-
-[[False,  True,  True,  True],
- [False, False,  True,  True],
- [False, False, False,  True],
- [False, False, False, False]]
-Multiplying this tensor by -1e9, we get:
-
-[[-0e+00, -1e+09, -1e+09, -1e+09],
- [-0e+00, -0e+00, -1e+09, -1e+09],
- [-0e+00, -0e+00, -0e+00, -1e+09],
- [-0e+00, -0e+00, -0e+00, -0e+00]]
-Now we have an additive mask. We can add this matrix to our attention weights to make all the upper right entries very large negative numbers. This will cause them to be zeroed out after the softmax operation. Also, note that we add “_” as a prefix to the attribute name _causal_mask which marks it as a private variable. This signals to mlx that it is not a parameter and should not be updated during training.
-
-class Attention(nn.Module):
-    def __init__(self, head_size):
-        super().__init__()
-        self.head_size = head_size
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
-        # attn_weights.shape = (B, T, T)
-        attn_weights = attn_weights + self._causal_mask
-        attn_weights = mx.softmax(attn_weights, axis=-1)
-        o = (attn_weights @ V) # (B, T, head_size)
-Now we can softmax row-wise to get the final attention weights and multiply these weights by the values to get our output. Note we pass axis=-1 to softmax which specifies that we want to softmax across the last dimension which are the rows.
-
-The final step is output linear projection and dropout.
-
-dropout = 0.1 # add this with hyperparams at top of file
-class Attention(nn.Module):
-    def __init__(self, head_size):
-        super().__init__()
-        self.head_size = head_size
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-        self.c_proj = nn.Linear(head_size, n_emb) # output projection
-        self.resid_dropout = nn.Dropout(dropout)
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        attn_weights = (Q @ K.transpose([0, 2, 1])) / math.sqrt(self.head_size)
-        # attn_weights.shape = (B, T, T)
-        attn_weights = attn_weights + self._causal_mask
-        attn_weights = mx.softmax(attn_weights, axis=-1)
-        o = (attn_weights @ V) # (B, T, head_size)
-        o = self.c_proj(self.resid_dropout(o))
-        return o
-We add two new layers, c_proj and resid_dropout which are the output projection and residual dropout. The output projection is to return the vectors to their original dimension n_emb. The dropout is added for regularization and training stability which is important as we start layering the transformer blocks to get a deep network. And that’s it for implementing one attention head!
-
-Multi-Head Attention
-Instead of having just one attention head LLMs often use multiple attention heads in parallel and concatenate their outputs to create the final representation. For example, let’s say we had one attention head with head_size=64 so the vector it produced for each token was 64 dimensional. We could achieve the same thing with 4 parallel attention heads each with head_size=16 by concatenating their outputs to produce a 16x4 = 64 dimensional output. Multi-head attention allows the model to learn more complex representations because each head learns different projections and attention weights.
-
-n_heads = 4
-class MultiHeadAttention(nn.Module): # naive implementation
-    def __init__(self):
-        super().__init__()
-        self.heads = [Attention(head_size // n_heads) for _ in range(n_heads)]
-    def __call__(self, x):
-        return mx.concatenate([head(x) for head in self.heads], axis=-1)
-The straightforward implementation is to create a list of n_heads attention heads where each one has size equal to our final head size divided by n_heads. Then we concatenate the output of each head over the last axis. However, this implementation is inefficient and does not take advantage of the speed of tensors. Let’s implement multi-head attention with the power of tensors.
-
-head_size = 64 # put at top of file
-class MultiHeadAttention(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-        self.c_proj = nn.Linear(head_size, n_emb) # output projection
-        self.resid_dropout = nn.Dropout(dropout)
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-We start with our single-head attention implementation. The __init__() function has not changed. The forward pass begins as normal with the creation of the key, query, and value projections.
-
-head_size = 64 # put at top of file
-n_heads = 8 # put at top of file
-class MultiHeadAttention(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-        self.c_proj = nn.Linear(head_size, n_emb) # output projection
-        self.resid_dropout = nn.Dropout(dropout)
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        mha_shape = (B, T, n_heads, head_size//n_heads)
-        K = mx.as_strided(K, (mha_shape)) # (B, T, n_heads, head_size//n_heads)
-        Q = mx.as_strided(Q, (mha_shape)) # (B, T, n_heads, head_size//n_heads)
-        V = mx.as_strided(V, (mha_shape)) # (B, T, n_heads, head_size//n_heads)
-The next thing we need to do is introduce a new dimension for the number of heads n_heads . In the naive implementation, we had separate attention objects each with their own key, query, and value tensors but now we have them all in one tensor, therefore we need a dimension for the heads. We define the new shape we want in mha_shape . Then we use mx.as_strided() to reshape each tensor to have the head dimension. This function is equivalent to view from pytorch and tells mlx to treat this array as a different shape. But we still have a problem. Notice that we if try to multiply Q @ K_t (where K_t is K transposed over it’s last 2 dims) to compute attention weights as we did before, we will be multiplying the following shapes:
-
-(B, T, n_heads, head_size//n_heads) @ (B, T, head_size//n_heads, n_heads)
-Result shape: (B, T, n_heads, n_heads)
-This would result in a tensor of shape (B, T, n_heads, n_heads) which is incorrect. With one head our attention weights were shape (B, T, T) which makes sense because it gives us the interaction between each pair of tokens. So now our shape should be the same but with a heads dimension: (B, n_heads, T, T) . We achieve this by transposing the dimensions of keys, queries, and values after we reshape them to make n_heads dimension 1 instead of 2.
-
-head_size = 64 # put at top of file
-n_heads = 8 # put at top of file
-class MultiHeadAttention(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-        self.c_proj = nn.Linear(head_size, n_emb) # output projection
-        self.attn_dropout = nn.Dropout(dropout)
-        self.resid_dropout = nn.Dropout(dropout)
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        mha_shape = (B, T, n_heads, head_size//n_heads)
-        K = mx.as_strided(K, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
-        Q = mx.as_strided(Q, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
-        V = mx.as_strided(V, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
-        attn_weights = (Q @ K.transpose([0, 1, 3, 2])) / math.sqrt(Q.shape[-1]) # (B, n_heads, T, T)
-        attn_weights = attn_weights + self._causal_mask[:T, :T]
-        attn_weights = mx.softmax(attn_weights, axis=-1)
-        attn_weights = self.attn_dropout(attn_weights)
-        o = (attn_weights @ V) # (B, n_heads, T, head_size//n_heads)
-
-Now we can calculate the correction attention weights. Notice that we scale the attention weights by the size of an individual attention head rather than head_size which would be the size after concatenation. We also apply dropout to the attention weights.
-
-Finally, we perform the concatenation and apply the output projection and dropout.
-
-head_size = 64 # put at top of file
-n_heads = 8 # put at top of file
-class MultiHeadAttention(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.k_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.q_proj = nn.Linear(n_emb, head_size, bias=False)
-        self.v_proj = nn.Linear(n_emb, head_size, bias=False)
-        indices = mx.arange(ctx_len)
-        mask = indices[:, None] < indices[None] # broadcasting trick
-        self._causal_mask = mask * -1e9
-        self.c_proj = nn.Linear(head_size, n_emb) # output projection
-        self.attn_dropout = nn.Dropout(dropout)
-        self.resid_dropout = nn.Dropout(dropout)
-    def __call__(self, x):
-        B, T, C = x.shape # (batch_size, ctx_len, n_emb)
-        K = self.k_proj(x) # (B, T, head_size)
-        Q = self.q_proj(x) # (B, T, head_size)
-        V = self.v_proj(x) # (B, T, head_size)
-        mha_shape = (B, T, n_heads, head_size//n_heads)
-        K = mx.as_strided(K, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
-        Q = mx.as_strided(Q, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
-        V = mx.as_strided(V, (mha_shape)).transpose([0, 2, 1, 3]) # (B, n_heads, T, head_size//n_heads)
-        attn_weights = (Q @ K.transpose([0, 1, 3, 2])) / math.sqrt(Q.shape[-1]) # (B, n_heads, T, T)
-        attn_weights = attn_weights + self._causal_mask[:T, :T]
-        attn_weights = mx.softmax(attn_weights, axis=-1)
-        attn_weights = self.attn_dropout(attn_weights)
-        o = (attn_weights @ V) # (B, n_heads, T, head_size//n_heads)
-        o = o.transpose([0, 2, 1, 3]).reshape((B, T, head_size)) # concat heads
-        o = self.c_proj(self.resid_dropout(o))
-        return o
-Since we have everything in one tensor, we can do some shape manipulation to do the concatenation. First, we move n_heads back to the second to last dimension with the transpose function. Then we reshape back to the original size to undo the splitting into heads we performed earlier. This is the same as concatenating the final vectors from each head. And that’s it for multi-head attention! We’ve gotten through the most intense part of our implementation.
-
-MLP
-The next part of the architecture is the multilayer perception or MLP. This is a fancy way of saying 2 stacked linear layers. There’s not much to be said here, it is a standard neural network.
-
-class MLP(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.c_fc = nn.Linear(n_emb, 4 * n_emb)
-        self.gelu = nn.GELU()
-        self.c_proj = nn.Linear(4 * n_emb, n_emb)
-        self.dropout = nn.Dropout(dropout)
-    def __call__(self, x):
-        x = self.gelu(self.c_fc(x))
-        x = self.c_proj(x)
-        x = self.dropout(x)
-        return x
-We take the input and project it to a higher dimension with c_fc . Then we apply gelu nonlinearity and project it back down to the embedding dimension with c_proj . Finally, we apply dropout and return. The purpose of the MLP is to allow for some computation after the vectors have communicated during attention. We will stack these communication layers (attention) and computation layers (mlp) into a block.
-
-Block
-A GPT block consists of attention followed by an MLP. These blocks will be repeated to make the architecture deep.
-
-class Block(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.mlp = MLP()
-        self.mha = MultiHeadAttention()
-    def __call__(self, x):
-        x = self.mha(x)
-        x = self.mlp(x)
-        return x
-Now, we need to add two more features to improve training stability. Let’s take a look at the architecture diagram again.
-
-Layernorms and Skip Connections
-
-image by author
-We still need to implement the components highlighted in red. The arrows are skip connections. Instead of the input being transformed directly, the effect of the attention and MLP layers is additive. Their result is added to the input instead of directly replacing it. This is good for the training stability of deep networks since in the backward pass, the operands of an addition operation will receive the same gradient as their sum. Gradients can thus flow backwards freely which prevents issues like vanishing/exploding gradients that plague deep networks. Layernorm also helps with training stability by ensuring activations are normally distributed. Here is the final implementation.
-
-class Block(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.mlp = MLP()
-        self.mha = MultiHeadAttention()
-        self.ln_1 = nn.LayerNorm(dims=n_emb)
-        self.ln_2 = nn.LayerNorm(dims=n_emb)
-    def __call__(self, x):
-        x = x + self.mha(self.ln_1(x))
-        x = x + self.mlp(self.ln_2(x))
-        return x
-Layernorm is applied before multi-head attention and MLP. The skip connections are added with x = x + ... making the operations additive.
-
-Forward Pass
-With the Block defined, we can finish the full GPT-2 forward pass.
-
-n_layers = 3 # put at top of file
-class GPT(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.wte = nn.Embedding(vocab_size, n_emb) # token embeddings
-        self.wpe = nn.Embedding(ctx_len, n_emb) # position embeddings
-        self.blocks = nn.Sequential(
-            *[Block() for _ in range(n_layers)],
-        ) # transformer blocks
-        self.ln_f = nn.LayerNorm(dims=n_emb) # final layernorm
-        self.lm_head = nn.Linear(n_emb, vocab_size) # output projection
-    # Tensor shapes commented
-    def __call__(self, x):
-        B, T = x.shape # (B = batch_size, T = ctx_len)
-        tok_emb = self.wte(x) # (B, T, n_emb)
-        pos_emb = self.wpe(mx.arange(T)) # (T, n_emb)
-        x = tok_emb + pos_emb # (B, T, n_emb)
-        x = self.blocks(x) # (B, T, n_emb)
-        x = self.ln_f(x) # (B, T, b_emb)
-        logits = self.lm_head(x) # (B, T, vocab_size)
-        return logits
-We create a container for the blocks using nn.Sequential which takes any input and passes it sequentially through the contained layers. Then we can apply all the blocks with self.blocks(x) . Finally, we apply a layer norm and then the lm_head. The lm_head or language modeling head is just a linear layer that maps from the embedding dimension to the vocab size. The model will output a vector containing some value for each word in our vocabulary, or the logits. We can softmax the logits to get a probability distribution over the vocabulary which we can sample from to get the next token. We will also use the logits to calculate the loss during training. There are just two more things we need to implement before we begin training.
-
-Sampling
-We need to write a generate function to sample from the model once training is complete. The idea is that we start with some sequence of our choice, then we predict the next token and append this to our sequence. Then we feed the new sequence in and predict the next token again. This continues until we decide to stop.
-
-# method of GPT class
-def generate(self, max_new_tokens):
-  ctx = mx.zeros((1, 1), dtype=mx.int32)
-We prompt the model with a single token, zero. Zero is the newline character so it is a natural place to start the generation since we just want to see how Shakespeare-like our model can get. Note that we initialize the shape to (1, 1) to simulate a single batch with a sequence length of one.
-
-# method of GPT class
-def generate(self, max_new_tokens):
-  ctx = mx.zeros((1, 1), dtype=mx.int32)
-  for _ in range(max_new_tokens):
-    logits = self(ctx[:, -ctx_len:]) # pass in last ctx_len characters
-    logits = logits[:, -1, :] # get logits for the next token
-    next_tok = mx.random.categorical(logits, num_samples=1)
-    ctx = mx.concatenate((ctx, next_tok), axis=1)
-return ctx
-Then we get the logits for the next token by passing in the last ctx_len characters to the model. However, our model output is of shape (B, T, vocab_size) since it predicts the next token logits for each token in the input. We use all of that during training, but now we only want the logits for the last token because we can use this to sample a new token. Therefore we index the logits to get the last element in the first dimension which is the sequence dimension. Then we sample the next token using the mx.random.categorical() function which takes the logits and the number of samples we want as input. This function will softmax the logits to turn them into a probability distribution and then randomly sample a token according to the probabilities. Finally, we concatenate the new token to the context and repeat the process max_new_tokens number of times.
-
-Initialization
-The last thing to do is handle weight initialization which is important for training dynamics.
-
-# method of GPT
-def _init_parameters(self):
-    normal_init = nn.init.normal(mean=0.0, std=0.02)
-    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
-First, we define two different nn.init.normal functions. The first one is for initializing all linear and embedding layers. The second one is for initializing linear layers that are specifically residual projections i.e. the last linear layer inside multi-head attention and MLP. The reason for this special initialization is that it checks accumulation along the residual path as model depth increases according to the GPT-2 paper [2].
-
-In mlx we can change the parameters of the model using the mx.update() function. Checking the docs, it expects a complete or partial dictionary of the new model parameters. We can see what this dictionary looks like by printing out self.parameters() inside the GPT class.
-
-{'wte': {'weight': array([[-0.025084, -0.0197523, -0.0341617, ..., -0.0979123, -0.0830218, -0.0784692],
-       [-0.00777913, -0.117002, -0.0310708, ..., 0.0128591, 0.122941, 0.000414443],
-       [0.0240044, -0.0859084, 0.0253116, ..., 0.108967, 0.0767123, 0.0221565],
-       ...,
-       [0.050729, -0.04578, 0.0685943, ..., -0.0496998, -0.00350879, -0.00631825],
-       [0.00518804, 0.0499818, 0.0330045, ..., 0.0300661, 0.0431054, 0.000958906],
-       [-0.0323007, 0.0132046, 0.0208218, ..., -0.0785159, 0.00436121, -0.00726994]], dtype=float32)}, 'wpe': {'weight': array([[0.000797923, -0.0396898, -0.029047, ..., -0.0132273, 0.00684483, -0.0067624],
-       [-0.0247021, -0.0274349, 0.0310587, ..., -0.100099, 0.0301566, -0.0178732],
-       [0.0929172, -0.0468649, 0.0101506, ..., -0.0341086, -0.0516283, 0.0447596],
-       ...,
-       [-0.0508172, 0.0892201, -0.00183612, ..., -0.00341944, 0.023437, 0.0296461],
-       [0.0105829, 0.0688093, 0.146744, ..., -0.0836337, 0.0206679, 0.0184166],
-       [-0.00578717, -0.0606196, -0.0917056, ..., -0.0641549, -0.0490424, 0.0998114]], dtype=float32)}, 'blocks': {'layers': [{'mlp': {'c_fc': {'weight': array([[0.0169199, 0.00264431, 0.0316978, ..., -0.0596867, -0.0153549, 0.0176386],
-       ...
-It’s a nested dictionary containing each model weight as an mx.array. So to initialize the parameters of our model we need to build up a dictionary like this with our new params and pass them to self.update() . We can achieve this as follows:
-
-# method of GPT
-def _init_parameters(self):
-    normal_init = nn.init.normal(mean=0.0, std=0.02)
-    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
-    new_params = []
-    for name, module in self.named_modules():
-        if isinstance(module, nn.layers.linear.Linear):
-            new_params.append((name + '.weight', normal_init(module.weight)))
-        elif isinstance(module, nn.layers.embedding.Embedding):
-            new_params.append((name + '.weight', normal_init(module.weight)
-We maintain a list of tuples called new_params which will contain tuples of (parameter_name, new_value). Next, we loop through each nn.Module object in our model with self.named_modules() which returns tuples of (name, module). If we print out the module names within the loop we see that they look like this:
-
-lm_head
-blocks
-blocks.layers.4
-blocks.layers.3
-blocks.layers.3.ln_2
-blocks.layers.3.ln_1
-blocks.layers.3.mha
-blocks.layers.3.mha.resid_dropout
-blocks.layers.3.mha.c_proj
-blocks.layers.3.mha.attn_dropout
-blocks.layers.3.mha.c_attn
-...
-blocks.layers.0.mlp.dropout
-blocks.layers.0.mlp.c_proj
-blocks.layers.0.mlp.gelu
-blocks.layers.0.mlp.c_fc
-wpe
-wte
-We use the isinstance() function to find the linear and embedding layers and then add them to our list. For example, say we are looping and reach “blocks.layers.0.mlp.c_fc” which is the first linear layer in the MLP. This would trigger the first if statement, and the tuple (""block.layers.0.mlp.c_fc.weight"", [<normally initialized weight here>]) would be added to our list. We have to add “.weight” to the name because we specifically want to initialize the weight in this way, not the bias. Now we need to handle the residual projection initialization.
-
-# method of GPT
-def _init_parameters(self):
-    normal_init = nn.init.normal(mean=0.0, std=0.02)
-    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
-    new_params = []
-    for name, module in self.named_modules():
-        if isinstance(module, nn.layers.linear.Linear):
-            if 'c_proj' in name: # residual projection
-                new_params.append((name + '.weight', residual_init(module.weight)))
-            else:
-                new_params.append((name + '.weight', normal_init(module.weight)))
-        elif isinstance(module, nn.layers.embedding.Embedding):
-            new_params.append((name + '.weight', normal_init(module.weight)))
-After checking if the module is a linear layer, we check if “c_proj” is in the name because that’s how we named the residual projections. Then we can apply the special initialization. Finally, we need to initialize the biases to be zero.
-
-# method of GPT
-def _init_parameters(self):
-    normal_init = nn.init.normal(mean=0.0, std=0.02)
-    residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
-    new_params = []
-    for name, module in self.named_modules():
-        if isinstance(module, nn.layers.linear.Linear):
-            if 'c_proj' in name:
-                new_params.append((name + '.weight', residual_init(module.weight)))
-            else:
-                new_params.append((name + '.weight', normal_init(module.weight)))
-            if 'bias' in module:
-                new_params.append((name + '.bias', mx.zeros(module.bias.shape)))
-        elif isinstance(module, nn.layers.embedding.Embedding):
-            new_params.append((name + '.weight', normal_init(module.weight)))
-    self = self.update(utils.tree_unflatten(new_params))
-We add another if statement under our linear branch to check if the nn.Module object has a bias attribute. If it does, we add it to the list initialized to zeros. Finally, we need to transform our list of tuples into a nested dictionary. Luckily mlx has some functions implemented for dealing with parameter dictionaries, and we can use util.tree_unflatten() to convert this list of tuples to a nested parameter dictionary. This is passed into the update method to initialize the parameters. Now we can call _init_parameters() in the constructor.
-
-class GPT(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.wte = nn.Embedding(vocab_size, n_emb) # token embeddings
-        self.wpe = nn.Embedding(ctx_len, n_emb) # position embeddings
-        self.blocks = nn.Sequential(
-            *[Block() for _ in range(n_layers)],
-        ) # transformer blocks
-        self.ln_f = nn.LayerNorm(dims=n_emb) # final layernorm
-        self.lm_head = nn.Linear(n_emb, vocab_size) # output projection
-        self._init_parameters() # <-- initialize params
-        # print total number of params on initialization
-        total_params = sum([p.size for n,p in utils.tree_flatten(self.parameters())])
-        print(f""Total params: {(total_params / 1e6):.3f}M"")
-    # Tensor shapes commented
-    def __call__(self, x):
-        B, T = x.shape # (B = batch_size, T = ctx_len)
-        tok_emb = self.wte(x) # (B, T, n_emb)
-        pos_emb = self.wpe(mx.arange(T)) # (T, n_emb)
-        x = tok_emb + pos_emb # (B, T, n_emb)
-        x = self.blocks(x) # (B, T, n_emb)
-        x = self.ln_f(x) # (B, T, b_emb)
-        logits = self.lm_head(x) # (B, T, vocab_size)
-        return logits
-    def generate(self, max_new_tokens):
-        ctx = mx.zeros((1, 1), dtype=mx.int32)
-        for _ in range(max_new_tokens):
-          logits = self(ctx[:, -ctx_len:]) # pass in last ctx_len characters
-          logits = logits[:, -1, :] # get logits for the next token
-          next_tok = mx.random.categorical(logits, num_samples=1)
-          ctx = mx.concatenate((ctx, next_tok), axis=1)
-        return ctx
-    def _init_parameters(self):
-        normal_init = nn.init.normal(mean=0.0, std=0.02)
-        residual_init = nn.init.normal(mean=0.0, std=(0.02 / math.sqrt(2 * n_layers)))
-        new_params = []
-        for name, module in self.named_modules():
-            if isinstance(module, nn.layers.linear.Linear):
-                if 'c_proj' in name:
-                    new_params.append((name + '.weight', residual_init(module.weight)))
-                else:
-                    new_params.append((name + '.weight', normal_init(module.weight)))
-                if 'bias' in module:
-                    new_params.append((name + '.bias', mx.zeros(module.bias.shape)))
-            elif isinstance(module, nn.layers.embedding.Embedding):
-                new_params.append((name + '.weight', normal_init(module.weight)))
-        self = self.update(utils.tree_unflatten(new_params))
-
-We also add 2 lines of code in the constructor to print the total number of params. Finally, we are ready to build the training loop.
-
-Training Loop
-To train the model we need a loss function. Since we are predicting classes (next token) we use cross-entropy loss.
-
-def loss_fn(model, x, y):
-    logits = model(x)
-    B, T, C = logits.shape # (batch_size, seq_len, vocab_size)
-    logits = logits.reshape(B*T, C)
-    y = y.reshape(B*T)
-    loss = nn.losses.cross_entropy(logits, y, reduction='mean')
-    return loss
-First, we get the logits from the model. Then we reshape logits to make a list of vocab_size length arrays. We also reshape y, the correct token ids, to have the same length. Then we use the built-in cross-entropy loss function to calculate the loss for each example and average them to get a single value.
-
-model = GPT()
-mx.eval(model.parameters()) # Create the model params (mlx is lazy evaluation)
-loss_and_grad = nn.value_and_grad(model, loss_fn)
-lr = 0.1
-optimizer = optim.AdamW(learning_rate=lr)
-Next, we instantiate the model, but since mlx is lazy evaluation it won’t allocate and create the parameters. We need to call mx.eval on the parameters to ensure they get created. Then we can use nn.value_and_grad() to get a function that returns the loss and gradient of model parameters w.r.t the loss. This is all we need to optimize. Finally, we initialize an AdamW optimizer.
-
-A quick note on nn.value_and_grad(). If you are used to PyTorch you might expect us to use loss.backward() which goes through the computation graph and updates the .grad attribute of each tensor in our model. However, mlx automatic differentiation works on functions instead of computation graphs [3]. Therefore, mlx has built-ins that take in a function and return the gradient function such as nn.value_and_grad() .
-
-Now we define the training loop.
-
-num_epochs=20
-batch_size=32
-for epoch in range(num_epochs):
-    model.train(True)
-    running_loss = 0
-    batch_cnt = 0
-    for input, label in get_batches(X_train, y_train, batch_size):
-        batch_cnt += 1
-        loss, grads = loss_and_grad(model, input, label)
-        optimizer.update(model, grads)
-        running_loss += loss.item()
-        # compute new parameters and optimizer state
-        mx.eval(model.parameters(), optimizer.state)
-    avg_train_loss = running_loss / batch_cnt
-    model.train(False) # set eval mode
-    running_loss = 0
-    batch_cnt = 0
-    for input, label in get_batches(X_val, y_val, batch_size):
-        batch_cnt += 1
-        loss = loss_fn(model, input, label)
-        running_loss += loss.item()
-    avg_val_loss = running_loss / batch_cnt
-    print(f""Epoch {epoch:2} | train = {avg_train_loss:.4f} | val = {avg_val_loss:.4f}"")
-The outer loop runs through the epochs. We first set the model to training mode because some modules have different behaviors during training and testing such as dropout. Then we use our get_batches function from earlier to loop through batches of the training data. We get the loss over the batch and the gradient using loss_and_grad . Then we pass the model and gradients to the optimizer to update the model parameters. Finally we call mx.eval (remember mlx does lazy evaluation) to ensure the parameters and optimizer state get updated. Then we calculate the average train loss over the data to print later. This is one pass through the training data. Similarly, we calculate the validation loss and then print the average train and val loss over the epoch.
-
-completion = decode(model.generate(1000)[0].tolist())
-print(completion)
-with open('completions.txt', 'w') as f:
-    f.write(completion)
-Finally, we add some code to generate from our model. Since the generation output is still in the (B, T) shape we have to index it at 0 to make it 1D and then convert it from an mlx array to a Python list. Then we can pass it to our decode function from earlier, and write it to a file.
-
-These are the parameters we will use for training (you can play around with this):
-
-ctx_len = 128
-n_emb = 128
-dropout = 0.1
-head_size = 128
-n_heads = 4
-n_layers = 3
-num_epochs = 20
-batch_size = 64
-lr = 1e-3
-Now we can run the file to start training. With the settings above training took around 10 minutes on my m2 MacBook. I achieved the following training loss last epoch.
-
-Epoch 19 | train = 1.6961 | val = 1.8143
-Let’s look at some output.
-
-GLOUCESTER:
-But accomes mo move it.
-
-KING EDWARD:
-Where our that proclaim that I curse, or I sprithe.
-
-CORIOLANUS:
-Not want:
-His bops to thy father
-At with hath folk; by son and fproathead:
-The good nor may prosperson like it not,
-What, the beggares
-More hath, when that made a,
-Your vainst Citizen:
-Let here are go in queen me and knife
-To my deserved me you promise: not a fettimes,
-That one the will not.
-
-CORIOLANUS:
-And been of queens,
-Thou to do we best!
-
-JULIET:
-Not, brother recourable this doth our accuse
-Into fight!
-Not bad for just 10 minutes of training with a tiny model that is predicting characters! It clearly has the form of Shakespeare, although it is nonsense. The only difference between our model and the real GPT-2 now is scale! Now I encourage you to experiment — try out different settings, maybe tinker with the architecture, and see how low of a loss you can achieve.
-
-References
-[1] Karpathy A (2015).Tiny Shakespeare [Data set]. https://github.com/karpathy/char-rnn (MIT license)
-
-[2] A. Radford, J. Wu, R. Child, D. Luan, D. Amodei, I. Sutskever, Language Models are Unsupervised Multitask Learners (2019), OpenAI
-
-[3] Automatic Differentiation — mlx docs"

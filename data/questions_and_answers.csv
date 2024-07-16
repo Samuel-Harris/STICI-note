@@ -85,10 +85,10 @@ let list = [2, 3, 4]
 let list = [1, ..list]
 let [1, second_element, ..] = list
 [1.0, ..list] // compile error, type mismatch"
-52,13,False,,
-53,13,False,,
-54,13,True,,
-55,13,True,,
+80,13,False,"Why are the top-right values in the raw attention weights set to negative infinity?","A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax."
+81,13,False,"How can I freeze a variable during training in MLX?","To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training."
+82,13,True,"Where is broadcasting used?","Broadcasting is used to do the < comparision between the column vector [0, 1, 2, 3] and the row vector [0, 1, 2, 3], which is one of the steps to make a causal language modelling mask. Broadcasting is also used to add pos_emb and tok_emb elementwise to get the new representations of the tokens with positional information."
+83,13,True,"What is Karpathy known for?","Karpathy A is listed as the author of the Tiny Shakespeare dataset and the creator of an 'exellent GPT from scratch tutorial'."
 56,14,False,"How is the narrator related to Perry","Perry is the narrator's brother"
 57,14,False,"How long has the narrator been sober for?","The author had been sober for seven hundred and thirty days."
 58,14,True,"What things did Jackie remember differently to what she saw?","In her and Perry's childhood home, Jackie didn't remember having a projector room and she remembered the doorway to the kitchen being on the other side of the living room. She also remembered that she had almost killed her brother, Perry, seven hundred and thirty days ago in a car accident, when she actually did kill her brother in that accident."
@@ -119,7 +119,3 @@ Finally, at the end of the story, Jackie licked the cracks on her lips as her ey
 77,19,False,"In what way can including unrelated documents affect the RAG system?","Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy."
 78,19,True,"What is the recommended way to index text for question-answering?","It is recommended to first apply text normalization processes such as tokenization, stemming, and the removal of stop words to enhance the text’s suitability for indexing. Pretrained LMs can then be used to generate semantic vector representations of texts. These vectors are stored, enabling rapid and precise retrieval from extensive data collections, significantly enhancing retrieval efficiency. Sentence-level indexing is more appropriate than document-level indexing for summarizing documents to precisely locate answers."
 79,19,True,"What are the advantages and disadvantages of the BM25 algorithm?","The advantage of BM25 is that it is efficient. The disadvantage of the BM25 algorithm is that it focuses on term frequency and presence for document algorithm, so it often overlooks the semantic information of queries."
-80,19,False,,
-81,19,False,,
-82,19,True,,
-83,19,True,,
