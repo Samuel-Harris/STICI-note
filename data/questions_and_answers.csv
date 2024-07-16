@@ -25,19 +25,19 @@ You encounter 2 ropers seeking the next burrowed entrance left by the Kryn."
 12,3,False,"How do the data storage options compare?","For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
 For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
 For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
-For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone)"
-13,3,False,"When was UTF-8 support added for European languages?","Wednesday 3rd April in the v0.2.7 Update"
-14,3,True,"What kind of model is the bling-phi-3 model","The bling-phi-3 model is the newest and most accurate BLING/DRAGON model. BLING models are small CPU-based RAG-optimized, instruct-following 1B-3B parameter models. DRAGON models are production-grade RAG-optimized 6-7B parameter models - "Delivering RAG on ..." the leading foundation base models."
-15,3,True,"In which versions were the SLIM models updated?","The SLIM models were updated in versions 0.2.3, 0.2.6, 0.2.12, 0.3.0, and 0.3.1"
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone)."
+13,3,False,"When was UTF-8 support added for European languages?","UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update."
+14,3,True,"What kind of model is the bling-phi-3 model","The bling-phi-3 model is the newest and most accurate BLING/DRAGON model. BLING models are small CPU-based RAG-optimized, instruct-following 1B-3B parameter models. DRAGON models are production-grade RAG-optimized 6-7B parameter models - ""Delivering RAG on ..."" the leading foundation base models."
+15,3,True,"In which versions were the SLIM models updated?","The SLIM models were updated in versions 0.2.3, 0.2.6, 0.2.12, 0.3.0, and 0.3.1."
 16,4,False,"How do I make a button?","import marimo as mo
 
 button = mo.ui.run_button()
 button
 
-mo.stop(not button.value, "Click 'run' to generate a random number")
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
 
 import random
-random.randint(0, 1000)"
+random.randint(0, 1000)."
 17,4,False,"When might I use caching?","You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings."
 18,4,True,"What are the ways of grouping UI elements together?","UI elements can be grouped together using the following methods:
 - Create an array of UI elements.
@@ -60,10 +60,10 @@ random.randint(0, 1000)"
 30,7,True,"What are the emperor's aliases?","The emperor has also known as the ""Dream Guardian"", the ""Dream Visitor"", and ""Balduran""."
 31,7,True,"Who was Duke Stelmane?","Duke Stelmane was a major figure of the Knights of the Shield, a lawful and neutral evil conglomerate of politicians and merchants manipulating events behind the scenes, acting as the Emperor's envoy while it secretly kept her enthralled. Duke Belynne Stelmane dies recently."
 32,8,False,"What did I drink at the pintxo bars?","You drank txakoli at the pintxo bars."
-33,8,False,"Which part of the trip did I like the most?","Your favourite part of the trip was your four days on the Camino"
+33,8,False,"Which part of the trip did I like the most?","Your favourite part of the trip was your four days on the Camino."
 34,8,True,"Where was I offered desserts?","You ate a delightful puff pastry and custard-filled local treat, and a slice of Basque cheesecake at Otaegui, and you were beckoned with cake in the camino."
 35,8,True,"What forms of exercise did we do?","You did hiking and surfing."
-36,9,False,"What is the meaning behind the infrared scenes?", "The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members."
+36,9,False,"What is the meaning behind the infrared scenes?","The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members."
 37,9,False,"How do the people who commit atrocious acts and those that are complicit in these acts differ?","The Zone of Interest does not really differentiate between evil-doers and those supporting such evil."
 38,9,True,"Who is in the family that this film is about?","The film takes the perspective of the Hoss family. The Hoss family consists of: the patriarch Rudolf and his wife, Hedwig;their two sons and three daughters, the youngest still a baby; and Hedwig's mother."
 39,9,True,"What items do Rudolf's family take from the Jews and who takes them?","Rudolf's wife, Hedwig, often receives luxury and expensive items taken from the Jews. On one occasion, she is seen receiving a fancy fur coat with lipstick lying inside one of the pockets. The Rudolf's children are also seen collecting and playing with gold teeth taken from the remains of the dead Jews."
@@ -76,7 +76,7 @@ random.randint(0, 1000)"
 46,11,True,"Other than this blog post, what has the author written?","The author has also written: a paper about the emergence of instabilities in large language models and a more accessible blog post on the same topic; a LLM.int8() paper; a sparse training blog post; a TPU vs GPU blog post; and a paper about k-bit inference scaling laws."
 47,11,True,"In what contexts is BERT mentioned?","It is mentioned that for BERT large during training, the input and weight matrix of any matrix multiplication fit neatly into the L2 cache of Ada (but not other Us). The author also mentions that they benchmarked the time for 500 mini-batches for BERT Large during inference (excluding the softmax layer) on the 4x RTX 2080 Ti system. They chose BERT Large inference since, from their experience, this is the deep learning model that stresses the GPU the most."
 48,12,False,"How does function exporting differ between Gleam and Python?","In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public."
-49,12,False,"What is the syntax for pipe","The operator for Pipe in Gleam is |>"
+49,12,False,"What is the syntax for pipe","The operator for Pipe in Gleam is '|>'."
 50,12,True,"What data structures does Gleam natively support?","Gleam supports strings, tuples, lists, and dictionaries."
 51,12,True,"What things will cause a compilation error in Gleam?","In Gleam, let and = can be used for pattern matching, but you’ll get compile errors if there’s a type mismatch. Functions can optionally have their argument and return types annotated in Gleam. These type annotations will always be checked by the compiler and throw a compilation error if not valid.
 
@@ -89,7 +89,7 @@ let [1, second_element, ..] = list
 81,13,False,"How can I freeze a variable during training in MLX?","To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training."
 82,13,True,"Where is broadcasting used?","Broadcasting is used to do the < comparision between the column vector [0, 1, 2, 3] and the row vector [0, 1, 2, 3], which is one of the steps to make a causal language modelling mask. Broadcasting is also used to add pos_emb and tok_emb elementwise to get the new representations of the tokens with positional information."
 83,13,True,"What is Karpathy known for?","Karpathy A is listed as the author of the Tiny Shakespeare dataset and the creator of an 'exellent GPT from scratch tutorial'."
-56,14,False,"How is the narrator related to Perry","Perry is the narrator's brother"
+56,14,False,"How is the narrator related to Perry","Perry is the narrator's brother."
 57,14,False,"How long has the narrator been sober for?","The author had been sober for seven hundred and thirty days."
 58,14,True,"What things did Jackie remember differently to what she saw?","In her and Perry's childhood home, Jackie didn't remember having a projector room and she remembered the doorway to the kitchen being on the other side of the living room. She also remembered that she had almost killed her brother, Perry, seven hundred and thirty days ago in a car accident, when she actually did kill her brother in that accident."
 59,14,True,"What references to alcohol are there","The narrator, Jackie, had been sober for seven hundred and thirty days. Seven hundred and thirty days ago, Jackie and Perry had gotten into a car accident that almost killed the two because Jackie had been driving after drinking Bacardi Limon.
@@ -111,7 +111,7 @@ Finally, at the end of the story, Jackie licked the cracks on her lips as her ey
 69,17,False,"When is this game set?","This game is set in 2023, thirteen years after the events of Alan Wake."
 70,17,True,"What things does Scratch do?","Scratch: re-edited the ""Return"" novel manuscript into a horror story, making it take effect in reality; escapes Cauldron Lake; kills Jaakko and escapes from captivity, unsuccessfully attempting to take the Clicker from Saga; possesses Casey, steals the Clicker, and throws Saga into the Dark Place; and posseses Alan again before being killed."
 71,17,True,"What is Alan tricked into believing by his wife?","Alan believes that while being possessed by the Dark Presence, he torments Alice with visions of his alter ego, Scratch, which eventually leading to her suicide. Alice had actually tricked Alan into thinking she had committing suicide by choosing to return the Dark Place as part of a plan to help him eventually escape, explaining that the only way he can escape the loops is through ""ascension."""
-72,18,False, "Who wrote 'Divine Rivals'?","Rebecca Ross wrote 'Divine Rivals'."
+72,18,False,"Who wrote 'Divine Rivals'?","Rebecca Ross wrote 'Divine Rivals'."
 73,18,False,"Who was resurrected with a group of other murder victims?","Lou was resurrected along with a handful of other women murdered by a single serial killer."
 74,18,True,"Which books have dragons in them?","The books 'To Shape a Dragon’s Breath', 'FOURTH WING', and 'Day of the Fallen Night' have dragons in them."
 75,18,True,"Which books contain multiple narratives?","The books 'Same Bed Different Dreams', 'EVERY DROP IS A MAN’S NIGHTMARE', 'The Museum of Human History', 'Witch King', and 'The Terraformers' each use multiple narratives."
