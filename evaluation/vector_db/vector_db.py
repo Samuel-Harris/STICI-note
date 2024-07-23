@@ -1,11 +1,9 @@
-import chromadb
+from langchain_community.vectorstores import Chroma
+from langchain_core.documents import Document
+from langchain_core.embeddings import Embeddings
 
 COLLECTION_NAME: str = "document"
 
 
-def make_chroma_client(text_chunks: list[str]) -> chromadb.ClientAPI:
-    chroma_client: chromadb.Client = chromadb.Client()
-    collection: chromadb.Collection = chroma_client.create_collection(COLLECTION_NAME)
-    collection.add(documents=text_chunks, ids=list(map(str, range(len(text_chunks)))))
-
-    return chroma_client
+def make_chroma_client(text_chunks: list[Document], embedding_function: Embeddings) -> Chroma:
+    return Chroma.from_documents(text_chunks, embedding_function)
