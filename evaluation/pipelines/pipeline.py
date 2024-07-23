@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 
-import chromadb
 from langchain.prompts import PromptTemplate
+from langchain_core.language_models import LanguageModelLike
+from langchain_core.vectorstores import VectorStoreRetriever
 
 
 class Pipeline(ABC):
     @abstractmethod
-    def __init__(self, temperature: float, prompt_template: PromptTemplate, vector_db: chromadb.ClientAPI) -> None:
+    def __init__(self, llm: LanguageModelLike, prompt_template: PromptTemplate,
+                 vector_db_retriever: VectorStoreRetriever) -> None:
         pass
 
     @abstractmethod
