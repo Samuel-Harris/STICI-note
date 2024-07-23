@@ -1,4 +1,4 @@
 .idea/
 */.ipynb_checkpoints/
-*.gguf
+prototype/*.gguf
 .DS_Store
