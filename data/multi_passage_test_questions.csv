@@ -1,0 +1,33 @@
+document_index,question,answer
+3,What kind of model is the bling-phi-3 model,"The bling-phi-3 model is the newest and most accurate BLING/DRAGON model. BLING models are small CPU-based RAG-optimized, instruct-following 1B-3B parameter models. DRAGON models are production-grade RAG-optimized 6-7B parameter models - ""Delivering RAG on ..."" the leading foundation base models."
+3,In which versions were the SLIM models updated?,"The SLIM models were updated in versions 0.2.3, 0.2.6, 0.2.12, 0.3.0, and 0.3.1."
+4,What are the ways of grouping UI elements together?,"UI elements can be grouped together using the following methods:
+- Create an array of UI elements.
+- Create a dictionary of UI elements.
+- Embed a dynamic number of UI elements in another output.
+- Create a hstack (or vstack) of UI elements with on_change handlers.
+- Create a table column of buttons with on_change handlers
+- Create a form with multiple UI elements."
+4,What are the parameters for the mo.ui.text function?,The parameters for mo.ui.text are label and placeholder. These are both optional.
+6,What are the risk classifications for AI?,"The risk classifications are: ""minimal risk"", ""high-risk"", ""unacceptable risk"", and ""specific transparency risk"""
+6,What are the rules for developing general purpose AI models?,"General purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks. 12 months after the AI Act enters into force, the obligations for general purpose AI governance become applicable. Providers of general purpose AI models, which are trained on large data amounts and therefore prone to high energy consumption, are required to disclose energy consumption. Providers of free and open-source models are exempted from most of obligations, but this exemption does not cover obligations for providers of general purpose AI models with systemic risks."
+7,What are the emperor's aliases?,"The emperor has also known as the ""Dream Guardian"", the ""Dream Visitor"", and ""Balduran""."
+7,Who was Duke Stelmane?,"Duke Stelmane was a major figure of the Knights of the Shield, a lawful and neutral evil conglomerate of politicians and merchants manipulating events behind the scenes, acting as the Emperor's envoy while it secretly kept her enthralled. Duke Belynne Stelmane dies recently."
+8,Where was I offered desserts?,"You ate a delightful puff pastry and custard-filled local treat, and a slice of Basque cheesecake at Otaegui, and you were beckoned with cake in the camino."
+8,What forms of exercise did we do?,You did hiking and surfing.
+11,"Other than this blog post, what has the author written?",The author has also written: a paper about the emergence of instabilities in large language models and a more accessible blog post on the same topic; a LLM.int8() paper; a sparse training blog post; a TPU vs GPU blog post; and a paper about k-bit inference scaling laws.
+11,In what contexts is BERT mentioned?,"It is mentioned that for BERT large during training, the input and weight matrix of any matrix multiplication fit neatly into the L2 cache of Ada (but not other Us). The author also mentions that they benchmarked the time for 500 mini-batches for BERT Large during inference (excluding the softmax layer) on the 4x RTX 2080 Ti system. They chose BERT Large inference since, from their experience, this is the deep learning model that stresses the GPU the most."
+12,What data structures does Gleam natively support?,"Gleam supports strings, tuples, lists, and dictionaries."
+12,What things will cause a compilation error in Gleam?,"In Gleam, let and = can be used for pattern matching, but you’ll get compile errors if there’s a type mismatch. Functions can optionally have their argument and return types annotated in Gleam. These type annotations will always be checked by the compiler and throw a compilation error if not valid.
+
+The following code will also throw a compilation error:
+let list = [2, 3, 4]
+let list = [1, ..list]
+let [1, second_element, ..] = list
+[1.0, ..list] // compile error, type mismatch"
+15,Where does the Doctor say that he is a time lord?,The Doctor declares that he is the last of the time lords in the Tardis and in a memory in the airlock door.
+15,Who are the characters in this script?,"The characters in this script are: RUBY, DOCTOR, CARLA, ERIC, BABIES, POPPY, MARCEL?, ADJANI?, SANDRA?, NAN-E, JOCELYN, COMPUTER, and the Bogeyman."
+16,What can moss be used for?,Harvesting moss gives 1 foraging exp per moss and speed gro requires five moss.
+16,What are all of the sources of battery packs that have ever existed?,Weeds in the Mutant Bug Lair used to turn into battery battery packs in the winter and the solar panels currently slowly generate battery packs when left in the sun.
+19,What is the recommended way to index text for question-answering?,"It is recommended to first apply text normalization processes such as tokenization, stemming, and the removal of stop words to enhance the text’s suitability for indexing. Pretrained LMs can then be used to generate semantic vector representations of texts. These vectors are stored, enabling rapid and precise retrieval from extensive data collections, significantly enhancing retrieval efficiency. Sentence-level indexing is more appropriate than document-level indexing for summarizing documents to precisely locate answers."
+19,What are the advantages and disadvantages of the BM25 algorithm?,"The advantage of BM25 is that it is efficient. The disadvantage of the BM25 algorithm is that it focuses on term frequency and presence for document algorithm, so it often overlooks the semantic information of queries."
