@@ -6,7 +6,7 @@ from langchain_core.runnables import Runnable
 from langchain_core.vectorstores import VectorStoreRetriever
 from overrides import overrides
 
-from evaluation.pipelines.pipeline import Pipeline
+from pipelines.pipeline import Pipeline
 
 
 class BasicPipeline(Pipeline):
