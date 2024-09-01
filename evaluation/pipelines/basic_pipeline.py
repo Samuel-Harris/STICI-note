@@ -5,7 +5,7 @@ from langchain_core.language_models import LanguageModelLike
 from langchain_core.runnables import Runnable
 from langchain_core.vectorstores import VectorStoreRetriever
 
-from pipeline import Pipeline
+from evaluation.pipelines.pipeline import Pipeline
 
 
 class BasicPipeline(Pipeline):

@@ -1,10 +1,12 @@
+import torch
 from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from vector_db.vector_db import construct_chroma_client
-from pipelines.basic_pipeline import BasicPipeline
-from models.model_loaders import load_llama_cpp_model
+from evaluation.vector_db.vector_db import construct_chroma_client
+from evaluation.pipelines.basic_pipeline import BasicPipeline
+from evaluation.models.model_factory import construct_hf_model
+from transformers import BitsAndBytesConfig
 
 raw_prompt_template = """<|system|>
 In this conversation between a user and the AI, the AI is helpful and friendly, and when it does not know the answer it says "I don’t know".
@@ -13,7 +15,7 @@ To help answer the question, you can use the following information:
 {context}</s>
 <|user|>
 {input}</s>
-<|AI|>33
+<|AI|>
 """
 prompt_template = PromptTemplate(template=raw_prompt_template, input_variables=["input", "context"])
 
