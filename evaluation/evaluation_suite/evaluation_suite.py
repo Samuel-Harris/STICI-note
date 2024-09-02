@@ -3,10 +3,10 @@ from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 
+from evaluation.evaluation_suite.model_config import ModelConfig
 from evaluation.vector_db.vector_db import construct_chroma_client
 from evaluation.pipelines.basic_pipeline import BasicPipeline
 from evaluation.models.model_factory import construct_hf_model
-
 
 raw_prompt_template = """<|system|>
 In this conversation between a user and the AI, the AI is helpful and friendly, and when it does not know the answer it says "I don’t know".
@@ -21,7 +21,18 @@ prompt_template = PromptTemplate(template=raw_prompt_template, input_variables=[
 
 print(f"Is torch available on MPS: {torch.backends.mps.is_available()}")
 
-model = construct_hf_model("models/model_weights/tinyllama-1.1b-chat-v1.0.Q6_K.gguf")
+test_config = ModelConfig(model_path="models/model_weights/tinyllama-1.1b-chat-v1.0.Q6_K.gguf",
+                          temperature=0.75,
+                          max_tokens=2000,
+                          top_p=1,
+                          top_k=40,
+                          last_n_tokens_size=64,
+                          n_ctx=2048,
+                          n_batch=512,
+                          n_gpu_layers=-1,
+                          f16_kv=True)
+
+model = construct_hf_model(test_config)
 
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 text_chunks = [Document("My favourite big cat is the lion."), Document("Koalas are my favourite animal")]

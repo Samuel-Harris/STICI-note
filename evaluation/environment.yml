@@ -75,6 +75,8 @@ dependencies:
   - pandas=2.2.2=py312hd77ebd4_0
   - pip=24.2=py312hca03da5_0
   - pyarrow=16.1.0=py312hd77ebd4_0
+  - pydantic=2.8.2=py312hca03da5_0
+  - pydantic-core=2.20.1=py312hf0e4da2_0
   - pysocks=1.7.1=py312hca03da5_0
   - python=3.12.4=h99e199e_1
   - python-dateutil=2.9.0post0=py312hca03da5_2
@@ -177,8 +179,6 @@ dependencies:
       - psutil==6.0.0
       - pyasn1==0.6.0
       - pyasn1-modules==0.4.0
-      - pydantic==2.8.2
-      - pydantic-core==2.20.1
       - pygments==2.18.0
       - pypika==0.48.9
       - pyproject-hooks==1.1.0
