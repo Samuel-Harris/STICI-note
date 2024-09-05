@@ -1,0 +1,3 @@
+[
+    "<|system|>\nIn this conversation between a user and the AI, the AI is helpful and friendly, and when it does not know the answer it says \"I don’t know\".\nTo help answer the question, you can use the following information:\n{context}</s>\n<|user|>\n{input}</s>\n<|AI|>"
+]

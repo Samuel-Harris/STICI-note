@@ -7,7 +7,7 @@ from langchain_core.vectorstores import VectorStoreRetriever
 
 class Pipeline(ABC):
     @abstractmethod
-    def __init__(self, llm: LanguageModelLike, prompt_template: PromptTemplate,
+    def __init__(self, model: LanguageModelLike, prompt_template: PromptTemplate,
                  vector_db_retriever: VectorStoreRetriever) -> None:
         pass
 

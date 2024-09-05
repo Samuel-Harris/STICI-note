@@ -11,9 +11,9 @@ from evaluation.pipelines.pipeline import Pipeline
 class BasicPipeline(Pipeline):
     retrieval_chain: Runnable
 
-    def __init__(self, llm: LanguageModelLike, prompt_template: PromptTemplate,
+    def __init__(self, model: LanguageModelLike, prompt_template: PromptTemplate,
                  vector_db_retriever: VectorStoreRetriever) -> None:
-        combine_docs_chain = create_stuff_documents_chain(llm, prompt_template)
+        combine_docs_chain = create_stuff_documents_chain(model, prompt_template)
 
         self.retrieval_chain = create_retrieval_chain(vector_db_retriever, combine_docs_chain)
 
