@@ -3,7 +3,7 @@ from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from evaluation.test_configs.model_config import ModelConfig
+from evaluation.evaluation_configs.model_config import ModelConfig
 from evaluation.vector_db.vector_db import construct_chroma_client
 from evaluation.pipelines.basic_pipeline import BasicPipeline
 from evaluation.models.model_factory import construct_hf_model
