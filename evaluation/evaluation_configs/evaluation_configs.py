@@ -71,7 +71,3 @@ class TestConfigIterator:
             return test_config
         else:
             raise StopIteration
-
-
-for x in TestConfigIterator():
-    print(x)
