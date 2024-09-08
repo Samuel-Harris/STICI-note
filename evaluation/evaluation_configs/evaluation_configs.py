@@ -1,6 +1,6 @@
 import json
 from itertools import product
-from typing import Type
+from typing import Type, Generator
 
 from langchain_core.language_models import LLM, LanguageModelLike
 from langchain_core.prompts import PromptTemplate
@@ -51,7 +51,7 @@ class TestPipeline:
         self.pipeline = test_config.pipeline_class(model, test_config.prompt_template, vector_store_retriever)
 
 
-def generate_test_pipelines():
+def generate_test_pipelines() -> Generator[TestPipeline]:
     model_config: ModelConfig
     pipeline_class: Type[Pipeline]
     prompt_template: PromptTemplate
