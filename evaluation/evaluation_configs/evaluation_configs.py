@@ -11,7 +11,7 @@ from evaluation.models.model_factory import construct_hf_model
 from evaluation.pipelines.basic_pipeline import BasicPipeline
 from evaluation.pipelines.pipeline import Pipeline
 from evaluation.evaluation_configs.model_config import ModelConfig
-from evaluation.vector_db.vector_db import construct_chroma_client
+from evaluation.vector_db.vector_db import construct_chroma_vector_store_retriever
 
 # import and set up config data
 with open("evaluation/evaluation_configs/model_configs.json", "r") as f:
@@ -43,40 +43,24 @@ class TestConfig(BaseModel):
 
 class TestPipeline:
     def __init__(self, test_config: TestConfig):
+        self.llm_config = test_config.llm_config
         model: LLM = construct_hf_model(test_config.llm_config)
         embedding_model: HuggingFaceEmbeddings = HuggingFaceEmbeddings(model_name=test_config.embedding_model_name)
-        vector_store_retriever = construct_chroma_client(embedding_model)
+        vector_store_retriever = construct_chroma_vector_store_retriever(embedding_model)
 
         self.pipeline = test_config.pipeline_class(model, test_config.prompt_template, vector_store_retriever)
 
 
-class TestConfigIterator:
-    def __init__(self):
-        self.current = 0
-        self.test_configs: list[TestConfig] = []
-
-        model_config: ModelConfig
-        pipeline_class: Type[Pipeline]
-        prompt_template: PromptTemplate
-        embedding_model_name: str
-        for model_config, pipeline_class, prompt_template, embedding_model_name in product(model_configs,
-                                                                                           pipeline_classes,
-                                                                                           prompt_templates,
-                                                                                           embedding_models):
-            model: LLM = construct_hf_model(model_config)
-            embedding_model: HuggingFaceEmbeddings = HuggingFaceEmbeddings(model_name=embedding_model_name)
-            test_config = TestConfig(llm_config=model_config, model=model, prompt_template=prompt_template,
-                                     pipeline_class=pipeline_class, embedding_model=embedding_model)
-            self.test_configs.append(test_config)
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.current < len(self.test_configs):
-            test_config = self.test_configs[self.current]
-            self.current += 1
-
-            return test_config
-        else:
-            raise StopIteration
+def generate_test_pipelines():
+    model_config: ModelConfig
+    pipeline_class: Type[Pipeline]
+    prompt_template: PromptTemplate
+    embedding_model_name: str
+    for model_config, pipeline_class, prompt_template, embedding_model_name in product(model_configs,
+                                                                                       pipeline_classes,
+                                                                                       prompt_templates,
+                                                                                       embedding_models):
+        test_config: TestConfig = TestConfig(llm_config=model_config, prompt_template=prompt_template,
+                                             pipeline_class=pipeline_class, embedding_model_name=embedding_model_name)
+        test_pipeline: TestPipeline = TestPipeline(test_config)
+        yield test_pipeline
