@@ -12,3 +12,6 @@ class ModelConfig(BaseModel):
     n_batch: int
     n_gpu_layers: int
     f16_kv: bool
+
+    def print_hyperparameters(self):
+        print(self.dict())
