@@ -11,6 +11,7 @@ from evaluation.models.model_factory import construct_hf_model
 from evaluation.pipelines.basic_pipeline import BasicPipeline
 from evaluation.pipelines.pipeline import Pipeline
 from evaluation.evaluation_configs.model_config import ModelConfig
+from evaluation.vector_db.vector_db import construct_chroma_client
 
 # import and set up config data
 with open("evaluation/evaluation_configs/model_configs.json", "r") as f:
@@ -32,13 +33,21 @@ pipeline_classes: list[Type[Pipeline]] = [
 
 class TestConfig(BaseModel):
     llm_config: ModelConfig
-    model: LanguageModelLike
     prompt_template: PromptTemplate
     pipeline_class: Type[Pipeline]
-    embedding_model: HuggingFaceEmbeddings
+    embedding_model_name: str
 
     class Config:
         arbitrary_types_allowed = True
+
+
+class TestPipeline:
+    def __init__(self, test_config: TestConfig):
+        model: LLM = construct_hf_model(test_config.llm_config)
+        embedding_model: HuggingFaceEmbeddings = HuggingFaceEmbeddings(model_name=test_config.embedding_model_name)
+        vector_store_retriever = construct_chroma_client(embedding_model)
+
+        self.pipeline = test_config.pipeline_class(model, test_config.prompt_template, vector_store_retriever)
 
 
 class TestConfigIterator:

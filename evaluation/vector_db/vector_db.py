@@ -1,7 +1,7 @@
 from langchain_community.vectorstores import Chroma
-from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
+from langchain_core.vectorstores import VectorStoreRetriever
 
 
-def construct_chroma_client(text_chunks: list[Document], embedding_function: Embeddings) -> Chroma:
-    return Chroma.from_documents(text_chunks, embedding_function)
+def construct_chroma_vector_store_retriever(embedding_function: Embeddings) -> VectorStoreRetriever:
+    return Chroma(embedding_function=embedding_function).as_retriever()
