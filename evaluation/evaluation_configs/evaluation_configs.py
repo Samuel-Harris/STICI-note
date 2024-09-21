@@ -2,7 +2,7 @@ import json
 from itertools import product
 from typing import Type, Generator
 
-from langchain_core.language_models import LLM, LanguageModelLike
+from langchain_core.language_models import LLM
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 from pydantic.v1 import BaseModel
@@ -14,16 +14,16 @@ from evaluation.evaluation_configs.model_config import ModelConfig
 from evaluation.vector_db.vector_db import construct_chroma_vector_store_retriever
 
 # import and set up config data
-with open("evaluation/evaluation_configs/model_configs.json", "r") as f:
+with open("evaluation_configs/model_configs.json", "r") as f:
     raw_model_configs = json.loads(f.read())
     model_configs = [ModelConfig.validate(raw_model_config) for raw_model_config in raw_model_configs]
 
-with open("evaluation/evaluation_configs/prompt_templates.json", "r") as f:
+with open("evaluation_configs/prompt_templates.json", "r") as f:
     raw_prompt_templates = json.loads(f.read())
     prompt_templates = [PromptTemplate(template=raw_prompt_template, input_variables=["input", "context"]) for
                         raw_prompt_template in raw_prompt_templates]
 
-with open("evaluation/evaluation_configs/embedding_models.json", "r") as f:
+with open("evaluation_configs/embedding_models.json", "r") as f:
     embedding_models = json.loads(f.read())
 
 pipeline_classes: list[Type[Pipeline]] = [
@@ -43,15 +43,16 @@ class TestConfig(BaseModel):
 
 class TestPipeline:
     def __init__(self, test_config: TestConfig):
-        self.llm_config = test_config.llm_config
+        self.test_config: TestConfig = test_config
+        self.llm_config: ModelConfig = test_config.llm_config
         model: LLM = construct_hf_model(test_config.llm_config)
         embedding_model: HuggingFaceEmbeddings = HuggingFaceEmbeddings(model_name=test_config.embedding_model_name)
         vector_store_retriever = construct_chroma_vector_store_retriever(embedding_model)
 
-        self.pipeline = test_config.pipeline_class(model, test_config.prompt_template, vector_store_retriever)
+        self.pipeline: Pipeline = test_config.pipeline_class(model, test_config.prompt_template, vector_store_retriever)
 
 
-def generate_test_pipelines() -> Generator[TestPipeline]:
+def generate_test_pipelines() -> Generator[TestPipeline, None, None]:
     model_config: ModelConfig
     pipeline_class: Type[Pipeline]
     prompt_template: PromptTemplate

@@ -1,43 +1,30 @@
-import torch
-from langchain_core.documents import Document
-from langchain_core.prompts import PromptTemplate
-from langchain_huggingface import HuggingFaceEmbeddings
+import giskard
+import pandas as pd
+from giskard import Dataset, TestResult
+from giskard.testing.tests.llm.ground_truth import test_llm_ground_truth_similarity
 
-from evaluation.evaluation_configs.model_config import ModelConfig
-from evaluation.vector_db.vector_db import construct_chroma_client
-from evaluation.pipelines.basic_pipeline import BasicPipeline
-from evaluation.models.model_factory import construct_hf_model
+from evaluation.evaluation_configs.evaluation_configs import generate_test_pipelines, TestPipeline
 
-raw_prompt_template = """<|system|>
-In this conversation between a user and the AI, the AI is helpful and friendly, and when it does not know the answer it says "I don’t know".
+from evaluation.pipelines.pipeline import Pipeline
 
-To help answer the question, you can use the following information:
-{context}</s>
-<|user|>
-{input}</s>
-<|AI|>
-"""
-prompt_template = PromptTemplate(template=raw_prompt_template, input_variables=["input", "context"])
 
-print(f"Is torch available on MPS: {torch.backends.mps.is_available()}")
+test_df = pd.read_csv("../data/single_passage_test_questions.csv")
 
-test_config = ModelConfig(model_path="models/model_weights/tinyllama-1.1b-chat-v1.0.Q6_K.gguf",
-                          temperature=0.75,
-                          max_tokens=2000,
-                          top_p=1,
-                          top_k=40,
-                          last_n_tokens_size=64,
-                          n_ctx=2048,
-                          n_batch=512,
-                          n_gpu_layers=-1,
-                          f16_kv=True)
 
-model = construct_hf_model(test_config)
+def predict(pipeline: Pipeline, df: pd.DataFrame):
+    return [pipeline.query(question) for question in df["question"]]
 
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-text_chunks = [Document("My favourite big cat is the lion."), Document("Koalas are my favourite animal")]
-vector_db = construct_chroma_client(text_chunks, embeddings)
 
-basic_pipeline = BasicPipeline(model, prompt_template, vector_db.as_retriever())
-
-print(basic_pipeline.query("What is my favourite animal?"))
+test_pipeline: TestPipeline
+for test_pipeline in generate_test_pipelines():
+    giskard_model: giskard.Model = giskard.Model(
+        model=lambda df: predict(test_pipeline.pipeline, df),
+        model_type="text_generation",
+        name="Climate Change Question Answering",
+        description="This model answers any question about climate change based on IPCC reports",
+        feature_names=["question"],
+    )
+    dataset = Dataset(test_df, target="answer")
+    result: TestResult = test_llm_ground_truth_similarity(giskard_model, dataset).execute()
+    print(result)
+    print(result.details)
