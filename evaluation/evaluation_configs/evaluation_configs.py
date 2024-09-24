@@ -2,16 +2,21 @@ import json
 from itertools import product
 from typing import Type, Generator
 
+from langchain_chroma import Chroma
+from langchain_core.documents import Document
 from langchain_core.language_models import LLM
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_text_splitters import TextSplitter
 from pydantic.v1 import BaseModel
 
 from evaluation.models.model_factory import construct_hf_model
 from evaluation.pipelines.basic_pipeline import BasicPipeline
 from evaluation.pipelines.pipeline import Pipeline
 from evaluation.evaluation_configs.model_config import ModelConfig
-from evaluation.vector_db.vector_db import construct_chroma_vector_store_retriever
+from evaluation.text_splitters.recursive_character_text_splitter import RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST
+from evaluation.text_splitters.text_splitter_factory import TextSplitterWrapper
+from evaluation.vector_db.vector_db import construct_chroma_vector_store
 
 # import and set up config data
 with open("evaluation_configs/model_configs.json", "r") as f:
@@ -30,9 +35,14 @@ pipeline_classes: list[Type[Pipeline]] = [
     BasicPipeline
 ]
 
+text_splitter_wrappers: list[TextSplitter] = [
+    *RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST,
+]
+
 
 class TestConfig(BaseModel):
     llm_config: ModelConfig
+    text_splitter_wrapper: TextSplitterWrapper
     prompt_template: PromptTemplate
     pipeline_class: Type[Pipeline]
     embedding_model_name: str
@@ -44,12 +54,23 @@ class TestConfig(BaseModel):
 class TestPipeline:
     def __init__(self, test_config: TestConfig):
         self.test_config: TestConfig = test_config
-        self.llm_config: ModelConfig = test_config.llm_config
+
         model: LLM = construct_hf_model(test_config.llm_config)
         embedding_model: HuggingFaceEmbeddings = HuggingFaceEmbeddings(model_name=test_config.embedding_model_name)
-        vector_store_retriever = construct_chroma_vector_store_retriever(embedding_model)
+        self.vector_store: Chroma = construct_chroma_vector_store(embedding_model)
 
-        self.pipeline: Pipeline = test_config.pipeline_class(model, test_config.prompt_template, vector_store_retriever)
+        self.pipeline: Pipeline = test_config.pipeline_class(model, test_config.prompt_template,
+                                                             self.vector_store.as_retriever())
+
+        self.text_splitter = self.test_config.text_splitter_wrapper.construct_text_splitter()
+
+    def add_text(self, text: str):
+        chunks: list[str] = self.text_splitter.split_text(text)
+        documents = [Document(chunk) for chunk in chunks]
+        self.vector_store.add_documents(documents)
+
+    def reset_chunks(self):
+        self.vector_store.reset_collection()
 
 
 def generate_test_pipelines() -> Generator[TestPipeline, None, None]:
@@ -57,11 +78,14 @@ def generate_test_pipelines() -> Generator[TestPipeline, None, None]:
     pipeline_class: Type[Pipeline]
     prompt_template: PromptTemplate
     embedding_model_name: str
-    for model_config, pipeline_class, prompt_template, embedding_model_name in product(model_configs,
-                                                                                       pipeline_classes,
-                                                                                       prompt_templates,
-                                                                                       embedding_models):
+    for model_config, pipeline_class, text_splitter_wrapper, prompt_template, embedding_model_name in product(
+            model_configs,
+            pipeline_classes,
+            text_splitter_wrappers,
+            prompt_templates,
+            embedding_models):
         test_config: TestConfig = TestConfig(llm_config=model_config, prompt_template=prompt_template,
-                                             pipeline_class=pipeline_class, embedding_model_name=embedding_model_name)
+                                             text_splitter_wrapper=text_splitter_wrapper, pipeline_class=pipeline_class,
+                                             embedding_model_name=embedding_model_name)
         test_pipeline: TestPipeline = TestPipeline(test_config)
         yield test_pipeline
