@@ -5,4 +5,4 @@ from evaluation.evaluation_configs.model_config import ModelConfig
 
 
 def construct_hf_model(llm_config: ModelConfig) -> LLM:
-    return LlamaCpp(**llm_config.dict())
+    return LlamaCpp(verbose=False, **llm_config.dict())

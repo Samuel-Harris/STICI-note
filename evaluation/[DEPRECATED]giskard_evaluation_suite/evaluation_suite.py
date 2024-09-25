@@ -3,7 +3,7 @@ import pandas as pd
 from giskard import Dataset, TestResult
 from giskard.testing.tests.llm.ground_truth import test_llm_ground_truth_similarity
 
-from evaluation.evaluation_configs.evaluation_configs import generate_test_pipelines, TestPipeline
+from evaluation.evaluation_configs.evaluation_configs import generate_test_pipeline_df, TestPipeline
 
 from evaluation.pipelines.pipeline import Pipeline
 
@@ -16,7 +16,7 @@ def predict(pipeline: Pipeline, df: pd.DataFrame):
 
 
 test_pipeline: TestPipeline
-for test_pipeline in generate_test_pipelines():
+for test_pipeline in generate_test_pipeline_df():
     giskard_model: giskard.Model = giskard.Model(
         model=lambda df: predict(test_pipeline.pipeline, df),
         model_type="text_generation",

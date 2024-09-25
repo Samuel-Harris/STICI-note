@@ -18,4 +18,4 @@ class BasicPipeline(Pipeline):
         self.retrieval_chain = create_retrieval_chain(vector_db_retriever, combine_docs_chain)
 
     def query(self, query: str) -> str:
-        return self.retrieval_chain.invoke({"input": query})
+        return self.retrieval_chain.invoke({"input": query})["answer"]

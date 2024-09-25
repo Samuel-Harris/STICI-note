@@ -9,6 +9,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import TextSplitter
 from pydantic.v1 import BaseModel
+import pandas as pd
 
 from evaluation.models.model_factory import construct_hf_model
 from evaluation.pipelines.basic_pipeline import BasicPipeline
@@ -52,7 +53,7 @@ class TestConfig(BaseModel):
 
 
 class TestPipeline:
-    def __init__(self, test_config: TestConfig):
+    def __init__(self, test_config: TestConfig) -> None:
         self.test_config: TestConfig = test_config
 
         model: LLM = construct_hf_model(test_config.llm_config)
@@ -64,16 +65,32 @@ class TestPipeline:
 
         self.text_splitter = self.test_config.text_splitter_wrapper.construct_text_splitter()
 
-    def add_text(self, text: str):
+    def add_text_to_vector_db(self, text: str) -> None:
         chunks: list[str] = self.text_splitter.split_text(text)
         documents = [Document(chunk) for chunk in chunks]
         self.vector_store.add_documents(documents)
 
-    def reset_chunks(self):
+    def reset_vector_db(self) -> None:
         self.vector_store.reset_collection()
 
 
-def generate_test_pipelines() -> Generator[TestPipeline, None, None]:
+class TestPipelineContextManager:
+    def __init__(self, test_pipeline: TestPipeline, row: pd.Series, documents_df: pd.DataFrame) -> None:
+        self.test_pipeline: TestPipeline = test_pipeline
+        self.document_text: str = documents_df[documents_df["index"] == row["document_index"]]["text"].iloc[0]
+
+    def __enter__(self) -> TestPipeline:
+        self.test_pipeline.add_text_to_vector_db(self.document_text)
+
+        return self.test_pipeline
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.test_pipeline.reset_vector_db()
+
+
+def generate_test_pipeline_df() -> pd.DataFrame:
+    test_pipeline_list: list[TestPipeline] = []
+
     model_config: ModelConfig
     pipeline_class: Type[Pipeline]
     prompt_template: PromptTemplate
@@ -88,4 +105,6 @@ def generate_test_pipelines() -> Generator[TestPipeline, None, None]:
                                              text_splitter_wrapper=text_splitter_wrapper, pipeline_class=pipeline_class,
                                              embedding_model_name=embedding_model_name)
         test_pipeline: TestPipeline = TestPipeline(test_config)
-        yield test_pipeline
+        test_pipeline_list.append(test_pipeline)
+
+    return pd.DataFrame(test_pipeline_list)
