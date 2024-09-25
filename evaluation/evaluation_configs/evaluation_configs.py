@@ -1,6 +1,6 @@
 import json
 from itertools import product
-from typing import Type, Generator
+from typing import Type
 
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
@@ -8,8 +8,8 @@ from langchain_core.language_models import LLM
 from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import TextSplitter
-from pydantic.v1 import BaseModel
 import pandas as pd
+from overrides import overrides
 
 from evaluation.models.model_factory import construct_hf_model
 from evaluation.pipelines.basic_pipeline import BasicPipeline
@@ -18,6 +18,7 @@ from evaluation.evaluation_configs.model_config import ModelConfig
 from evaluation.text_splitters.recursive_character_text_splitter import RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST
 from evaluation.text_splitters.text_splitter_factory import TextSplitterWrapper
 from evaluation.vector_db.vector_db import construct_chroma_vector_store
+from evaluation.evaluation_configs.base_config import BaseConfig
 
 # import and set up config data
 with open("evaluation_configs/model_configs.json", "r") as f:
@@ -41,7 +42,7 @@ text_splitter_wrappers: list[TextSplitter] = [
 ]
 
 
-class TestConfig(BaseModel):
+class TestConfig(BaseConfig):
     llm_config: ModelConfig
     text_splitter_wrapper: TextSplitterWrapper
     prompt_template: PromptTemplate
@@ -50,6 +51,16 @@ class TestConfig(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
+
+    @overrides
+    def get_attributes(self) -> dict[str, str | int | float | bool]:
+        attributes: dict[str, str | int | float | bool] = {**self.llm_config.get_attributes(),
+                                                           **self.text_splitter_wrapper.get_attributes(),
+                                                           "prompt_template": str(self.prompt_template),
+                                                           "pipeline_class": self.pipeline_class.__name__,
+                                                           "embedding_model_name": self.embedding_model_name}
+
+        return attributes
 
 
 class TestPipeline:
@@ -107,4 +118,8 @@ def generate_test_pipeline_df() -> pd.DataFrame:
         test_pipeline: TestPipeline = TestPipeline(test_config)
         test_pipeline_list.append(test_pipeline)
 
-    return pd.DataFrame(test_pipeline_list)
+    data = {"test_pipeline": test_pipeline_list, **test_pipeline_list[0].test_config.get_attributes()}
+    for test_pipeline in test_pipeline_list[1:]:
+        for key, value in test_pipeline.test_config.get_attributes().items():
+            data[key].append(value)
+    return pd.DataFrame(data)

@@ -1,7 +1,9 @@
-from pydantic.v1 import BaseModel
+from overrides import overrides
+
+from evaluation.evaluation_configs.base_config import BaseConfig
 
 
-class ModelConfig(BaseModel):
+class ModelConfig(BaseConfig):
     model_path: str
     temperature: float
     max_tokens: int
@@ -13,5 +15,6 @@ class ModelConfig(BaseModel):
     n_gpu_layers: int
     f16_kv: bool
 
-    def print_hyperparameters(self):
-        print(self.dict())
+    @overrides
+    def get_attributes(self) -> dict[str, str|int|float|bool]:
+        return self.dict()

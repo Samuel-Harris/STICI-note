@@ -1,10 +1,11 @@
-from abc import abstractmethod, ABC
+from abc import abstractmethod
 
 from langchain_text_splitters import TextSplitter
-from pydantic.v1 import BaseModel
+
+from evaluation.evaluation_configs.base_config import BaseConfig
 
 
-class TextSplitterWrapper(ABC, BaseModel):
+class TextSplitterWrapper(BaseConfig):
     @abstractmethod
     def construct_text_splitter(self) -> TextSplitter:
         pass

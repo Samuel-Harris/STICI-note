@@ -1,4 +1,5 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from overrides import overrides
 
 from evaluation.text_splitters.text_splitter_factory import TextSplitterWrapper
 
@@ -14,6 +15,10 @@ class RecursiveCharacterTextSplitterWrapper(TextSplitterWrapper):
             length_function=len,
             is_separator_regex=False,
         )
+
+    @overrides
+    def get_attributes(self) -> dict[str, str | int | float | bool]:
+        return self.dict()
 
 
 RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST: list[RecursiveCharacterTextSplitterWrapper] = [
