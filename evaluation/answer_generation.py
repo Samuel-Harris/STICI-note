@@ -8,8 +8,8 @@ from evaluation.evaluation_configs.test_pipeline import generate_test_pipeline_d
 
 def main() -> None:
     documents_df: pd.DataFrame = pd.read_csv("../data/documents.csv")
-    multi_passage_df: pd.DataFrame = pd.read_csv("../data/multi_passage_answer_questions.csv").head(3)
-    single_passage_df: pd.DataFrame = pd.read_csv("../data/single_passage_answer_questions.csv").head(3)
+    multi_passage_df: pd.DataFrame = pd.read_csv("../data/multi_passage_answer_questions.csv")
+    single_passage_df: pd.DataFrame = pd.read_csv("../data/single_passage_answer_questions.csv")
     no_answer_df: pd.DataFrame = pd.read_csv("../data/no_answer_questions.csv")
     no_answer_df["expected_answer"] = ["The answer to your question is not in the provided document." for _ in
                                        range(len(no_answer_df))]
@@ -26,7 +26,13 @@ def main() -> None:
 
     test_pipeline: Series
     for test_pipeline_i, test_pipeline_row in test_pipeline_df.iterrows():
-        run_test_on_dataset(documents_df, single_passage_df, test_pipeline_row.test_pipeline, "multi_passage",
+        run_test_on_dataset(documents_df, multi_passage_df, test_pipeline_row.test_pipeline, "multi_passage",
+                            test_pipeline_i)
+
+        run_test_on_dataset(documents_df, single_passage_df, test_pipeline_row.test_pipeline, "single_passage",
+                            test_pipeline_i)
+
+        run_test_on_dataset(documents_df, no_answer_df, test_pipeline_row.test_pipeline, "no_answer",
                             test_pipeline_i)
 
 
