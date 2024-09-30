@@ -11,7 +11,7 @@ def main() -> None:
     multi_passage_df: pd.DataFrame = pd.read_csv("../data/multi_passage_answer_questions.csv")
     single_passage_df: pd.DataFrame = pd.read_csv("../data/single_passage_answer_questions.csv")
     no_answer_df: pd.DataFrame = pd.read_csv("../data/no_answer_questions.csv")
-    no_answer_df["expected_answer"] = ["The answer to your question is not in the provided document." for _ in
+    no_answer_df["expected_answer"] = ["The answer to your question is not in the provided text." for _ in
                                        range(len(no_answer_df))]
 
     multi_passage_df = multi_passage_df.rename(columns={"answer": "expected_answer"})
