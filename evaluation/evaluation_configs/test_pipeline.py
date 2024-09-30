@@ -58,8 +58,10 @@ class TestPipelineContextManager:
 def generate_test_pipeline_df() -> pd.DataFrame:
     # import and set up config data
     with open("evaluation_configs/model_configs.json", "r") as f:
-        raw_model_configs = json.loads(f.read())
-        model_configs = [ModelConfig.validate(raw_model_config) for raw_model_config in raw_model_configs]
+        raw_model_configs: dict = json.loads(f.read())
+
+        model_configs = [ModelConfig.validate(dict(zip(raw_model_configs.keys(), model_config))) for model_config in
+                         product(*raw_model_configs.values())]
 
     with open("evaluation_configs/prompt_templates.json", "r") as f:
         raw_prompt_templates = json.loads(f.read())

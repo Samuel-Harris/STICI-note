@@ -1,20 +1,22 @@
+from typing import Optional
+
 from overrides import overrides
 
 from evaluation.evaluation_configs.base_config import BaseConfig
 
 
 class ModelConfig(BaseConfig):
-    model_path: str
-    temperature: float
-    max_tokens: int
-    top_p: int
-    top_k: int
-    last_n_tokens_size: int
-    n_ctx: int
-    n_batch: int
-    n_gpu_layers: int
-    f16_kv: bool
+    model_path: Optional[str] = "models/model_weights/tinyllama-1.1b-chat-v1.0.Q6_K.gguf"
+    temperature: Optional[float] = 0.75
+    max_tokens: Optional[int] = 2000
+    top_p: Optional[int] = 1
+    top_k: Optional[int] = 40
+    last_n_tokens_size: Optional[int] = 64
+    n_ctx: Optional[int] = 2048
+    n_batch: Optional[int] = 512
+    n_gpu_layers: Optional[int] = -1
+    f16_kv: Optional[bool] = True
 
     @overrides
-    def get_attributes(self) -> dict[str, str|int|float|bool]:
+    def get_attributes(self) -> dict[str, str | int | float | bool]:
         return self.dict()
