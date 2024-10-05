@@ -1,4 +1,5 @@
 import pandas as pd
+import torch
 from pandas import Series
 from tqdm import tqdm
 
@@ -7,6 +8,8 @@ from evaluation.evaluation_configs.test_pipeline import generate_test_pipeline_d
 
 
 def main() -> None:
+    torch.mps.set_per_process_memory_fraction(0.0)
+
     documents_df: pd.DataFrame = pd.read_csv("../data/documents.csv")
     multi_passage_df: pd.DataFrame = pd.read_csv("../data/multi_passage_answer_questions.csv")
     single_passage_df: pd.DataFrame = pd.read_csv("../data/single_passage_answer_questions.csv")
