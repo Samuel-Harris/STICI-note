@@ -27,7 +27,6 @@ def main() -> None:
     test_pipeline_df: pd.DataFrame = generate_test_pipeline_df()
     test_pipeline_df.drop(columns=["test_pipeline"]).to_csv("../data/test_pipelines.csv", index_label="index")
 
-    test_pipeline: Series
     for test_pipeline_i, test_pipeline_row in test_pipeline_df.iterrows():
         run_test_on_dataset(documents_df, multi_passage_df, test_pipeline_row.test_pipeline, "multi_passage",
                             test_pipeline_i)
