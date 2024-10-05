@@ -98,8 +98,9 @@ def generate_test_pipeline_df() -> pd.DataFrame:
         test_pipeline: TestPipeline = TestPipeline(test_config)
         test_pipeline_list.append(test_pipeline)
 
-    data = {"test_pipeline": test_pipeline_list, **test_pipeline_list[0].test_config.get_attributes()}
-    for test_pipeline in test_pipeline_list[1:]:
+    data: dict[str, list[object]] = {key: [] for key in test_pipeline_list[0].test_config.get_attributes().keys()}
+    data["test_pipeline"] = test_pipeline_list
+    for test_pipeline in test_pipeline_list:
         for key, value in test_pipeline.test_config.get_attributes().items():
             data[key].append(value)
     return pd.DataFrame(data)
