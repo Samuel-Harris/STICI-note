@@ -60,7 +60,7 @@ def generate_test_pipeline_df() -> pd.DataFrame:
     with open("evaluation_configs/model_configs.json", "r") as f:
         raw_model_configs: dict = json.loads(f.read())
 
-        model_configs = [ModelConfig.validate(dict(zip(raw_model_configs.keys(), model_config))) for model_config in
+        model_configs = [ModelConfig.model_validate(dict(zip(raw_model_configs.keys(), model_config))) for model_config in
                          product(*raw_model_configs.values())]
 
     with open("evaluation_configs/prompt_templates.json", "r") as f:
