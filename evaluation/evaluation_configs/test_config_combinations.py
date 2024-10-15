@@ -42,7 +42,6 @@ class TestConfigCombinations:
 
         # Generate all possible config combinations
         self.test_configs = []
-
         model_config: ModelConfig
         pipeline_class: Type[Pipeline]
         prompt_template: PromptTemplate

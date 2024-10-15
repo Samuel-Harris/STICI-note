@@ -6,7 +6,8 @@ from pandas import Series
 from tqdm import tqdm
 
 from evaluation.evaluation_configs.test_config_combinations import TestConfigCombinations
-from evaluation.evaluation_configs.test_pipeline import TestPipeline, TestPipelineContextManager
+from evaluation.evaluation_configs.test_pipeline import TestPipeline
+from evaluation.evaluation_configs.test_pipeline_context_manager import TestPipelineContextManager
 
 
 def main() -> None:
