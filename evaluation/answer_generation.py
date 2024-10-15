@@ -13,6 +13,7 @@ from evaluation.evaluation_configs.test_pipeline_context_manager import TestPipe
 def main() -> None:
     torch.mps.set_per_process_memory_fraction(0.0)
 
+    # load and prepare datasets
     documents_df: pd.DataFrame = pd.read_csv("../data/documents.csv")
     multi_passage_df: pd.DataFrame = pd.read_csv("../data/multi_passage_answer_questions.csv")
     single_passage_df: pd.DataFrame = pd.read_csv("../data/single_passage_answer_questions.csv")
@@ -27,6 +28,7 @@ def main() -> None:
     single_passage_df["actual_answer"] = [None] * len(single_passage_df)
     no_answer_df["actual_answer"] = [None] * len(no_answer_df)
 
+    # generate and save test pipeline configurations
     test_config_combinations = TestConfigCombinations()
 
     n_config_combinations: int = test_config_combinations.get_n_combinations()
@@ -34,6 +36,7 @@ def main() -> None:
 
     save_test_pipeline_configs(test_config_combinations)
 
+    # run tests
     for test_pipeline_i, test_pipeline in enumerate(test_config_combinations.generate_test_pipelines()):
         run_test_on_dataset(documents_df, multi_passage_df, test_pipeline, "multi_passage", test_pipeline_i,
                             n_config_combinations)
