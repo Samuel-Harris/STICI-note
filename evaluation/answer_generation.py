@@ -1,10 +1,12 @@
+from typing import Any
+
 import pandas as pd
 import torch
 from pandas import Series
 from tqdm import tqdm
 
-from evaluation.evaluation_configs.test_pipeline import generate_test_pipeline_df, TestPipeline, \
-    TestPipelineContextManager
+from evaluation.evaluation_configs.test_config_combinations import TestConfigCombinations
+from evaluation.evaluation_configs.test_pipeline import TestPipeline, TestPipelineContextManager
 
 
 def main() -> None:
@@ -24,23 +26,34 @@ def main() -> None:
     single_passage_df["actual_answer"] = [None] * len(single_passage_df)
     no_answer_df["actual_answer"] = [None] * len(no_answer_df)
 
-    test_pipeline_df: pd.DataFrame = generate_test_pipeline_df()
-    test_pipeline_df.drop(columns=["test_pipeline"]).to_csv("../data/test_pipelines.csv", index_label="index")
+    test_config_combinations = TestConfigCombinations()
 
-    for test_pipeline_i, test_pipeline_row in test_pipeline_df.iterrows():
-        run_test_on_dataset(documents_df, multi_passage_df, test_pipeline_row.test_pipeline, "multi_passage",
-                            test_pipeline_i)
+    n_config_combinations: int = test_config_combinations.get_n_combinations()
+    print(f"Testing {n_config_combinations} config combinations")
 
-        run_test_on_dataset(documents_df, single_passage_df, test_pipeline_row.test_pipeline, "single_passage",
-                            test_pipeline_i)
+    save_test_pipeline_configs(test_config_combinations)
 
-        run_test_on_dataset(documents_df, no_answer_df, test_pipeline_row.test_pipeline, "no_answer",
-                            test_pipeline_i)
+    for test_pipeline_i, test_pipeline in enumerate(test_config_combinations.generate_test_pipelines()):
+        run_test_on_dataset(documents_df, multi_passage_df, test_pipeline, "multi_passage", test_pipeline_i,
+                            n_config_combinations)
+
+        run_test_on_dataset(documents_df, single_passage_df, test_pipeline, "single_passage", test_pipeline_i,
+                            n_config_combinations)
+
+        run_test_on_dataset(documents_df, no_answer_df, test_pipeline, "no_answer", test_pipeline_i,
+                            n_config_combinations)
+
+
+def save_test_pipeline_configs(test_config_combinations: TestConfigCombinations) -> None:
+    rows: list[dict[str, Any]] = []
+    for test_pipeline in test_config_combinations.get_test_config_combinations():
+        rows.append(test_pipeline.get_attributes())
+    pd.DataFrame(rows).to_csv("../data/test_pipelines.csv", index_label="index")
 
 
 def run_test_on_dataset(documents_df: pd.DataFrame, dataset: pd.DataFrame, test_pipeline: TestPipeline,
-                        dataset_name: str, test_pipeline_i: int) -> None:
-    print(f"Executing pipeline {test_pipeline.test_config} on {dataset_name} questions")
+                        dataset_name: str, test_pipeline_i: int, n_config_combinations: int) -> None:
+    print(f"Executing pipeline {test_pipeline_i}/{n_config_combinations - 1} on {dataset_name} questions", flush=True)
     progress_bar = tqdm(total=len(dataset))
 
     row: Series

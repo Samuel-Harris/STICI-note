@@ -18,8 +18,4 @@ class RecursiveCharacterTextSplitterWrapper(TextSplitterWrapper):
 
     @overrides
     def get_attributes(self) -> dict[str, str | int | float | bool]:
-        return self.dict()
-
-
-RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST: list[RecursiveCharacterTextSplitterWrapper] = [
-    RecursiveCharacterTextSplitterWrapper(chunk_size=300, chunk_overlap=100)]
+        return self.model_dump()

@@ -1,21 +1,12 @@
-import json
-from itertools import product
-from typing import Type
-
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_core.language_models import LLM
-from langchain_core.prompts import PromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_text_splitters import TextSplitter
 import pandas as pd
 
 from evaluation.evaluation_configs.test_config import TestConfig
 from evaluation.models.model_factory import construct_hf_model
-from evaluation.pipelines.basic_pipeline import BasicPipeline
 from evaluation.pipelines.pipeline import Pipeline
-from evaluation.evaluation_configs.model_config import ModelConfig
-from evaluation.text_splitters.recursive_character_text_splitter import RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST
 from evaluation.vector_db.vector_db import construct_chroma_vector_store
 
 
@@ -53,54 +44,3 @@ class TestPipelineContextManager:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.test_pipeline.reset_vector_db()
-
-
-def generate_test_pipeline_df() -> pd.DataFrame:
-    # import and set up config data
-    with open("evaluation_configs/model_configs.json", "r") as f:
-        raw_model_configs: dict = json.loads(f.read())
-
-        model_configs = [ModelConfig.model_validate(dict(zip(raw_model_configs.keys(), model_config))) for model_config in
-                         product(*raw_model_configs.values())]
-
-    with open("evaluation_configs/prompt_templates.json", "r") as f:
-        raw_prompt_templates = json.loads(f.read())
-        prompt_templates = [PromptTemplate(template=raw_prompt_template, input_variables=["input", "context"]) for
-                            raw_prompt_template in raw_prompt_templates]
-
-    with open("evaluation_configs/embedding_models.json", "r") as f:
-        embedding_models = json.loads(f.read())
-
-    pipeline_classes: list[Type[Pipeline]] = [
-        BasicPipeline
-    ]
-
-    text_splitter_wrappers: list[TextSplitter] = [
-        *RECURSIVE_CHARACTER_TEXT_SPLITTER_WRAPPER_LIST,
-    ]
-
-    # Generate list of all possible config combinations
-    test_pipeline_list: list[TestPipeline] = []
-
-    model_config: ModelConfig
-    pipeline_class: Type[Pipeline]
-    prompt_template: PromptTemplate
-    embedding_model_name: str
-    for model_config, pipeline_class, text_splitter_wrapper, prompt_template, embedding_model_name in product(
-            model_configs,
-            pipeline_classes,
-            text_splitter_wrappers,
-            prompt_templates,
-            embedding_models):
-        test_config: TestConfig = TestConfig(llm_config=model_config, prompt_template=prompt_template,
-                                             text_splitter_wrapper=text_splitter_wrapper, pipeline_class=pipeline_class,
-                                             embedding_model_name=embedding_model_name)
-        test_pipeline: TestPipeline = TestPipeline(test_config)
-        test_pipeline_list.append(test_pipeline)
-
-    data: dict[str, list[object]] = {key: [] for key in test_pipeline_list[0].test_config.get_attributes().keys()}
-    data["test_pipeline"] = test_pipeline_list
-    for test_pipeline in test_pipeline_list:
-        for key, value in test_pipeline.test_config.get_attributes().items():
-            data[key].append(value)
-    return pd.DataFrame(data)
