@@ -1,4 +1,3 @@
-import cProfile
 from typing import Any
 
 import pandas as pd
@@ -37,19 +36,16 @@ def main() -> None:
 
     save_test_pipeline_configs(test_config_combinations)
 
-    with cProfile.Profile() as pr:
-        # run tests
-        for test_pipeline_i, test_pipeline in enumerate(test_config_combinations.generate_test_pipelines()):
-            run_test_on_dataset(documents_df, multi_passage_df, test_pipeline, "multi_passage", test_pipeline_i,
-                                n_config_combinations)
+    # run tests
+    for test_pipeline_i, test_pipeline in enumerate(test_config_combinations.generate_test_pipelines()):
+        run_test_on_dataset(documents_df, multi_passage_df, test_pipeline, "multi_passage", test_pipeline_i,
+                            n_config_combinations)
 
-            # run_test_on_dataset(documents_df, single_passage_df, test_pipeline, "single_passage", test_pipeline_i,
-            #                     n_config_combinations)
-            #
-            # run_test_on_dataset(documents_df, no_answer_df, test_pipeline, "no_answer", test_pipeline_i,
-            #                     n_config_combinations)
+        run_test_on_dataset(documents_df, single_passage_df, test_pipeline, "single_passage", test_pipeline_i,
+                            n_config_combinations)
 
-        pr.print_stats(sort="cumtime")
+        run_test_on_dataset(documents_df, no_answer_df, test_pipeline, "no_answer", test_pipeline_i,
+                            n_config_combinations)
 
 
 def save_test_pipeline_configs(test_config_combinations: TestConfigCombinations) -> None:
