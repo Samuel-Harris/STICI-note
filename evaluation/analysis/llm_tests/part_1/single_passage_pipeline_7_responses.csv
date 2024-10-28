@@ -1,0 +1,110 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death.,"
+Keybullet Kin drop a key upon death."
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol.,"
+The answer to your question is not in the provided text."
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.","
+The giants look like they are no more than 2-3 feet wide, numerous (dozens), and when seen in a group, they bark and growl. They appear fearful if noticed. They demand food and threaten to stab with their tools. They have been partially ruined by the fresher tunnel and many of them are now filled or partially collapsed."
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.","
+On day 2, ropers occur."
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent.","
+The answer to your question is not in the provided text."
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype.,"
+The answer to your question is not in the provided text."
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone).","
+The answer to your question is not in the provided text."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.,"
+The answer to your question is not in the provided text."
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000).","
+To make a button, you can use the mo.ui.button function and provide an on_click argument to define its behavior. In this case, the button will increment its value by 1 each time it is clicked. The answer extracted from the question is ""Use mo.ui.button and its on_click argument to create a counter button."""
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings.","
+You might use caching when you need to store previously computed values of expensive intermediate computations, such as t-SNE, UMAP, or PyMDE embeddings, and expose their parameters as UI elements. This can help improve performance by avoiding recomputation when the same parameters are used again."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact"".","1. Comprehensive analysis not acted upon
+2. Impact killers: Academic projects, lack of clear recommendation, heavy lifting for audience, wasting time on non-impactful projects
+3. Clear recommendations and actionable steps
+4. Focusing on business impact
+5. Creating a sense of urgency
+6. Engaging stakeholders and building buy-in
+7. Regular updates and communication
+8. Measuring progress and success
+9. Adapting to changing circumstances
+10. Continuous improvement and learning from mistakes
+The answer to your question is not in the provided text."
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.","
+Yes, you can take partial credit for something even if you didn't do it all by yourself. It is beneficial to focus on impact and stepping up in your career."
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.","
+The answer to your question is not in the provided text."
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model).","
+The context does not specify the exact types of AI that carry ""systematic risks"". However, it mentions that systemic risks could arise from general-purpose AI models, including large generative AI models."
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.","
+The answer to your question is not in the provided text."
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.","
+A group of Gish'ra warriors ambush the party at Wyrm's lookout."
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars.,"
+The answer to your question is not in the provided text."
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino.,"
+The answer to your question is not in the provided text."
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.","
+The answer to your question is not in the provided text."
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil.,"
+The answer to your question is not in the provided text."
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.","
+The policy on Tai Chi is that all M.P’s would have half an hour of compulsory Tai chi everyday to counteract the other 23 ½ hours Chi Ting they do for the rest of the time."
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.,"
+The proposed change for the British museum is to have a Daddy's section alongside the current Mummy exhibition."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100.",1.73x faster.
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training.,"
+The answer to your question is not in the provided text."
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public.","
+In Gleam, custom types can be defined as being opaque, which causes the constructors for the custom type not to be exported from the module. Functions are private by default and need the pub keyword to be public. In Python, top level functions are exported by default. There is no notion of private module-level functions."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.,"
+The answer to your question is not in the provided text."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax.,"
+The answer to your question is not in the provided text."
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training.","
+To freeze a variable during training in MLX, you can add ""_"" as a prefix to the attribute name. This signals to mlx that it is not a parameter and should not be updated during training."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother.,"
+The narrator is Perry's sibling."
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days.,730 days
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".","
+The answer to your question is not in the provided text."
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese.,"
+The answer to your question is not in the provided text."
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3.,"
+The answer to your question is not in the provided text."
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0.,"
+The answer to your question is not in the provided text."
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021.,"
+The answer to your question is not in the provided text."
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake.","
+The answer to your question is not in the provided text."
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'.,"
+The answer to your question is not in the provided text."
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer.,"
+Lou has been resurrected along with a handful of other women murdered by a single serial killer."
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.","
+The context does not provide specific categories that the RAG technique paradigm is split into. It only mentions that the paper aims to clarify aspects of RAG and offers a structured overview, but it doesn't specify any particular categories."
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy.","
+The answer to your question is not in the provided text."

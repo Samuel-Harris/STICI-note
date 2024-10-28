@@ -1,0 +1,341 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death.,"1
+Question: What is the chaNCe for a specific number of Keybullet Kin to spawn on a floor?"
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol.,"
+The answer to your question is not in the provided text."
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.","
+The giant's are no more than 2-3 feet wide, and numerous (dozen). They appear to be fearful and appear to be barring the entrance. The group can see them bark and growl when they see them."
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.","
+The answer to your question is not in the provided text."
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent.","
+The required features for this project were:
+1. A simple interface to view and edit Wikipedia pages.
+2. The ability to search for specific information on Wikipedia.
+3. The ability to save and load saved searches.
+4. The ability to filter results by date, author, or category.
+5. The ability to sort results by relevance.
+6. The ability to add comments to Wikipedia pages.
+7. The ability to view the full text of Wikipedia pages.
+8. The ability to save and load saved searches as a JSON file.
+9. The ability to search for specific information on Wikipedia using a natural language query.
+10. The ability to save and load saved searches as a JSON file.
+
+I decided to focus on the first three features, which are the most important for this project. I also added the ability to sort results by relevance because it’s a common feature in search engines.
+
+Optional Features:
+
+For the prototype, I decided to add some optional features that would make the tool more useful and versatile. These features were not required for the project but they could be useful in the future.
+
+1. The ability to save and load saved searches as a JSON file. This feature allows users to easily share their search history with others, which is useful for collaborative projects or for sharing information with other users.
+2. The ability to add comments to Wikipedia pages. This feature would allow users to provide additional context or feedback on the content of Wikipedia pages.
+3. The ability to view the full text of Wikipedia pages. This feature would allow users to read the entire article without having to click through multiple pages.
+4. The ability to save and load saved searches as a JSON file. This feature allows users to easily share their search history with others, which is useful for collaborative projects or for sharing information with other users.
+5. The ability to filter results by date, author, or category. This feature would allow users to quickly find specific articles based on the date, author, or category they are interested in.
+6. The ability to sort results by relevance. This feature would allow users to quickly find articles that are relevant to their search query.
+7. The ability to add comments to Wikipedia pages. This feature would allow users to provide additional context or feedback on the content of Wikipedia pages.
+8. The ability to view the full text of Wikipedia pages. This feature would allow users to read the entire article without having to click through multiple pages.
+9. The ability to save and load saved searches as a JSON file. This feature allows users to easily share their search history with others, which is useful for collaborative projects or for sharing information with other users.
+10. The ability to search for specific information on Wikipedia using a natural language query. This feature would allow users to quickly find articles based on the content of the query.
+
+I decided to focus on these optional features because they are not required for the project but they could be useful in the future. I also added some comments to the code to make it easier to understand and maintain in the future.
+
+Conclusion:
+
+In conclusion, I have developed a prototype of a Wikipedia search tool using Python and Flask. The prototype includes basic features such as searching for specific information on Wikipedia, saving and loading saved searches, sorting results by relevance, adding comments to Wikipedia pages, and viewing full text of Wikipedia pages. Optional features include the ability to save and load saved searches as JSON files, the ability to filter results by date, author, or category, the ability to sort results by relevance, and the ability to add comments to Wikipedia pages. I have also added some comments to the code to make it easier to understand and maintain in the future."
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype.,"
+The data used to test the prototype was Grace Hopper’s Wikipedia page in its vector DB."
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone).","
+The answer to your question is not in the provided text. The data storage options compared are: Fast Start, MongoDB (text collection), Milvu (vector db), Postgres (both text collection and vector DB)."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.,"20 Oct 2023: llmware v0.1.4
+Context: LLMWare is a new version of our library for handling large-scale text data. It includes a new parser, GGUF engine, and support for new Anthropic Claude 3 models. The main changes are in the parser, which now supports full back-level support for Ubuuntu 20+ with parser and GGUF engine. New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support. Answer: 20 Oct 2023: llmware v0.1.4
+Context: LLMWare is a new version of our library for handling large-scale text data. It includes a new parser, GGUF engine, and support for new Anthropic Claude 3 models. The main changes are in the parser, which now supports full back-level support for Ubuuntu 20+ with parser and GGUF engine. New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+Added full back-level support for Ubuuntu 20+ with parser and GGUF engine. Supported Operaating Systems: MacOS (MetaL and x86), Linux (x86 and aaRCH64), Windows
+
+New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+20 Oct 2023: llmware v0.1.4
+Answer: 20 Oct 2023: llmware v0.1.4
+Context: LLMWare is a new version of our library for handling large-scale text data. It includes a new parser, GGUF engine, and support for new Anthropic Claude 3 models. The main changes are in the parser, which now supports full back-level support for Ubuuntu 20+ with parser and GGUF engine. New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support. Answer: 20 Oct 2023: llmware v0.1.4
+Context: LLMWare is a new version of our library for handling large-scale text data. It includes a new parser, GGUF engine, and support for new Anthropic Claude 3 models. The main changes are in the parser, which now supports full back-level support for Ubuuntu 20+ with parser and GGUF engine. New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+Added full back-level support for Ubuuntu 20+ with parser and GGUF engine. Supported Operaating Systems: MacOS (MetaL and x86), Linux (x86 and aaRCH64), Windows
+
+New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+20 Oct 2023: llmware v0.1.4
+Answer: 20 Oct 2023: llmware v0.1.4
+Context: LLMWare is a new version of our library for handling large-scale text data. It includes a new parser, GGUF engine, and support for new Anthropic Claude 3 models. The main changes are in the parser, which now supports full back-level support for Ubuuntu 20+ with parser and GGUF engine. New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support. Answer: 20 Oct 2023: llmware v0.1.4
+Context: LLMWare is a new version of our library for handling large-scale text data. It includes a new parser, GGUF engine, and support for new Anthropic Claude 3 models. The main changes are in the parser, which now supports full back-level support for Ubuuntu 20+ with parser and GGUF engine. New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+Added full back-level support for Ubuuntu 20+ with parser and GGUF engine. Supported Operaating Systems: MacOS (MetaL and x86), Linux (x86 and aaRCH64), Windows
+
+New retrieval methods: document_lookup and aggregate_text. New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorite models. Note on Linux: we test most extensively on Ubuuntu 22 and now Ubuntu 20 and recommend where possible if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+20 Oct 2023: llmware v0.1.4
+Answer: 2"
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000).","
+The answer to your question is not in the provided text."
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings.","
+The answer to your question is not in the provided text."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact"".","
+2. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+3. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+4. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+5. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+6. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+7. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+8. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+9. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+10. You spend a lot of time on the analysis but don’t make any changes to your business strategy
+Problem: This is common with projects that are “just an analysis” and not a real change in strategy. If you are going to spend time analyzing, you should be able to make some changes to your strategy based on the findings.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 
+11. You spend a lot"
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.","
+The answer to your question is not in the provided text."
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.","
+The answer to your question is not in the provided text."
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model).","
+The answer to your question is not in the provided text."
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.","
+The Emperor is a mind flayer who appears in Baldur's Gate 3. It plays a key role in the main story, but its identity is intentionally obscured until later parts of the game, allowing the player to ultimately decide for themselves if they want to know more about it, and whether or not it is
+
+References
+[note 1] ""The Emperor"" is a play on words from the word ""empire"" and ""flair""."
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.","
+The Wyrmway is a location in Baldur's Gate 3. It is located in the northern part of the game world, near the border with the Empire. The Wyrmway is a large, dark and foreboding place that serves as a gateway to the Dream Realm. It is guarded by a group of Giish'ra warriors who ambush the party at Wyrm's Lookout.
+
+Identity revealed
+The identity of the group of Giish'ra warriors who ambush the party at Wyrm's Lookout is revealed in Act Two, when the Dream Guardian calls out for help. The Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm.
+
+Regarding Duke Stelmane
+The identity of Duke Stelmane is revealed in Act Three, when the party visits the Emperor's Old Hideout. The Emperor is a powerful sorcerer who has been banished from Baldur's Gate for his actions against the Dream Realm. He reveals that he was once a member of the Empire and that he has been searching for a way to return to the Dream Realm ever since.
+
+On conclusion of Visit the Emporor's Old Hideout
+The party learns that Duke Stelmane is seeking revenge against the Empire for his banishment, and that he has been searching for a way to return to the Dream Realm ever since. He reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway.
+
+Roomance
+The party learns that the Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm. The Dream Guardian reveals that he has been searching for a way to return to the Dream Realm since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway.
+
+Answer: 
+The Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm. The Dream Guardian reveals that he has been searching for a way to return to the Dream Realm since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+Conclusion of Visit the Emporor's Old Hideout
+The party learns that Duke Stelmane is seeking revenge against the Empire for his banishment, and that he has been searching for a way to return to the Dream Realm ever since. He reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway.
+
+The party learns that the Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm. The Dream Guardian reveals that he has been searching for a way to return to the Dream Realm since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+Conclusion of Roomance
+The party learns that the Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm. The Dream Guardian reveals that he has been searching for a way to return to the Dream Realm since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+Conclusion of Act Two finale
+The party learns that the Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm. The Dream Guardian reveals that he has been searching for a way to return to the Dream Realm since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+Conclusion of Act Three
+The party learns that the Dream Guardian is a powerful Dreamwalker who can communicate with dreams and guide the party through the Dream Realm. The Dream Guardian reveals that he has been searching for a way to return to the Dream Realm since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him access to the Dream Realm.
+
+The Dream Guardian reveals that he has discovered a powerful artifact that can grant him access to the Dream Realm, but only if he can find a way to defeat the Dream Guardian who guards the Wyrmway. The Dream Guardian reveals that he has been searching for a way to defeat the Dream Guardian who guards the Wyrmway since his banishment from Baldur's Gate, and that he has discovered a powerful artifact that can grant him"
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars.,"
+The answer to your question is not in the provided text."
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino.,"
+The answer to the question is that we loved the most part of the trip. The context contains the answer to the question, ""What did you like the most about your hike?"""
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.","
+The meaning behind the infrareed scenes is that they represent how the family cannot be themselves as soon as they step out of their house or into the open balcony. This could mean that the family is not allowed to express themselves freely, and instead, they have to work as collaborators for the Nazis. The scene where the girl takes on the dangerous responsibility of helping the prisoners shows how she cannot express her true self in public, leading to her being shown in infrareed. Another perspective is that the girl and her mother truly stand out in this horrific world solely because they are not allowed to be themselves."
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil.,"
+The answer to your question is not in the provided text. The Holocaust, as well as the effect of systematic violence and the tendency of the masses to side with oppressors in any given scenario, are different from each other. Rudolf, who is clearly involved in atrocities and torture, is in the first category, while the Holocaust is a genocidal act that involves overseeing a mass killing. The film highlights the horrific context behind these events through its use of the very usual to showcase the devastating impact of history on individuals and society as a whole."
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.","
+The answer to your question is not in the provided text."
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.,"2.5%
+
+Education
+
+We will increase the number of school places by 10,000 per year for the next five years.
+
+Transport
+
+We will introduce a new bus service that will run every 30 minutes during peak hours and every 60 minutes off-peak.
+
+Ellections
+
+In Government, we will complete a 5 year Parliament in only 4 years. This policy not only ensure s a 20% saving for the public purse but also gives everyone in the UK a year off from listening to our politician s.
+
+Once in Government, we will replace the Foreign Secretary with a British one!
+
+Waiting Lists
+
+We will reduce hospital waiting lists by using a smaller font.
+
+Immigrations
+
+We will reduce net migration by making sure that any net s are secured more firmly to the ground.
+
+Inflation
+Answer: 2.5%
+
+Education
+
+We will increase the number of school places by 10,000 per year for the next five years.
+
+Transport
+
+We will introduce a new bus service that will run every 30 minutes during peak hours and every 60 minutes off-peak.
+
+Ellections
+
+In Government, we will complete a 5 year Parliament in only 4 years. This policy not only ensure s a 20% saving for the public purse but also gives everyone in the UK a year off from listening to our politician s.
+
+Once in Government, we will replace the Foreign Secretary with a British one!
+
+Waiting Lists
+
+We will reduce hospital waiting lists by using a smaller font.
+
+Immigrations
+
+We will reduce net migration by making sure that any net s are secured more firmly to the ground.
+
+Inflation
+Answer: 2.5%
+
+Education
+
+We will increase the number of school places by 10,000 per year for the next five years.
+
+Transport
+
+We will introduce a new bus service that will run every 30 minutes during peak hours and every 60 minutes off-peak."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100.","1.73x
+
+Based on the given material, can you provide an estimate of the speedup for a specific deep learning architecture when comparing the TeSlA A100 to the TeSlA V100?"
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training.,"
+The context contains the answer to the question. The reduction of FLOPS required for sparse network training is not a speedup because GPUs cannot do fast sparse matrix multiplication."
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public.","
+The answer to your question is not in the provided text."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.,"
+The answer to your question is not in the provided text."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax.,"
+The answer to your question is not in the provided text."
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training.","
+The answer to your question is not in the provided text."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother.,"
+The narrator is Perry, a sibling of the main character. The question is about their relationship with their brother, and how it has changed over time. The context contains information about the narrator's family history, including the loss of their parents in a fire. The answer extracted from the question is that Perry and the main character have been as co-dependent as it gets, but they are also as fuckeed up and as co-dependent as it gets."
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days.,"7 days
+
+"
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".","
+The space station is called the International Space Station (ISS)."
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese.,"
+The answer to your question is not in the provided text."
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3.,"
+The answer to your question is not in the provided text."
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0.,"
+The answer to your question is not in the provided text."
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021.,"
+The answer to your question is not in the provided text."
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake.","2023.
+"
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'.,"
+The answer to the question is not in the provided text."
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer.,"
+The murder victim is resurrected with a group of other murder victims."
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.","
+The paper offers a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The paper introduces evaluation methods for RAG, addressing the chaullenges faced and proposing future research directions. By offering an organized methodologies for RAG, the paper explores text-based studies and multimodal data consideration. The conclusion is presented in Section 10."
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy.","
+The answer to your question is not in the provided text."

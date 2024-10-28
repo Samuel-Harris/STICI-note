@@ -1,0 +1,106 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,How much health does the Mutant Bullet Kin have?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+1,0,Where can bishops be found?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+2,1,What happened on day 10?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+3,1,What did the goblins say?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+4,2,Why was the H100 GPU chosen for computation?,The answer to your question is not in the provided text.,"
+The H100 GPU was chosen for computation because it offers high performance and advanced features that can enhance the capabilities of the model. The H100 is equipped with a large number of cores, which allows for efficient parallel processing and accelerated computations. Additionally, its architecture includes features such as mixed precision training and support for large-scale models, making it well-suited for handling complex tasks and large datasets. Overall, the H100 GPU was selected to provide superior performance and scalability for the project at hand."
+5,2,Which masked language model was chosen for the AI?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+6,3,When was GPT 4 made available,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+7,3,What Tensorflow features are supported?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+8,4,How can I create graphs?,The answer to your question is not in the provided text.,"
+To create graphs, you can use libraries like Matplotlib or Plotly in Python. Here's an example using Matplotlib:
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate some data for the plot
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+# Create a figure and a set of subplots
+fig, ax = plt.subplots()
+
+# Plot the data
+ax.plot(x, y)
+
+# Set the title and labels for the plot
+ax.set_title('Sine Wave')
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+
+# Show the plot
+plt.show()
+```
+
+This code generates a sine wave plot using Matplotlib. You can customize it further by changing the data, adding more plots, or modifying the appearance of the plot."
+9,4,What is the name of the Java version of marimo?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+10,5,What is step 5?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+11,5,What is the advice for data scientists in finance companies?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text. However, based on the context of the conversation, it can be inferred that for a data scientist working in finance companies, they should focus on maximizing their impact by aligning their work with the goals and targets of the company, such as improving financial efficiency or reducing risk."
+12,6,What obligations are robots expected to follow?,The answer to your question is not in the provided text.,"
+As a conversational AI, I don't have the ability to follow obligations or laws. However, in general, robots and other AI systems are expected to follow certain ethical guidelines and legal frameworks depending on their use and jurisdiction. For example, high-risk AI systems may be subject to transparency and accountability requirements, while lower-risk systems might not have such strict obligations. It's important for developers and users of AI technology to ensure that their systems operate within the bounds of applicable laws and ethical standards."
+13,6,How long are the minimum prison sentences for rule breakers?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+14,7,What needs to be done to kiss the Emperor?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+15,7,How many wings did Balduran have?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+16,8,What is the author's favourite thing about Barcelona?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+17,8,Did the author prefer Madrid or San Sebastian?,The answer to your question is not in the provided text.,"
+The author did not explicitly state a preference between Madrid and San Sebastian. They mentioned enjoying their time in both places, but it seems they had more to see and do in Madrid, as they felt they could have spent four nights there instead of two. However, they also expressed admiration for the charm of San Sebastián."
+18,9,Who plays the boy in striped pyjamas?,The answer to your question is not in the provided text.,"
+The actor who plays the boy in ""The Pianist"" is not mentioned in the provided text. However, the main character of ""The Boy in Striped Pyjamas,"" Shmuel, is portrayed by Asa Butterfield."
+19,9,What relgion are the members of the Hoss family?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+20,10,What is the policy on semi-skimmed milk?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+21,10,What kind of pumps will be given to people to solve inflation?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+22,11,Which TPU is recommended?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+23,11,What is the rest temperature of the RTX 4090 GPU?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text. However, I can tell you that the maximum safe temperature for an RTX 4090 GPU is around 85-90C. It's important to monitor and manage the temperature of your GPU to prevent damage or performance issues."
+24,12,What does the ++ operator do in Gleam?,The answer to your question is not in the provided text.,"
+The ++ operator in Gleam is used for addition. In Gleam both values must be ints."
+25,12,How do sets in Python compare to sets in Gleam?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+26,13,How many parameters does the transformer model have?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+27,13,What is the advantage of transformers other other models?,The answer to your question is not in the provided text.,"
+The advantage of transformers over other models is their ability to capture long-range dependencies and context in text. This is achieved through the self-attention mechanism, which allows each word or token to attend to all other words or tokens in a given sequence. Transformers have been particularly successful in natural language processing tasks such as machine translation, question answering, and language modeling due to their ability to process information holistically and learn complex relationships between words and phrases."
+28,14,What brand of bourbon did the narrator drink?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+29,14,Who is Perry and Jackie's sibling?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+30,15,What colour is Nan-E?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+31,15,"What does Robby, the baby, say to the Doctor?",The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+32,16,In what version was the velociraptor introduced?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+33,16,What was added in version 1.5.7?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+34,17,Why did Saga stab Scratch?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+35,17,What caliber is the bullet of light?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+36,18,"In 'he who drowned the world', why did Gong Li sacrifice her brother?",The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+37,18,Which book is the best?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+38,19,Which paper by Hinton et. al. was used in this paper?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+39,19,Why was hardware such a limiting factor in this research?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."

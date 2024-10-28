@@ -1,6 +1,3 @@
 [
-    "sentence-transformers/all-mpnet-base-v2",
-    "sentence-transformers/multi-qa-mpnet-base-dot-v1",
-    "sentence-transformers/multi-qa-mpnet-base-cos-v1",
-    "sentence-transformers/msmarco-bert-base-dot-v5"
+    "sentence-transformers/all-mpnet-base-v2"
 ]
