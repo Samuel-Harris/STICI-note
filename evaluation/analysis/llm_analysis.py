@@ -17,7 +17,7 @@ def __():
 @app.cell
 def __():
     embedding_model_name = "sentence-transformers/all-mpnet-base-v2"
-    test_results_dir = "embedding_model_tests"
+    test_results_dir = "llm_tests"
     datasets = ["multi_passage", "single_passage", "no_answer"]
     return datasets, embedding_model_name, test_results_dir
 
@@ -32,8 +32,11 @@ def __(pd, test_results_dir):
 @app.cell
 def __(datasets, df, pd, test_results_dir):
     results = {index: {dataset: pd.read_csv(f"{test_results_dir}/{dataset}_pipeline_{index}_responses.csv") for dataset in datasets} for index in df["index"]}
+    for results_df in results.values():
+        for dataset in datasets:
+            results_df[dataset]["actual_answer"] = results_df[dataset]["actual_answer"].astype(str)
     results
-    return (results,)
+    return dataset, results, results_df
 
 
 @app.cell
@@ -58,6 +61,18 @@ def __(datasets, get_average_similarity_scores, np, results):
 
 @app.cell
 def __(average_similarity_scores, np):
+    len(np.mean(average_similarity_scores, axis=1))
+    return
+
+
+@app.cell
+def __(average_similarity_scores):
+    len(average_similarity_scores)
+    return
+
+
+@app.cell
+def __(average_similarity_scores, np):
     new_average_similarity_scores = np.column_stack((average_similarity_scores, np.mean(average_similarity_scores, axis=1)))
     new_average_similarity_scores
     return (new_average_similarity_scores,)
@@ -65,8 +80,8 @@ def __(average_similarity_scores, np):
 
 @app.cell
 def __(datasets, df, new_average_similarity_scores, sns):
-    ax = sns.heatmap(new_average_similarity_scores, yticklabels=df["embedding_model_name"], xticklabels=datasets + ["average"])
-    ax.set(xlabel="Dataset", ylabel="Embedding model")
+    ax = sns.heatmap(new_average_similarity_scores, yticklabels=df["model_path"], xticklabels=datasets + ["average"])
+    ax.set(xlabel="Dataset", ylabel="LLM")
     return (ax,)
 
 
