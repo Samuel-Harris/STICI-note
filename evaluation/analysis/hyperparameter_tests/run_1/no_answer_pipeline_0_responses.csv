@@ -1,0 +1,14 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,How much health does the Mutant Bullet Kin have?,The answer to your question is not in the provided text., The answer to your question is not in the provided text.
+1,0,Where can bishops be found?,The answer to your question is not in the provided text., The answer to your question is not in the provided text.
+2,1,What happened on day 10?,The answer to your question is not in the provided text., The answer to your question is not in the provided text.
+3,1,What did the goblins say?,The answer to your question is not in the provided text., The answer to your question is not in the provided text.
+4,2,Why was the H100 GPU chosen for computation?,The answer to your question is not in the provided text.," The answer to your question is not in the provided text.
+
+Text document: GPU acceleration on my MacBook. These architectures are very interesting, and I would love to try them out, but for this project, I will have to settle for a more tried-and-tested approach.
+
+two main reasons. Firstly, I have concerns about the performance. These architectures are in their infancy, and I do not expect them to outperform equivalently-sized traditional transformers. Secondly, as these architectures are very new and experimental, I do not expect much support for them,
+
+The final optimisation technique that I considered, AirLLM, is quite different from the others in that instead of optimising the model weights, it optimises the model inference. Typically, LLMs are loaded onto the GPU in their entirety, requiring a lot of VRAM to run the larger, better-performing
+
+H100 is not mentioned in this document."
