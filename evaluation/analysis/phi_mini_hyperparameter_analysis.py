@@ -11,7 +11,8 @@ def __():
     import pandas as pd
     import seaborn as sns
     import numpy as np
-    return HuggingFaceEmbeddings, mo, np, pd, sns
+    from scipy.spatial import distance
+    return HuggingFaceEmbeddings, distance, mo, np, pd, sns
 
 
 @app.cell
@@ -86,36 +87,26 @@ def __(HuggingFaceEmbeddings, embedding_model_name):
 
 
 @app.cell
-def __(embedding_model, np, pd):
-    def get_average_similarity_scores(dataset_response_df: pd.DataFrame):
-        return np.average(np.absolute(np.array(embedding_model.embed_documents(dataset_response_df["expected_answer"])) -  np.array(embedding_model.embed_documents(dataset_response_df["actual_answer"]))))
-    return (get_average_similarity_scores,)
+def __(distance, embedding_model, np, pd):
+    def average_cosine_similarity(dataset_response_df: pd.DataFrame):
+        expected_answers_vector = np.array(embedding_model.embed_documents(dataset_response_df["expected_answer"]))
+        actual_answers_vector = np.array(embedding_model.embed_documents(dataset_response_df["actual_answer"]))
+        return np.average([1 - distance.cosine(expected_answers_vector[i], actual_answers_vector[i]) for i in range(len(expected_answers_vector))])
+    return (average_cosine_similarity,)
 
 
 @app.cell
-def __(datasets, get_average_similarity_scores, np, results):
-    average_similarity_scores = np.array([[get_average_similarity_scores(results[index][dataset]) for dataset in datasets] for index in results])
-    average_similarity_scores
-    return (average_similarity_scores,)
+def __(average_cosine_similarity, datasets, np, results):
+    cosine_similarity_scores = np.array([[average_cosine_similarity(results[index][dataset]) for dataset in datasets] for index in results])
+    cosine_similarity_scores
+    return (cosine_similarity_scores,)
 
 
 @app.cell
-def __(average_similarity_scores, np):
-    len(np.mean(average_similarity_scores, axis=1))
-    return
-
-
-@app.cell
-def __(average_similarity_scores):
-    len(average_similarity_scores)
-    return
-
-
-@app.cell
-def __(average_similarity_scores, np):
-    new_average_similarity_scores = np.column_stack((average_similarity_scores, np.mean(average_similarity_scores, axis=1)))
-    new_average_similarity_scores
-    return (new_average_similarity_scores,)
+def __(cosine_similarity_scores, np):
+    cosine_similarity_scores_with_average = np.column_stack((cosine_similarity_scores, np.mean(cosine_similarity_scores, axis=1)))
+    cosine_similarity_scores_with_average
+    return (cosine_similarity_scores_with_average,)
 
 
 @app.cell
@@ -133,14 +124,13 @@ def __(temp_top_p_top_k_col):
 
 
 @app.cell
-def __(new_average_similarity_scores):
-    len(new_average_similarity_scores)
-    return
-
-
-@app.cell
-def __(datasets, new_average_similarity_scores, sns, temp_top_p_top_k_col):
-    ax = sns.heatmap(new_average_similarity_scores, yticklabels=temp_top_p_top_k_col, xticklabels=datasets + ["average"])
+def __(
+    cosine_similarity_scores_with_average,
+    datasets,
+    sns,
+    temp_top_p_top_k_col,
+):
+    ax = sns.heatmap(cosine_similarity_scores_with_average, yticklabels=temp_top_p_top_k_col, xticklabels=datasets + ["average"], cbar_kws={'label': 'Average cosine similarity'})
     ax.set(xlabel="Dataset", ylabel="Temperature,top-p,top-k")
     return (ax,)
 
