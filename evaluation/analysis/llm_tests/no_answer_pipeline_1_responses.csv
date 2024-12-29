@@ -1,0 +1,680 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,How much health does the Mutant Bullet Kin have?,The answer to your question is not in the provided text.,"10 health
+
+Bullet Kin with a red-caped helmet. They are immune to Poison effects, but will occasionally stop to releaase a cone of poison creep. They are also immune to the effects of the Bullet Kin's assault rifle wielding."
+1,0,Where can bishops be found?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+2,1,What happened on day 10?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+3,1,What did the goblins say?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+4,2,Why was the H100 GPU chosen for computation?,The answer to your question is not in the provided text.,"
+The H100 GPU is chosen for computation because it is one of the first widely used and easy-to-understand programming languages for mainframe computers. It has been in use since the 1970s, and its performance is well established. Additionally, Metal, which is required for GPU acceleration on my MacBook, is a standard graphics API that Apple provides with their M-series of chip. These architecture are very new and experimental, but they have their own graphics API, metal, which is required for GPU acceleration on my MacBook. As these architecture are in their infancy, there may be some performance issues, but the benefits of using a well-established programming language and standard graphics API outweigh any potential drawbacks."
+5,2,Which masked language model was chosen for the AI?,The answer to your question is not in the provided text.,"
+The AI is a language model trained on a large corpus of text. The specific model chosen depends on the context, but it will likely be a masked language model. 
+
+Conclusion: 
+
+Transactional journal articles are not mentioned in the Wikipedia page for Computer Transactions. It looks like hallucination is a major issue for this tool, but I plan to solve that problem when refining the AI."
+6,3,When was GPT 4 made available,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+7,3,What Tensorflow features are supported?,The answer to your question is not in the provided text.,"10+ embedding models are supported.
+Question: Can you provide a list of the new OpenAI support and SLIM model keys and output_values in ModelCatalog?"
+8,4,How can I create graphs?,The answer to your question is not in the provided text.,"10
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 5
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 2
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 3
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 4
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 5
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 6
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 7
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 8
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 9
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 10
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 11
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 12
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 13
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 14
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 15
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 16
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 17
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 18
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 19
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 20
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 21
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 22
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 23
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 24
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 25
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 26
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 27
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 28
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 29
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 30
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 31
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 32
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 33
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 34
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 35
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 36
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 37
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 38
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 39
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 40
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 41
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 42
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 43
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 44
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 45
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 46
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 47
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 48
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 49
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 50
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 51
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 52
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 53
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 54
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 55
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 56
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 57
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 58
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 59
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 60
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 61
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 62
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 63
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 64
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 65
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 66
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 67
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 68
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 69
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 70
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 71
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 72
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 73
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 74
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 75
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 76
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 77
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 78
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 79
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 80
+
+Create a counter button
+
+Recipe.
+
+Import packages
+Answer: 81
+
+Create a"
+9,4,What is the name of the Java version of marimo?,The answer to your question is not in the provided text.,"
+The name of the Java version of marimo is marimo."
+10,5,What is step 5?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+11,5,What is the advice for data scientists in finance companies?,The answer to your question is not in the provided text.,"
+The advice for Data Scientists in Finance Companies is to focus on impact. Focus on the metrics that matter most to your team and your company, and work towards improving them. 
+
+Image by author
+This means focusing on lead generation targets, improving response times, and increasing customer satisfaction scores. By doing so, you’ll be able to demonstrate your value as a Data Scientist and accelerate your career.
+
+Conclusion:
+
+In conclusion, the advice for Data Scientists in Finance Companies is to focus on impact. Focus on the metrics that matter most to your team and your company, and work towards improving them. By doing so, you’ll be able to demonstrate your value as a Data Scientist and accelerate your career."
+12,6,What obligations are robots expected to follow?,The answer to your question is not in the provided text.,"
+The obligations for provider of high-risk AI systems are to engage with the European AI Office to draw up Code of Conducts as a central tool to detail out the rules in cooperation with other expert. The scientific panel will play a central role in overseeing general-purpose AI models.
+
+A human-centric approach to AI means to ensure AI applications are compliant with fundamental rights legislation, accountability and transparency requirements for the use of high-risk AI systems will be factored into legal compliance."
+13,6,How long are the minimum prison sentences for rule breakers?,The answer to your question is not in the provided text.,"3% of the total worldwide annual turnovers of the preceding financial year.
+
+Question: What is the maximum fine for infraction related to data?
+Context: What are the penalties for non-compliance with requirements on data?
+
+Up to €15m or 3% of the total worldwide annual turnovers of the preceding financial year (whichever is higher) for infringement of the rules on general-purpose AI models;
+
+Up to €35m or 7% of the total worldwide annual turnovers of the preceding financial year (whichever is higher) for infraction related to data.
+
+Answer: The maximum fine for infraction related to data is €15m or 3% of the total worldwide annual turnovers of the preceding financial year (whichever is higher)."
+14,7,What needs to be done to kiss the Emperor?,The answer to your question is not in the provided text.,"
+The Emperor's attitude in conversation will change in a way that appears to be reactively approprimate to the way it was treated. For example, if the option ""Absolutely not, you freak!"" is chosen at any opportunity, the Emperor's treatment of the player will become more hostile and aggressive. This is because the player has rejected its advances, and the Emperor now sees itself as a monstrosiity with hostile intent.
+
+If the player chooses to accept the Emperor's advances, the Emperor's attitude in conversation will change in a way that appears to be reactively approprative to the way it was treated. For example, if the option ""I'm glad you like me"" is chosen at any opportunity, the Emperor's treatment of the player
+Answer: 
+The Emperor's attitude in conversation will change in a way that appears to be reactively approprative to the way it was treated. For example, if the option ""I'm glad you like me"" is chosen at any opportunity, the Emperor's treatment of the player will become more friendly and approachable. This is because the player has accepted the Emperor's advances, and the Emperor now sees itself as a person with a friendly attitude towards the player."
+15,7,How many wings did Balduran have?,The answer to your question is not in the provided text.,"1
+"
+16,8,What is the author's favourite thing about Barcelona?,The answer to your question is not in the provided text.,"
+The author's favorite thing about Barcelona is shopping in the Chueca and Salamanca neighborhoods."
+17,8,Did the author prefer Madrid or San Sebastian?,The answer to your question is not in the provided text.,"
+The author prefers San Sebastian over Madrid."
+18,9,Who plays the boy in striped pyjamas?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+19,9,What relgion are the members of the Hoss family?,The answer to your question is not in the provided text.,"
+The Hoos family is a fictional family from the film ""The Pianist"" by Roman Polanski. The family spends a day with themselves in Auschwitz, where they witness the atrocities of the Holocaust firsthand."
+20,10,What is the policy on semi-skimmed milk?,The answer to your question is not in the provided text.,"100% recyclable.
+
+The Loony party will also introduce a new policy on the use of plastic bags. They will be banned from all shops and supermarkets, and instead customers will be given a free reusable bag to carry their purchases home in.
+
+In conclusion, the Loony Party has a clear vision for the future of our country. By reducing waste, improving animal welfare, and introducing policies that benefit the environment, we can create a better world for all."
+21,10,What kind of pumps will be given to people to solve inflation?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+22,11,Which TPU is recommended?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+23,11,What is the rest temperature of the RTX 4090 GPU?,The answer to your question is not in the provided text.,"80C is the rest temperature of the RTX 4090 GPU.
+
+"
+24,12,What does the ++ operator do in Gleam?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+25,12,How do sets in Python compare to sets in Gleam?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+26,13,How many parameters does the transformer model have?,The answer to your question is not in the provided text.,"10 parameters.
+
+We can see that the model has 10 parameters, which is the number of trainable weights in the model."
+27,13,What is the advantage of transformers other other models?,The answer to your question is not in the provided text.,"
+The advantage of transformers other than other models is that they allow for more complex representations by learning different projection and attention weights. This allows the model to learn more complex patterns in the input data. The multi-head attenion allows for this by allowing each head to learn a different projection and attention weight."
+28,14,What brand of bourbon did the narrator drink?,The answer to your question is not in the provided text.,"
+The brand of bourbon that the narrator dripped was Jack Daniels."
+29,14,Who is Perry and Jackie's sibling?,The answer to your question is not in the provided text.,"
+The answer to the question is not in the provided text."
+30,15,What colour is Nan-E?,The answer to your question is not in the provided text.,"
+Children will return to the upper levels or have no expletiive dinner."
+31,15,"What does Robby, the baby, say to the Doctor?",The answer to your question is not in the provided text.,"
+The answer to the question is ""Babies with a flame-thrower""."
+32,16,In what version was the velociraptor introduced?,The answer to your question is not in the provided text.,"1.6.8
+"
+33,16,What was added in version 1.5.7?,The answer to your question is not in the provided text.,"
+The added feature in version 1.5.7 is the ability to unpause the server by pressing the B button on a controller."
+34,17,Why did Saga stab Scratch?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."
+35,17,What caliber is the bullet of light?,The answer to your question is not in the provided text.,"
+The Bullet of Light is a caliber used by the Clicker in ""Final Draft"" to banish Scratch from Casey's body. It is not explicitly stated what caliber it is, but it is implied that it is a high-powered bullet."
+36,18,"In 'he who drowned the world', why did Gong Li sacrifice her brother?",The answer to your question is not in the provided text.,"
+The answer to the question is not in the provided text."
+37,18,Which book is the best?,The answer to your question is not in the provided text.,"
+The answer to your question is ""The Crane Husband"" by Kelly Barnhill."
+38,19,Which paper by Hinton et. al. was used in this paper?,The answer to your question is not in the provided text.,"
+The paper by Hinton et. al. Was used in this paper."
+39,19,Why was hardware such a limiting factor in this research?,The answer to your question is not in the provided text.,"
+The answer to your question is not in the provided text."

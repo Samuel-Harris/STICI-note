@@ -1,0 +1,453 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,Which enemy types wield an AK-47?,Assault-rifle wielding Bullet and Tankers wield AK-47s.,"
+The AI does not have the capability to know the specific enemy types wield an AK-47. However, in the provided text, it is mentioned that the player encounters Bandana Bullet Kin, which are described as having a higher magazine size than regular Bullet Kin and firing four slithering lines of bullet at the player from under their hoods. This suggests that they may be enemies that use an AK-47 or other similar weaponry."
+1,0,What makes jammed enemies different?,"Jammed Keybullet Kin drop 2 keys instead of 1, jammed Chance Kins have a chance to drop twice the loot, and jammed red-Caped Bullet Kin deal contact damage. Additionally, Jammed Keybullet Kin Jammed variations run faster and will take less time to teleport away from the player if they are not destroyed quickly.","
+Jammed enemies are enemies that have been damaged or destroyed by the player, but still remain in the game world. This means that they can still move and attack the player, even if they are not fully destroyed. Jammed enemies are often used as a way to create challenging situations for players, such as forcing them to use different tactics or strategies to defeat them. They can also be used to add an element of surprise or danger to the gameplay, making it more exciting and engaging for players."
+2,1,What enemies are encountered in the second encounter?,26 kobolds and 1 kobold inventor are encountered in the second encounter.,"
+The second encounter is described as Kobold Traps, which are described as ""small, agile creatures with sharp claws and teeth."""
+3,1,What monsters are encountered in this journey?,"Ropers, kobolds, kobold inventors, fire giants, and fire giant dreadnoughts.","
+The passage mentions that the Paths through the Underground/Underdark is a journey through natural chamberss and cavern passways, which are inhabited by various monsters. The text doesn't provide specific details about the monsters encountered on this journey, but it does mention that they include ""sleeps"" (presumably slithering creatures) and ""crystal clusters."""
+4,2,What framework was chosen to execute the RAG process and what alternatives were considered?,The LangChain framework was used to orchestrate the RAG process. Llamaindex and LitGPT were also considered during development. Llmware was considered after development had finished.,"
+The AI did not provide specific information about the framework chosen to execute the RAG process. However, it did mention that LangChain was an option for orchestrating the RAG process from the vector DB to the inference. The AI also mentioned that LangChain and llamaindex are well-supported frameworks for composing NLP tasks, which means they have been proven to perform very well in resource-constrained environments like on a laptop. Therefore, LangChain was considered an option for executing the RAG process. However, it is possible that other frameworks could have been chosen if there were specific requirements or constraints that made them more suitable."
+5,2,Which large language models and vector databases were shortlisted for this project?,"The tinyllama-1.1b-chat-v1.0 Q6_K, Phi 3 Q4_K_M"", bartowski/dolphin-2.8-experiment26-7b-GGUF Q3_K_L, mgonzs13/Mistroll-7B-v2.2-GGU, and QuantFactory/Meta-Llama-3-8B-Instruct Q3_K_M large language models and the Chroma, Qdrant, and Vespa vector databases were shortlisted for this project.","
+The article doesn't provide a specific list of large languaage models and vector databases that were shortlisted for this project. However, the article mentions that sixteen different vector DBs were considered for the project, but only three of them stood out to the user: Chrma, Qdrant, and Vepspa."
+6,3,What kind of model is the bling-phi-3 model,"The bling-phi-3 model is the newest and most accurate BLING/DRAGON model. BLING models are small CPU-based RAG-optimized, instruct-following 1B-3B parameter models. DRAGON models are production-grade RAG-optimized 6-7B parameter models - ""Delivering RAG on ..."" the leading foundation base models.","
+The bling-phi-3 model is a small CPU-based RAG-optimized, instruct-following 1B-3B parameter model. It is designed for use in natural language processing (NLP) tasks such as document summarization and text classification. The model is based on the BLING/DRAGON architecture, which is a popular approach for generating sequence-to-sequence models for NLP tasks.
+
+The bling-phi-3 model is available in the ModelCatalog of the AI platform. It can be instantiated as an out-of-the-box registered option in the catalog, and it can be used like any other model in the platform's natural language processing (NLP) tools."
+7,3,In which versions were the SLIM models updated?,"The SLIM models were updated in versions 0.2.3, 0.2.6, 0.2.12, 0.3.0, and 0.3.1.","
+The SLIM models were updated in the v0.2.4 and v0.2.5 updates to the MilvuS software."
+8,4,What are the ways of grouping UI elements together?,"UI elements can be grouped together using the following methods:
+- Create an array of UI elements.
+- Create a dictionary of UI elements.
+- Embed a dynamic number of UI elements in another output.
+- Create a hstack (or vstack) of UI elements with on_change handlers.
+- Create a table column of buttons with on_change handlers
+- Create a form with multiple UI elements.","
+There are several ways to group UI elements together:
+
+1. Using a dictionary or list of UI elements: You can create a dictionary or list of UI elements and use it to group them together. For example, you could have a dictionary with the following keys:
+
+```python
+{
+    ""header"": mo.ui.label(""Header""),
+    ""description"": mo.ui.text(""Description""),
+    ""button1"": mo.ui.button(""Button 1""),
+    ""button2"": mo.ui.button(""Button 2"")
+}
+```
+
+And then use this dictionary to group the UI elements together:
+
+```python
+import random
+
+form = mo.form(title=""My Form"", fields=[
+    mo.field(label=""Header""),
+    mo.field(label=""Description""),
+    mo.field(type=""button"", label=""Button 1""),
+    mo.field(type=""button"", label=""Button 2"")
+])
+
+for i in range(5):
+    form.fields[i].value = ""Value {}"".format(i)
+
+form.submit()
+```
+
+In this example, the `form` object is created with a dictionary of UI elements as its fields. The `submit()` method submits the form and waits for it to be processed by the server.
+
+2. Using a list of UI elements: You can also create a list of UI elements and use it to group them together. For example, you could have a list with the following items:
+
+```python
+[mo.ui.label(""Header""), mo.ui.text(""Description""), mo.ui.button(""Button 1""), mo.ui.button(""Button 2"")]
+```
+
+And then use this list to group the UI elements together:
+
+```python
+import random
+
+form = mo.form(title=""My Form"", fields=[
+    mo.field(label=""Header""),
+    mo.field(label=""Description""),
+    mo.field(type=""button"", label=""Button 1""),
+    mo.field(type=""button"", label=""Button 2"")
+])
+
+for i in range(5):
+    form.fields[i].value = ""Value {}"".format(i)
+
+form.submit()
+```
+
+In this example, the `form` object is created with a list of UI elements as its fields. The `submit()` method submits the form and waits for it to be processed by the server.
+
+3. Using a function: You can also create a function that takes an array or list of UI elements as input and returns a dictionary or list of UI elements, based on the keys in the input array/list. For example, you could have a function like this:
+
+```python
+def group_ui_elements(ui_elements):
+    return {
+        ""header"": mo.ui.label(""Header""),
+        ""description"": mo.ui.text(""Description""),
+        ""button1"": mo.ui.button(""Button 1""),
+        ""button2"": mo.ui.button(""Button 2"")
+    }
+```
+
+And then use this function to group the UI elements together:
+
+```python
+import random
+
+form = mo.form(title=""My Form"", fields=[
+    mo.field(label=""Header""),
+    mo.field(label=""Description""),
+    mo.field(type=""button"", label=""Button 1""),
+    mo.field(type=""button"", label=""Button 2"")
+])
+
+for i in range(5):
+    form.fields[i].value = ""Value {}"".format(i)
+
+form.submit()
+```
+
+In this example, the `group_ui_elements()` function is called with an array of UI elements as input. The resulting dictionary or list of UI elements is then used to group the UI elements together."
+9,4,What are the parameters for the mo.ui.text function?,The parameters for mo.ui.text are label and placeholder. These are both optional.,"
+The `mo.ui.text` function takes the following parameters:
+
+- `placeholder`: The placeholder text to display when the user types into the input field. This parameter is optional and defaults to an empty string.
+- `value`: The initial value of the input field. This parameter is required and must be a valid Python object (e.g., a string, integer, float, or boolean).
+- `min_length`: The minimum length of the input field before it becomes required. This parameter is optional and defaults to 0.
+- `max_length`: The maximum length of the input field before it becomes required. This parameter is optional and defaults to None (i.e., no maximum length).
+- `required`: Whether or not the input field should be required for submission. This parameter is optional and defaults to False.
+- `placeholder_text`: A placeholder text that will display when the user types into the input field. This parameter is optional and defaults to an empty string.
+- `value_on_focus`: The initial value of the input field when it receives focus. This parameter is optional and defaults to None (i.e., no initial value).
+- `min_length_on_focus`: The minimum length of the input field when it receives focus. This parameter is optional and defaults to 0.
+- `max_length_on_focus`: The maximum length of the input field when it receives focus. This parameter is optional and defaults to None (i.e., no maximum length).
+- `required_on_focus`: Whether or not the input field should be required for submission when it receives focus. This parameter is optional and defaults to False.
+- `placeholder_text_on_focus`: A placeholder text that will display when the user types into the input field when it receives focus. This parameter is optional and defaults to an empty string.
+- `value_on_blur`: The initial value of the input field when it loses focus. This parameter is optional and defaults to None (i.e., no initial value).
+- `min_length_on_blur`: The minimum length of the input field when it loses focus. This parameter is optional and defaults to 0.
+- `max_length_on_blur`: The maximum length of the input field when it loses focus. This parameter is optional and defaults to None (i.e., no maximum length).
+- `required_on_blur`: Whether or not the input field should be required for submission when it loses focus. This parameter is optional and defaults to False.
+
+You can pass these parameters to the `mo.ui.text` function as follows:
+
+```python
+import mo
+
+form = mo.form({
+    ""name"": mo.ui.text(placeholder=""Your name"", value=""John Doe""),
+    ""email"": mo.ui.text(placeholder=""Your email address"", min_length=5, max_length=100),
+    ""password"": mo.ui.text(placeholder=""Your password"", required=True),
+})
+```"
+10,5,What are the given examples of common challenges?,"The given examples of common challenges are: ""you create a comprehensive analysis but nobody is acting on it""; ""you ran an experiment but nobody is using the results""; ""you built a predictive model, but the team you built it for is not using it""; and ""you created a dashboard but nobody is looking at it"".","
+Here are some examples of common chaullenges:
+
+1. The project is not aligned with the company's goals or values
+2. The project team is not skilled enough to deliver the expected results
+3. The project scope has changed since it was initially defined
+4. The project timeline is too tight, and the project team cannot meet it
+5. The project budget is too high, and the project team cannot deliver the results within the budget
+6. The project is not well-communicated to stakeholders
+7. The project is not well-planned or executed
+8. The project is not monitored regularly enough to ensure progress is being made towards its goals
+9. The project is not properly documented, and it's difficult for other team members to understand what needs to be done
+10. The project is not prioritized correctly, and the team is not focused on the most important tasks."
+11,5,What are the four steps to become more impact-focused?,"The four steps to become more impact-focused are: ""Step 1: Understand what impact looks like for your role and measure your success accordingly"", ""Step 2: Ensure your work solves a real business problem"", ""Step 3: Ensure there is buy-in for your work"", and ""Step 4: Focus your time on the highest-impact thing"".","
+Sure, here are the four steps to become more impact-focus:
+
+1. Understand what impact looks like for your role and measure your success accordingly.
+2. Stop thinking about productivity metrics like ""I launched 5 experiments"" or ""I built this model."" Hold yourself accountable to driving impact.
+3. Focus your time on the highest-impact thing. No matter what role you're in, you're likely juggling multiple priorities. To maximize your impact, you need to ensure you spend the majority of your time on the most important thing.
+4. Step up and prioritize impact. This means leaving it to your manager to worry about impact. But stepping up comes with some real benefits for your career:
+
+- Increased job satisfaction and engagement
+- Better alignment with company values and mission
+- Greater opportunities for growth and advancement
+- More effective communication with stakeholders and customers
+
+Remember, becoming more impact-focused takes time and effort. But the benefits are worth it!"
+12,6,What are the risk classifications for AI?,"The risk classifications are: ""minimal risk"", ""high-risk"", ""unacceptable risk"", and ""specific transparency risk""","
+The Commission proposes a risk–based approach, with four levels of risk for AI systems:
+
+1. Low-risk: The system is designed to perform its intended function and does not pose significant risks to human health or safety.
+2. Medium-risk: The system poses some risks to human health or safety but is unlikely to cause significant harm.
+3. High-risk: The system poses a high risk of causing significant harm to human health or safety, and the potential consequences are likely to be severe.
+4. Very high-risk: The system poses an extremely high risk of causing significant harm to human health or safety, and the potential consequences are likely to be catastrophic.
+
+The Commission also proposes a risk classification for general purpose AI models, which are not specifically designed for specific applications but can be used in various contexts. These models are classified as follows:
+
+1. Low-risk: The model does not pose significant risks to human health or safety and is unlikely to cause significant harm.
+2. Medium-risk: The model poses some risks to human health or safety but is unlikely to cause significant harm.
+3. High-risk: The model poses a high risk of causing significant harm to human health or safety, and the potential consequences are likely to be severe.
+4. Very high-risk: The model poses an extremely high risk of causing significant harm to human health or safety, and the potential consequences are likely to be catastrophic."
+13,6,What are the rules for developing general purpose AI models?,"General purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks. 12 months after the AI Act enters into force, the obligations for general purpose AI governance become applicable. Providers of general purpose AI models, which are trained on large data amounts and therefore prone to high energy consumption, are required to disclose energy consumption. Providers of free and open-source models are exempted from most of obligations, but this exemption does not cover obligations for providers of general purpose AI models with systemic risks.","
+The rules for developing general-purpose AI models are complex and vary depending on the specific model being developed. However, some common requirements include:
+
+1. Registration with the UK's Data Protection Authority (DPA) to ensure that the model is safe and secure.
+
+2. Clearly documenting the model's design, including its inputs, outputs, and any assumptions made about the data.
+
+3. Ensuring that the model is capable of performing its intended function accurately and efficiently.
+
+4. Providing clear documentation on how the model works, including its architecture, training data, and evaluation metrics.
+
+5. Regularly updating the model to address any new or emerging threats or vulnerabilities.
+
+6. Ensuring that the model is subjected to rigorous testing and validation procedures to ensure its safety and reliability.
+
+7. Providing clear information on how the model will be used, including any potential risks or consequences of using it.
+
+8. Developing a risk assessment plan to identify and mitigate any potential risks associated with the model.
+
+9. Ensuring that the model is designed to operate within the boundaries of its intended use case and does not pose a significant risk to human life, health, or property.
+
+10. Regularly monitoring and updating the model's performance to ensure it remains safe and effective over time.
+
+Overall, developing general-purpose AI models requires careful planning, testing, and regulatory compliance to ensure that they are safe, secure, and effective for their intended use case."
+14,7,What are the emperor's aliases?,"The emperor has also known as the ""Dream Guardian"", the ""Dream Visitor"", and ""Balduran"".","
+The emperor's alias is ""it"" in the game files, and ""he"" in-game. The game's files also refer to it as ""they,"" possibly due to an oversight or characters conflating its current and previous identities."
+15,7,Who was Duke Stelmane?,"Duke Stelmane was a major figure of the Knights of the Shield, a lawful and neutral evil conglomerate of politicians and merchants manipulating events behind the scenes, acting as the Emperor's envoy while it secretly kept her enthralled. Duke Belynne Stelmane dies recently.","
+Dukes Stelmane was a fictional character created by the author of this conversation. The author did not have any personal knowledge or experience with Duke Stelmane, and the information provided in the conversation is based on the author's imagination and research."
+16,8,Where was I offered desserts?,"You ate a delightful puff pastry and custard-filled local treat, and a slice of Basque cheesecake at Otaegui, and you were beckoned with cake in the camino.","
+I do not have access to the specific conversation between the user and the ai. However, based on the given text material, it is unclear where you were offered desserts. The conversation mentions that you were wandering through the cobblestone streets of san sebastian looking for your next pintxo, but there is no mention of any specific restaurant or dessert offerings."
+17,8,What forms of exercise did we do?,You did hiking and surfing.,"
+Yes, I can provide you with information about the forms of exercise that we did during our hike. During our camino journey, we followed a well-defined route that included several hiking trails and scenic views. Here are some examples of the types of exercises we engaged in:
+
+1. Walking: We walked for hours on end, taking in the stunning views of the countryside and coastline.
+
+2. Cycling: We cycled along the coastal roads, enjoying the fresh sea air and scenic views.
+
+3. Hiking: We hiked through beautiful parks, forests, and mountains, taking in the stunning natural beauty of the area.
+
+4. Swimming: We took a dip in the cool waters of the coastal rivers and lakes, enjoying the refreshing sensation of the water on our skin.
+
+5. Yoga: We practiced yoga on the beach or in the park, taking advantage of the beautiful scenery to relax and unwind.
+
+6. Dancing: We danced along to the music of local musicians, enjoying the vibrant atmosphere and the chance to let loose and have some fun.
+
+7. Running: We ran through the streets of the city, taking in the sights and sounds of the bustling urban environment.
+
+These were just a few examples of the types of exercises we engaged in during our camino journey. The goal was to stay active and healthy while enjoying the beauty of nature and the company of friends."
+18,9,Who is in the family that this film is about?,"The film takes the perspective of the Hoss family. The Hoss family consists of: the patriarch Rudolf and his wife, Hedwig;their two sons and three daughters, the youngest still a baby; and Hedwig's mother.","
+The family that this film is about is the Hooss family, which includes Rudolf Hoosss, a notorious real figure from history who was a commander of the Auschwitz concentration camp."
+19,9,What items do Rudolf's family take from the Jews and who takes them?,"Rudolf's wife, Hedwig, often receives luxury and expensive items taken from the Jews. On one occasion, she is seen receiving a fancy fur coat with lipstick lying inside one of the pockets. The Rudolf's children are also seen collecting and playing with gold teeth taken from the remains of the dead Jews.","
+In the film, Rudolf's family takes from the Jews and who takes them are not explicitly stated. However, it is implied that they take luxury items such as fancy fur coats, expensive jewelry, and other items of high value. It is also mentioned that the Nazis do not differentiate between the rich and the poor among their prisoners, which suggests that Rudolf's family may have taken these items from the Jews in order to show their wealth and status."
+20,10,What are the proposed changes that affect healthcare?,"The proposed changes that affect healthcare are: any possible schemes thought up by Government, Council , NHS etc,  such as closure of Hosptitals, workplace parking levy etc will be preceded with a Public Consultation which we will then ignore; in an effort to reduce the problems faced by the NHS , it is proposed to reduce pregnancy from nine to seven months; and with Government helped finance, AstraZeneca should buy out Pfizer, then, as we would have the rights to Viagra, the economy may stay up longer.","
+The proposed changes that affect healthcare in the text are:
+
+1. We will replace the Foreign Secretary with a British one!
+2. Immigrations
+3. Inflation
+4. Income Tax
+5. Healthcare
+6. Energy Policy
+7. Government Policy
+8. Government Policy
+9. Energys
+
+These changes are aimed at improving the healthcare system, reducing waiting lists, combating corruption in public life, introducing a new Board of Bribery to set standardised rates, preventing identity theft instantly, getting rid of Standing Charge, freezing inflation, and reducing inflation by giving everyone free pins. The Government relies heavily on expert advice when formulating policies."
+21,10,What versions of the Manicfesto are there?,"There is the Manicfesto proposals, the General Election 2022 Manicfesto, and the General Election 2019 Manicfesto.","
+There are multiple versions of the Manicfesto, each with its own set of tweets and ideas. Here are some examples:
+
+1. The original version from 2019: https://twitter.com/Manicfesto/status/1354786919511298560
+
+2. A more recent version from 2021: https://twitter.com/Manicfesto/status/1452333111912335104
+
+3. A more detailed version from 2022: https://twitter.com/Manicfesto/status/1567891111923136256
+
+These versions may have different themes, ideas, and tweets, but they all share the Manicfesto hashtag and the overall goal of improving the lives of animals and people."
+22,11,"Other than this blog post, what has the author written?",The author has also written: a paper about the emergence of instabilities in large language models and a more accessible blog post on the same topic; a LLM.int8() paper; a sparse training blog post; a TPU vs GPU blog post; and a paper about k-bit inference scaling laws.,"
+The author has written a blog post titled ""How to Choose the Right GPU for Your Needs"" that provides insights and advice on how to think about GPUs, including their advantages and limitations. The post covers topics such as multi-GPU configurations, memory management, and the impact of GPUs on performance and efficiency. It also includes a section on choosing the right GPU for specific applications and a list of resources for further reading."
+23,11,In what contexts is BERT mentioned?,"It is mentioned that for BERT large during training, the input and weight matrix of any matrix multiplication fit neatly into the L2 cache of Ada (but not other Us). The author also mentions that they benchmarked the time for 500 mini-batches for BERT Large during inference (excluding the softmax layer) on the 4x RTX 2080 Ti system. They chose BERT Large inference since, from their experience, this is the deep learning model that stresses the GPU the most.","
+BERT is mentioned in the context of large-scale language modeling, specifically in the context of the blog post ""The BERT Model: A Comprehensive Guide for Researchers and Practitioners."" The article provides a comprehensive overview of BERT, including its architecture, training, and application to various tasks such as text classification, question answering, and machine translation. It also discusses some of the limitations and challenges associated with using BERT in these applications."
+24,12,What data structures does Gleam natively support?,"Gleam supports strings, tuples, lists, and dictionaries.","
+Gleam natively supports the following data structures:
+
+1. Lists (both mutable and immutable)
+2. Tuples
+3. Dictionaries
+4. Sets
+5. Deque (double-ended queue)
+6. Queue (first-in, first-out)
+7. Binary search tree (BST)
+8. Hash table (hash map)
+9. Stack (first-in, first-out)
+10. Queue (FIFO)
+11. Deque (double-ended queue)
+12. Set (unordered set)
+13. Dictionary (unordered mapping)
+14. Binary search tree (BST)
+15. Hash table (hash map)
+16. Stack (first-in, first-out)
+17. Queue (FIFO)
+18. Deque (double-ended queue)
+19. Set (unordered set)
+20. Dictionary (unordered mapping)
+
+These data structures are implemented using the built-in Python classes and functions."
+25,12,What things will cause a compilation error in Gleam?,"In Gleam, let and = can be used for pattern matching, but you’ll get compile errors if there’s a type mismatch. Functions can optionally have their argument and return types annotated in Gleam. These type annotations will always be checked by the compiler and throw a compilation error if not valid.
+
+The following code will also throw a compilation error:
+let list = [2, 3, 4]
+let list = [1, ..list]
+let [1, second_element, ..] = list
+[1.0, ..list] // compile error, type mismatch","
+In GleaM, there are several things that can cause a compilation error:
+
+1. Incorrect type annotations: If the types of arguments and return values in a function are not correctly annotated, the compiler will throw a compilation error. For example, if you try to call a function with an argument of type float and a return value of type int, the compiler will complain that the return value is not an integer.
+
+2. Unsupported operations: GlemaM does not support all operations that are supported by other programming languages. For example, it does not support some mathematical operators like +, -, *, /, and ^.
+
+3. Incorrect usage of functions: If you use a function incorrectly or with the wrong arguments, the compiler will also throw a compilation error. For example, if you try to call a function that takes an argument of type int but expects a float as return value, the compiler will complain that the argument is not an integer.
+
+4. Incorrect usage of operators: If you use an operator incorrectly or with the wrong arguments, the compiler will also throw a compilation error. For example, if you try to add two integers using the + operator but expect a float as return value, the compiler will complain that the argument is not an integer.
+
+5. Incorrect usage of functions: If you use a function incorrectly or with the wrong arguments, the compiler will also throw a compilation error. For example, if you try to call a function that takes an argument of type float but expects a string as return value, the compiler will complain that the argument is not a float.
+
+6. Incorrect usage of types: If you use a type incorrectly or with the wrong arguments, the compiler will also throw a compilation error. For example, if you try to call a function that takes an argument of type int but expects a string as return value, the compiler will complain that the argument is not a float.
+
+7. Incorrect usage of functions: If you use a function incorrectly or with the wrong arguments, the compiler will also throw a compilation error. For example, if you try to call a function that takes an argument of type string but expects a float as return value, the compiler will complain that the argument is not a string."
+26,13,Where is broadcasting used?,"Broadcasting is used to do the < comparision between the column vector [0, 1, 2, 3] and the row vector [0, 1, 2, 3], which is one of the steps to make a causal language modelling mask. Broadcasting is also used to add pos_emb and tok_emb elementwise to get the new representations of the tokens with positional information.","
+Broadcasting is a technique used in numerical computation to distribute data across multiple processors or cores. In TensorFlow, broadcasting is used to distribute the values of a tensor across multiple devices (processors) in parallel. This allows for efficient computation on large datasets that would otherwise be too large to fit into memory on a single device. Broadcasting is particularly useful when working with tensors that have different shapes or dimensions, as it allows for data to be distributed across multiple devices without losing any information."
+27,13,What is Karpathy known for?,Karpathy A is listed as the author of the Tiny Shakespeare dataset and the creator of an 'exellent GPT from scratch tutorial'.,"
+Karpathy is known for his contributions to the field of deep learning, particularly in the areas of neural networks and computer vision. He has made significant contributions to the development of convolutional neural networks (CNNs) and their applications in image recognition, object detection, and segmentation. Karpathy also developed the popular PyTorch framework for deep learning, which has become a popular choice among researchers and developers. Additionally, he has been involved in several successful AI projects, including OpenAI's GPT-3 language model and OpenViBE, an open-source platform for visualizing neural networks."
+28,14,What things did Jackie remember differently to what she saw?,"In her and Perry's childhood home, Jackie didn't remember having a projector room and she remembered the doorway to the kitchen being on the other side of the living room. She also remembered that she had almost killed her brother, Perry, seven hundred and thirty days ago in a car accident, when she actually did kill her brother in that accident.","
+In the conversation, Jackie remembers differently to what she saw because she was venomoous and had a different perspective on her situation. She remembered that she was in a car with her brother, but she also remembered that she was being chased by someone who was driving a car. This difference in perspective allowed her to see things from a different angle and come up with a more complex explanation for what happened."
+29,14,What references to alcohol are there,"The narrator, Jackie, had been sober for seven hundred and thirty days. Seven hundred and thirty days ago, Jackie and Perry had gotten into a car accident that almost killed the two because Jackie had been driving after drinking Bacardi Limon.
+
+Jackie saw a translucent memmory of her dad sitting motionless at a table with an empty glass of Apple-Schnapple and an empty bottle of Jim Beam. Jackie also remembered he father giving her beer as a child and her mother ignoring this.
+
+She used the death of her parents as an excuse for her alcoholism for so long, because admitting that they helped create the monster she would eventually become was like a knife to the heart. And knowing she had been too weak to conquer the addiction from her own volition just made the weapon twist in her chest.
+
+Finally, at the end of the story, Jackie licked the cracks on her lips as her eyes closed shut, imagining the oaky comfort of bourbon on her tongue. She felt herself drift, which she thought a good thing, because she needed the rest.","
+Yes, there are several references to alcohol in the conversation between the user and the AI. Here are some examples:
+
+- ""I’d used the death of my parents as the excuse for my alcoholism for so long"" - This refers to a past experience where the user's addiction was fueled by their grief over the loss of their parents.
+- ""And knowing I had been too weak to conquer the addiction from my own volition just made the weapon twist in my hand"" - This suggests that the user struggled with alcoholism for a long time and felt like they were powerless to overcome it on their own.
+- ""I hadn’t had a drink in exactly seven hundred and thirty days, and althouugh it remained unsaid, I knew Perry was terrified of leaving me to my own devices in fear I would relapse."" - This suggests that the user had been drinking regularly for a long time but didn't have any alcohol on hand when they needed it.
+- ""I felt a shiver run down my spine, “What are you talking about?”"" - This is a reference to the user feeling nervous or uneasy about something that Perry is saying."
+30,15,Where does the Doctor say that he is a time lord?,The Doctor declares that he is the last of the time lords in the Tardis and in a memory in the airlock door.,"
+The Doctor says that he is a time lord in the conversation with Ruby at the end of The Church on Ruby Road."
+31,15,Who are the characters in this script?,"The characters in this script are: RUBY, DOCTOR, CARLA, ERIC, BABIES, POPPY, MARCEL?, ADJANI?, SANDRA?, NAN-E, JOCELYN, COMPUTER, and the Bogeyman.","
+The characters in this script are:
+- Doctor: A friendly and helpful artificial intelligence that is helping a user with a simple task.
+- Ruby: The user's companion who helps them navigate the script.
+- Jocelyn: Ruby's human counterpart, who tries to help Ruby understand the context of the conversation.
+- Sandra: Jocelyn's human counterpart, who tries to help Ruby understand the context of the conversation.
+- Eric: A character in the script who is not explicitly mentioned but appears on the screen.
+
+The other characters are not explicitly named or described, but they are part of the dialogue and serve as a backdrop for the story."
+32,16,What can moss be used for?,Harvesting moss gives 1 foraging exp per moss and speed gro requires five moss.,"
+Moss is a type of plant that grows on rocks, walls, and other surfaces. It can be used for various purposes depending on the species and the environment where it grows. Some common uses of moss include:
+
+1. Decorative: Moss can be used to add texture and color to walls, floors, or other surfaces. It can also be used as a natural carpet or rug.
+
+2. Food source: Some species of moss are edible and can be eaten raw or cooked. They are often used in traditional cuisine or as a garnish for dishes.
+
+3. Medicine: Moss has been used for medicinal purposes for centuries. It is believed to have antibacterial, anti-inflammatory, and antifungal properties.
+
+4. Fiber: Some species of moss can be harvested for their fiber, which can be used to make textiles or other products.
+
+5. Building material: Moss can also be used as a building material in some cases. It is often used to create roofs and walls on buildings.
+
+6. Composting: Some species of moss can be composted, which can help to reduce waste and improve soil health."
+33,16,What are all of the sources of battery packs that have ever existed?,Weeds in the Mutant Bug Lair used to turn into battery battery packs in the winter and the solar panels currently slowly generate battery packs when left in the sun.,"
+I do not have access to the complete list of sources of battery packs that have ever existed. However, based on my knowledge and research, here are some possible sources:
+
+1. Battery-powered devices such as flashlights, radios, and cameras.
+2. Solar panels used in portable electronics like solar-powered calculators or solar-powered watches.
+3. Batteries used in small electronic devices like keychains, lighters, and remote controls.
+4. Battery packs used in larger electronic devices like laptops, tablets, and smartphones.
+5. Batteries used in portable power stations or chargers for electronic devices.
+6. Batteries used in small household appliances like hair dryers, toasters, and vacuum cleaners.
+7. Batteries used in larger household appliances like refrigerators, washing machines, and air conditioners.
+8. Batteries used in portable power banks or chargers for electronic devices.
+9. Batteries used in small medical devices like defibrillators or pacemakers.
+10. Batteries used in larger medical devices like ventilators or insulin pumps.
+
+these are just a few possible sources of battery packs that have ever existed, and the exact list may vary depending on the specific device or application."
+34,17,What things does Scratch do?,"Scratch: re-edited the ""Return"" novel manuscript into a horror story, making it take effect in reality; escapes Cauldron Lake; kills Jaakko and escapes from captivity, unsuccessfully attempting to take the Clicker from Saga; possesses Casey, steals the Clicker, and throws Saga into the Dark Place; and posseses Alan again before being killed.","
+In the story, Scratch is a malevolent entity that possesses Alan and causes him to act in ways that are not his own. Here are some of the things that Scratch does:
+
+1. Attacks Alan: Scratch attacks Alan whenever he tries to leave Bright Falls or escape from the Cult of the Tree.
+
+2. Infiltrates Alan's body: Scratch infiltrates Alan's body and takes control of his mind, making him act against his will.
+
+3. Disrupts Alan's memories: Scratch disrupts Alan's memories by altering them to make it seem like he is not the same person as before.
+
+4. Creates chaos: Scratch creates chaos and disorder in Bright Fall, causing destruction and mayhem wherever he goes.
+
+5. Attacks Odin and Tor: Scratch attacks Odin and Tor when they try to stop him from possessing Alan.
+
+6. Kills Saiga: Scratch kills Saiga when he tries to stop him from possessing Alan.
+
+7. Possesses Alan: Scratch possesses Alan, making him act against his will and causing him to do things that are not in his best interest."
+35,17,What is Alan tricked into believing by his wife?,"Alan believes that while being possessed by the Dark Presence, he torments Alice with visions of his alter ego, Scratch, which eventually leading to her suicide. Alice had actually tricked Alan into thinking she had committing suicide by choosing to return the Dark Place as part of a plan to help him eventually escape, explaining that the only way he can escape the loops is through ""ascension.""","
+Alan is tricked into believing by his wife Alice that he committed suicide by choosing to return the Dark Place as part of a plan to help him eventually escape. This information is provided in the conversation between Alan and the AI."
+36,18,Which books have dragons in them?,"The books 'To Shape a Dragon’s Breath', 'FOURTH WING', and 'Day of the Fallen Night' have dragons in them.","
+Yes, dragons are a common theme in fantasy novels. Here are some books with dragons in them:
+
+1. ""The Chronicles of Narnia"" series by C.S. Lewis - The Chronicles of Narnia is a series of fantasy novels that features the magical land of Narnia, where a group of children travel through different worlds and encounter various creatures, including dragons.
+
+2. ""The Lord of the Rings"" by J.R.R. Tolkien - The Lord of the Rings is a series of fantasy novels that follows the journey of hobbits Frodo Baggins and his companions as they attempt to destroy the One Ring, which holds the power to rule all of Middle-earth.
+
+3. ""The Wheel of Time"" by Robert Jordan - The Wheel of Time is a series of fantasy novels that follows the journey of a young woman named Moiraine and her companions as they travel through different worlds, encountering various magical creatures along the way, including dragons.
+
+4. ""The Dark Is Rising"" by Susan Cooper - The Dark Is Rising is a series of fantasy novels that follows the adventures of a young boy named Will Stanton and his friends as they battle against the forces of darkness in order to save their world from destruction.
+
+5. ""The Chronicles of Amber"" series by Roger Zelazny - The Chronicles of Amber is a series of fantasy novels that follows the adventures of a young woman named Amber and her companions as they travel through different worlds, encountering various magical creatures along the way, including dragons.
+
+6. ""The Wheel of Time"" by Robert Jordan - The Wheel of Time is a series of fantasy novels that follows the journey of a young woman named Moiraine and her companions as they travel through different worlds, encountering various magical creatures along the way, including dragons.
+
+7. ""The Chronicles of Prydain"" series by Lloyd Alexander - The Chronicles of Prydain is a series of fantasy novels that follows the adventures of a young boy named Taran and his companions as they travel through different worlds, encountering various magical creatures along the way, including dragons.
+
+8. ""The Wheel of Time"" by Robert Jordan - The Wheel of Time is a series of fantasy novels that follows the journey of a young woman named Moiraine and her companions as they travel through different worlds, encountering various magical creatures along the way, including dragons.
+
+9. ""The Chronicles of Prydain"" by Lloyd Alexander - The Chronicles of Prydain is a series of fantasy novels that follows the adventures of a young boy named Taran and his companions as they travel through different worlds, encountering various magical creatures along the way, including dragons.
+
+10. ""The Wheel of Time"" by Robert Jordan - The Wheel of Time is a series of fantasy novels that follows the journey of a young woman named Moiraine and her companions as they travel through different worlds, encountering various magical creatures along the way, including dragons."
+37,18,Which books contain multiple narratives?,"The books 'Same Bed Different Dreams', 'EVERY DROP IS A MAN’S NIGHTMARE', 'The Museum of Human History', 'Witch King', and 'The Terraformers' each use multiple narratives.","
+Yes, there are many books that contain multiple narratives. Here are a few examples:
+
+1. ""The Alchemist"" by Paulo Coelho - This novel has three main narratives: the story of Santiago's journey to find his true purpose in life, the story of his encounter with the alchemist who teaches him about the power of dreams and the importance of following one's heart, and the story of his eventual meeting with a wise old shepherd.
+
+2. ""The Lord of the Rings"" by J.R.R. Tolkien - This epic fantasy trilogy has three main narratives: the story of Frodo Baggins' journey to destroy the One Ring, the story of Aragorn's quest to reclaim the kingdom of Gondor from Sauron, and the story of the Fellowship of the Ring, which includes the adventures of Frodo, Samwise Gamgee, Merry Brandybuck, and Pippin Took.
+
+3. ""The Hunger Games"" by Suzanne Collins - This dystopian novel has three main narratives: the story of Katniss Everdeen's journey to become a tribute in the Hunger Games, the story of her rebellion against the Capitol, and the story of the rebellion led by Peeta Mellark.
+
+4. ""The Wind-Up Bird Chronicle"" by Haruki Murakami - This novel has three main narratives: the story of a man named Toru Watanabe who is trying to find his missing wife, the story of his encounter with a mysterious bird that appears in his apartment, and the story of his eventual discovery of a hidden world beneath Tokyo.
+
+5. ""The Name of the Wind"" by Patrick Rothfuss - This fantasy novel has three main narratives: the story of Kvothe's journey to become a famous wizard, the story of his encounter with a powerful sorceress named Naysha, and the story of his eventual confrontation with the dark lord who seeks to destroy him.
+
+These are just a few examples - there are many other books that contain multiple narratives as well!"
+38,19,What is the recommended way to index text for question-answering?,"It is recommended to first apply text normalization processes such as tokenization, stemming, and the removal of stop words to enhance the text’s suitability for indexing. Pretrained LMs can then be used to generate semantic vector representations of texts. These vectors are stored, enabling rapid and precise retrieval from extensive data collections, significantly enhancing retrieval efficiency. Sentence-level indexing is more appropriate than document-level indexing for summarizing documents to precisely locate answers.","
+The recommended way to index text for question-answering is to use document-level indexing. This involves creating a set of documents (i.e., sentences or paragraphs) that contain the questions and answers you want to answer. The documents should be well-structured, with clear headings and subheadings, and each sentence should have a unique identifier (i.e., a unique token).
+
+Document-level indexing is more appropriate for question-answering systems because it allows for efficient retrieval of information based on the questions asked. This is because the system can use the document structure to identify the relevant sentences or paragraphs that contain the answers to the questions.
+
+In summary, document-level indexing is recommended for question-answering systems because it allows for efficient retrieval of information based on the questions asked."
+39,19,What are the advantages and disadvantages of the BM25 algorithm?,"The advantage of BM25 is that it is efficient. The disadvantage of the BM25 algorithm is that it focuses on term frequency and presence for document algorithm, so it often overlooks the semantic information of queries.","
+The BM25 algorithm is a popular retrieval method that has been widely used in search engines and information retrieval applications. Here are some advantages and disadvantages of the BM25 algorithm:
+
+Advantages:
+1. High recall rate: The BM25 algorithm can achieve high recall rates, which means it returns relevant documents even when there is a low match between the query and the document.
+
+2. Robust to noise: The BM25 algorithm can handle queries with noise or irrelevant terms, as it considers both the query term and its context in the document.
+
+3. Flexible: The BM25 algorithm allows for customization of the parameters, such as the weighting of different search terms, to meet specific requirements.
+
+4. Easy to implement: The BM25 algorithm is a simple and straightforward algorithm that can be implemented easily in most search engines.
+
+Disadvantages:
+1. Complexity: The BM25 algorithm is complex and requires careful tuning of the parameters, which can be time-consuming and difficult for non-experts to implement.
+
+2. Limited applicability: While the BM25 algorithm has been widely used in search engines, it may not be as effective in other applications where the query terms are more complex or the documents have a different structure.
+
+3. Dependence on LMs: The BM25 algorithm relies heavily on pre-trained language models (LMs), which can be prone to overfitting and may not generalize well to new data.
+
+4. Limited applicability in non-English languages: While the BM25 algorithm has been successfully applied in English-language search engines, it may not work as effectively in other languages with different character sets or word order."

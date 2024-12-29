@@ -1,0 +1,2 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,Which enemy types wield an AK-47?,Assault-rifle wielding Bullet and Tankers wield AK-47s.,"Bullet Kin wield AK-47s as the given context states Assault-rifle wielding Bullet Kin wield AK-47s. The term 'Assault-rifle wielding' here refers to the enemy type, in this case, Bullet Kin. Tankers also wield AK-47s, but the question specifically asks for an enemy type./INST]"

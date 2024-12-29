@@ -1,0 +1,308 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death.,"
+Keybullet Kin drop a key upon death. The exact type of key they drop depends on the version of the game you are playing, but in general, they will drop one key."
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol.,"
+The bandaña bullet kin uses a regular AK-47, which is a semi-automatic rifle."
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.","
+The giant is described as being no more than 2-3 feet wide, and numerous (dozen). They are described as appearing fearful and appear rather unfriendly towards the group."
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.","
+On day 2, Ropers sleeps without any issues. Kobold Traps are not mentioned in the provided text."
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent.","
+The requirements for the project were:
+
+1. To plan and build a prototype of a tool that can help users find information about influential programmers, including their Wikipedia pages.
+2. To use machine learning techniques to analyze the text data and extract relevant information from it.
+3. To create a user-friendly interface for the tool that allows users to search for and display information about influential programmers.
+4. To test the prototype with real-world examples of Wikipedia pages related to influential programmers.
+5. To make the tool accessible to a wide audience by providing it in various formats, such as web applications, mobile apps, and desktop software.
+6. To ensure that the tool is efficient, reliable, and user-friendly.
+7. To provide clear documentation and support for users who may need help with using the tool."
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype.,"
+The data used to test the prototype was Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page."
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone).","
+The data storage options I mentioned in the conversation are:
+
+1. SQLite3 and ChrmaDB (File-based) out-of-the-box - no install required
+2. MongoDB (text collection) and Milvu (vector db) - install with Docker Composé
+3. Postgres (both text collection and vector DB) - install with Docker Composé
+
+All of these options support both text collections and vector databases, which means you can use them for both text-based data and geospatial data. SQLite3 is a lightweight database that is easy to set up and maintain, while ChrmaDB (File-based) is a more advanced option that supports large datasets and offers better performance than SQLite3. MongoDB is a popular NoSQL database that supports a wide range of data types and allows for complex queries and aggregations. Postgres is a relational database that is well-suited for storing and querying geospatial data, as it supports spatial indexes and supports multiple databases on the same server. Overall, each option has its strengths and weaknesses, so it's best to evaluate your specific use case and choose the one that best fits your needs."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.,"
+UTF-8 support for European languages was added in version 0.1.4 of the LLMware software. This means that the AI can now handle text files with Unicode characters, including those from European languages such as French, German, Italian, and Spanish."
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000).","
+To create a button in React, you can use the `button` component provided by the `react-bootstrap` library. Here's an example:
+
+```javascript
+import React from 'react';
+import { Button } from 'react-bootstrap';
+
+const MyButton = () => (
+  <Button variant=""primary"">Click Me!</Button>
+);
+
+export default MyButton;
+```
+
+In this example, we've imported the `Button` component from the `react-bootstrap` library and wrapped it in a `div` element with a `variant` prop set to `primary`. This will make the button look like a primary (or ""outline"") button. You can customize the button's appearance by changing the variant prop or adding other CSS classes.
+
+You can also use the `ButtonGroup` component from the same library to group multiple buttons together, and add some spacing between them:
+
+```javascript
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
+
+const MyButtonGroup = () => (
+  <ButtonGroup>
+    <Button variant=""primary"">One</Button>
+    <Button variant=""secondary"">Two</Button>
+    <Button variant=""success"">Three</Button>
+    <Button variant=""danger"">Four</Button>
+  </ButtonGroup>
+);
+
+export default MyButtonGroup;
+```
+
+In this example, we've imported the `ButtonGroup` component from the `react-bootstrap` library and wrapped it in a `div` element with some spacing between the buttons. You can customize the button group's appearance by changing the variant prop or adding other CSS classes."
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings.","
+Caching is a useful technique to improve the performance of your code. Here are some scenarios where you might want to use caching:
+
+1. When you need to compute expensive computations frequently, but only once per user session. For example, if you have a notebook that runs cells automatically as code and UI elements change, it can be helpful to cache the results of expensive computations like t-SNNe, UMAP, or PyMDE embedding computations.
+
+2. When you need to compute complex functions with many parameters, but only once per user session. For example, if you have a notebook that generates plots and tables based on data, it can be helpful to cache the results of expensive computations like plotting or table creation.
+
+3. When you need to compute computations frequently, but only once per user session. For example, if you have a web application that displays data in real-time, it can be helpful to cache the results of expensive computations like fetching data from an API.
+
+4. When you need to compute computations frequently, but only once per user session. For example, if you have a web application that generates reports based on data, it can be helpful to cache the results of expensive computations like generating PDFs or Excel files.
+
+In all these scenarios, cachining can help improve the performance of your code by reducing the number of times you need to compute expensive computations."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact"".","
+The key topics of this article are:
+
+1. Common challenges and how to address them in project management
+2. Analyzing data and making recommendations for impact
+3. Identifying potential paths forward and minimizing impact killers
+4. Addressing common challenges with specific projects
+5. Tips for minimizing the odds of wasting time on a project that won't lead to impact
+6. Common Challenges and How to Address Them"
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.","
+No, you don't have to do everything by yourself to be acknowledged for it. You can work with your team or colleagues to achieve the goal and then share the credit with them. However, if you are responsible for a significant achievement that has a direct impact on the company's success, you may want to consider seeking recognition from your manager or supervisor. This could be in the form of a formal acknowledgement, such as a letter or email, or informal recognition through praise and encouragement. Ultimately, it's up to you to decide how you want to approach this matter."
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.","
+The AI Act requires that certain types of models be officially registered with the Australian Government. These models include:
+
+1. Generative Adversarial Networks (GANs)
+2. Convolutional Neural Networks (CNNs)
+3. Recurrent Neural Networks (RNNs)
+4. Long Short-Term Memory (LSTM) networks
+5. Transformer models
+6. Transfer Learning Models
+7. Unsupervised Learning Models
+8. Reinforcement Learning Models
+9. Hybrid Models that combine multiple types of models
+10. Other models that are not explicitly listed in the AI Act.
+
+These models must be registered with the Australian Government to ensure they meet the requirements for use in Australia. The registration process involves submitting a model description, including details about the model's architecture and training data, as well as any relevant licenses or permissions. Once registered, these models can be used by researchers, developers, and other stakeholders in Australia."
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model).","
+AI systems that carry systematic risk are those that have the potential to cause significant harm or disruption to society, individuals, or the economy. These AI systems may include general-purpose models such as chatbots, autonomous vehicles, and predictive analytics, as well as more specialized models like language models, image recognition algorithms, and natural language processing tools.
+
+Systemic risk refers to a situation where an AI system's operation could have significant effects on the economy or society as a whole. This can occur when a single AI system has the potential to cause significant harm to multiple stakeholders, such as financial institutions, transportation systems, or healthcare providers.
+
+The Commission proposes that general-purpose AI models should be considered high-risk and subject to specific regulatory requirements, while specialized AI models should be subject to more detailed risk assessments and regulatory oversight."
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.","
+The player will find various sentimental knick-knacks from the Emperor's previous life, before becoming an illithid. These knick-knacks are likely to be related to the Emperor's past and its time in the city before it became illithid. The specific quest that the player will receive is Visit the Emperor's Old Hideout, which is mentioned in the conversation between the AI and the user."
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.","
+The party is ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout."
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars.,"
+I do not have access to your personal preferences or drinking habits. However, based on the given text, it is implied that you drank a meal at one of the pintxo bars."
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino.,"
+The part of the trip that you liked the most is not specified in the given text. The conversation between the user and the AI does not provide any information about which part of the trip you enjoyed the most."
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.","
+The infrareed scenes in Infrared are not explicitly explained, but they can be interpreted as a symbolic representation of the family's struggle to maintain their individuality and identity in a world where conformity is mandatory. The scenes showcase how the family cannot fully express themselves or be themselves in public, leading to them being seen as outsiders and ostracized by society. This can be interpreted as a metaphor for the family's struggle to maintain their individuality amidst the oppressive and conformist environment of Nazi Germany. The scenes also highlight the importance of individualism and self-expression in times of oppression, suggesting that even in the face of adversity, individuals must find ways to assert themselves and stand out from the crowd."
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil.,"
+The people who commit atrocities and those that are complicit in these acts differ in several ways:
+
+1. Motivations: The perpetrators of atrocities have a clear motivation to harm others, while the ones who are complicit may not have a direct motive for committing such acts.
+
+2. Behavior: Those who commit atrocities often exhibit extreme behavior, such as violence, cruelty, and sadism. They may also engage in dehumanizing behaviors, such as torture or killing of innocent people. On the other hand, those who are complicit may not have a direct motive for committing atrocities but may be aware of them and may even participate in them.
+
+3. Impact: The impact of atrocities on society is different from that of those who commit them. Atrocities can lead to significant social, political, and economic changes, while those who are complicit may not have a direct impact on the society.
+
+4. Legitimacy: Those who commit atrocities may be seen as legitimate by some people or groups, while those who are complicit may not be seen as legitimate by others.
+
+5. Responsibility: The responsibility for committing atrocities and being complicit in them lies with the perpetrators and those who enable them, respectively.
+
+Overall, the difference between those who commit atrocities and those who are complicit is significant, and it can have a profound impact on society as a whole."
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.","
+The policy on Tai Chi is not explicitly mentioned in the given text. However, it can be inferred that the Loony Party's proposal to redirect hot air from Parliament to the Gas Distribution Networks would involve practicing Tai Chi as a way of reducing stress and improving overall well-being."
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.,"
+The proposed change for the British Museum is to have a section dedicated to Daady's, which would be alongside the current Muhmay exhibition. This change is not mentioned in the given text."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100.","
+The Teslas A100 and V100 are two of NVIDIA's most powerful GPUs, with the A100 offering 1,555 GB/s memory bandwidth compared to the V100's 900 GB/s. However, the exact speedup between these two GPUs may vary depending on the specific tasks and workloads being executed. NVIDIA provides benchmark results for both GPUs across a wide range of computer vision and natural language processing (NLP) tasks, which can help users determine which GPU is best suited for their specific use case."
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training.,"
+I do not have access to your specific work or feedback. However, in general, criticism for reducing the number of FLOPS (floating-point operations per second) can refer to a reduction in performance that may affect the accuracy and efficiency of an algorithm. This could be due to factors such as the size of the input data, the complexity of the problem being solved, or the specific hardware architecture used for the computation. If you received criticism for your reduction of FLOPS, it is possible that this was related to one or more of these factors and that you may need to make adjustments to improve performance."
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public.","
+In Glerea, functions are exported by default. This means that any function defined in a module can be imported and used without the need for an explicit `pub` keyword. In Python, top-level functions are not automatically exported by default. To make a function exportable, it needs to be marked with the `pub` keyword.
+
+In Glerea, this is done using the `export` modifier on the function declaration:
+
+```python
+def sum(x, y):
+    x + y
+
+# Exported as 'sum'
+```
+
+In Python, this is done using the `__all__` attribute of a module:
+
+```python
+from my_module import *
+
+class MyClass:
+    def __init__(self):
+        self.x = 10
+
+def sum(x, y):
+    x + y
+
+# Exported as 'sum' and '__all__'
+```
+
+In Glerea, functions can be marked with the `export` modifier on the function declaration to make it exportable:
+
+```python
+def sum(x, y):
+    x + y
+
+# Exported as 'sum'
+```
+
+In Python, this is done using the `__all__` attribute of a module:
+
+```python
+from my_module import *
+
+class MyClass:
+    def __init__(self):
+        self.x = 10
+
+def sum(x, y):
+    x + y
+
+# Exported as 'sum' and '__all__'
+```
+
+In both Glerea and Python, functions can be marked with the `export` modifier to make them exportable."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.,"
+In Python, the pipe symbol (|>) is used to indicate a pipe operator. Here's an example:
+
+```python
+print(""hello | world"")  # prints ""hello world""
+```
+
+The `|` character is called the pipe symbol in Python."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax.,"
+The top-right values in the raw attention weights are set to negative infinity because we want to ensure that the attention weights are not too large. In a matrix of size (batch_size, head_size), the maximum value is 1.0, and the minimum value is -inf. So, if we set the top-right values to negative infinity, they will be equal to zero, which ensures that the attention weights are not too large. This helps prevent the model from overfitting or getting stuck in local minima."
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training.","
+To freeze a variable during training in MLX, you can use the `mx.set_default_ctx()` function to set the default context for your model. This will ensure that the variable is not updated during training and only used during evaluation. Here's an example:
+
+```python
+import mxnet as mx
+from mlx import GPTrainer, GPModel
+
+# define a simple neural network with two hidden layers
+def create_model():
+    model = GPModel(input=mx.sym.var('X'), output=mx.sym.var('Y'))
+    h1 = mx.sym.fullyconnected(data=model.output, num_hidden=2)
+    h2 = mx.sym.fullyconnected(data=h1, num_hidden=2)
+    out = mx.sym.fullyconnected(data=h2, num_hidden=1)
+    return model
+
+# define a training function that updates the model parameters using MLX
+def train():
+    trainer = GPTrainer()
+    trainer.set_params({'learning_rate': 0.1})
+    trainer.fit(create_model(), X_train, y_train)
+
+# define a validation function that evaluates the model on the validation set
+def eval():
+    val_model = create_model()
+    val_data = mx.test_helper.get_validation_data(X_val, y_val)
+    val_output = val_model.predict(val_data)
+    return val_output
+
+# define a function to freeze variables during training
+def freeze():
+    trainer.set_default_ctx('gpu')
+
+# define the main function that trains and evaluates the model
+if __name__ == '__main__':
+    # set up the training data
+    X_train, y_train = mx.test_helper.load_data(X_train, y_train)
+    X_val, y_val = mx.test_helper.load_data(X_val, y_val)
+    
+    # define the training function and freeze variables
+    train()
+    freeze()
+    
+    # evaluate the model on the validation set
+    val_output = eval()
+```
+
+In this example, we're defining a `create_model()` function that creates a simple neural network with two hidden layers. We're also defining a training function that updates the model parameters using MLX and an evaluation function that evaluates the model on the validation set. To freeze variables during training, we use the `set_default_ctx()` function to set the default context for our model. This ensures that any variables used in the model are not updated during training and only used during evaluation."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother.,"
+The narrator is not related to Perry in any way. The narrator is a fictional character created by the AI, and they are not based on anyone in real life."
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days.,"
+The narrator has been sober for seven hundred and thirty days, or approximately seven years."
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".","
+The name of the space station is ""Portal 357."""
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese.,"
+The people of Pacifico del Rio speak the DuBarryDuPlessy language, which is a combination of English and Tardis. The DuBarryDuPlessy language has a perception filter that helps it fit into every time and place, making it difficult for humans to understand."
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3.,"
+The pet adoption scene was added in patch 1.0.2, which was released on December 31st, 2019."
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0.,"
+Mushroom trees in Stardew Valley 1.5 no longer drop wood as of the update released on December 20, 2019."
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021.,"
+Alan Wake 2 was officially announced during the PlayStation Showcase live stream on May 24, 2023."
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake.","
+The game is set in the year 2077, which is approximately 50 years after the events of the original Resident Evil."
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'.,"
+'Divine Rivals' was written by Rebecca Ross."
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer.,"
+The resurrection of the group of murder victim in My Murder is not explicitly mentioned in the given text. However, it can be inferred that the group includes at least one woman who was killed by a serial killer and has been resurrected along with a handful of other women."
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.","
+The paper splits the RAG technique paradigm into three categories: 1) RAG-based methods, 2) RAG-inspired methods, and 3) RAG-related methods. The paper does not provide a detailed explanation of each category, but it does offer an overview of the different approaches to RAG research."
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy.","
+Including unrelated documents in a retrieval analysis (RAG) system can have several negative effects on the accuracy and effectiveness of the system. Here are some ways that including unrelated documents can affect RAG:
+
+1. Increased complexity: When including unrelated documents, the RAG system must analyze more information to determine relevance. This can lead to increased computational complexity, which can slow down the retrieval process and result in lower accuracy.
+
+2. Reduced precision: Unrelated documents may contain irrelevant or spurious information that can confuse the RAG system. This can reduce the precision of the results, making it harder for users to find relevant content.
+
+3. Increased false positives: When including unrelated documents in a retrieval analysis, the system may identify relevant content as well as irrelevant or spurious information. This can lead to increased false positives, which can result in users wasting time and resources on irrelevant results.
+
+4. Reduced relevance: Including unrelated documents can reduce the relevance of the retrieved content. This can result in lower accuracy and higher false negatives, as the system may identify relevant content that is not actually relevant to the user's query.
+
+5. Increased maintenance costs: Including unrelated documents in a retrieval analysis requires additional resources, such as time and expertise, to analyze and categorize them. This can increase maintenance costs for the RAG system over time."

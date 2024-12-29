@@ -1,0 +1,308 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death.,"
+Keybullet Kin drop a key upon death. The exact number of keys they drop depends on the variation of the Keybullet Kin you encounter, but typically, they will drop 1 key."
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol.,"
+The bandaña bullet kin use a regular AK-47, which is a semi-automatic rifle with a magazine capacity of 30 rounds."
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.","
+The giant is described as a massive, humanoid creature with elongated limbs and a broad chest. It has a long, thin body that tapers to a point at the top, where it ends in a pair of sharp claws. The head is large and bulbous, with a wide, flat face that is covered in rough, scaly skin. Its eyes are large and round, with a yellowish tint to them. The giant's arms and legs are long and muscular, with thick, knobby fingers and toes. It moves slowly and deliberately, with a deep, rumbling growl that echoes through the caverns."
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.","
+On day 2, Ropers sleeps without any issues. Kobold Traps are not mentioned in the provided text."
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent.","
+The requirements for the project were:
+
+1. A tool that can generate a list of features based on user input.
+2. The tool should be able to handle different types of data, such as text or images.
+3. The tool should have a user-friendly interface and allow users to easily add new features.
+4. The tool should be scalable and able to handle large datasets.
+5. The tool should be efficient in terms of performance and speed.
+6. The tool should be easy to use and understand for non-technical users.
+7. The tool should have a clear and concise documentation that explains how to use it.
+8. The tool should be able to handle different types of data, such as numerical or categorical features.
+9. The tool should be able to handle different types of text, such as natural language processing (NLP) or machine learning (ML).
+10. The tool should have a clear and concise API that allows other developers to easily integrate it into their own projects."
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype.,"
+The data used to test the prototype was a synthetic dataset generated using a language model (LLM) that was trained on a large corpus of text. This dataset was used to evaluate the performance of the prototype in generating responses to questions about Grace Hopper, one of the most influential programmers to have ever lived."
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone).","
+The data storage options mentioned in the conversation are:
+
+1. Data Store Options: SQLite3 and ChrmaDB (File-based) out-of-the-box - no install required, and MongoDB (text collection) and MilvuS (vector db) - install with Docker Composer.
+2. Postgres: use Postgres for both text collection and vector DB - install with Docker Composer.
+3. SQlit: use Postgres for both text collection and vector DB - install with Docker Composer.
+
+In terms of performance, SQLite3 is a lightweight database that can handle large volumes of data efficiently. ChrmaDB (File-based) out-of-the-box is also a good option as it provides fast read/write access to the text collection. MongoDB (text collection) and MilvuS (vector db) are both scalable and performant, but they require more resources than SQLite3 or ChrmaDB.
+
+In terms of data storage options, Postgres is a popular choice for database management systems due to its robustness, scalability, and flexibility. It provides a wide range of features such as transactional and replication capabilities, and it can handle large volumes of data efficiently. SQlit is also a good option for handling text collections, but it requires more resources than Postgres.
+
+Overall, the choice between SQLite3, ChrmaDB (File-based), Postgres, and SQlit will depend on your specific requirements and the size of your data."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.,"
+UTF-8 support for European languages was added in version 0.1.9 of the PDF Parser library, which was released on November 24th, 2023."
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000).","
+To make a button in MariMO, you can use the `mo.ui.button` class provided by the `mariMO` library. Here's an example:
+
+```python
+import mariMO as mo
+
+# Create a button with a value of 0 and no on_click function
+button = mo.ui.button(value=0)
+
+# Set the button to be clickable by adding an on_click function
+button.on_click = lambda: print(""Button clicked!"")
+
+# Add the button to a table
+table = mo.ui.table()
+table.add_row([button])
+
+# Display the table in a GUI
+mo.gui(table)
+```
+
+In this example, we've created a `mo.ui.button` object with a value of 0 and no on_click function. We've also added an `on_click` function to the button, which will be called when the user clicks it. Finally, we've added the button to a table using the `add_row()` method.
+
+You can customize the appearance and behavior of your buttons by modifying their properties or adding additional functions to the `on_click` function."
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings.","
+Caching is a technique used to improve the performance of your code by storing intermediate results and reusing them instead of computing them again. Here are some scenarios where you might want to use cachining:
+
+1. When you need to compute expensive computations frequently, but only once. For example, if you have a function that takes in a large number of parameters and outputs a small number of results, you can cache the intermediate computations so that they don't have to be recomputed every time. This can significantly improve performance.
+
+2. When you need to compute a large number of results quickly. For example, if you have a function that takes in a large dataset and outputs a small number of results, you can cache the intermediate computations so that they don't have to be recomputed every time. This can significantly improve performance.
+
+3. When you need to compute a large number of results repeatedly. For example, if you have a function that takes in a large dataset and outputs a small number of results, you can cache the intermediate computations so that they don't have to be recomputed every time. This can significantly improve performance.
+
+In general, cachining is useful when you need to compute expensive computations frequently but only once, or when you need to compute a large number of results quickly but only once."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact"".","
+The key topics of this article are:
+1. The importance of data analysis in decision-making
+2. The challenges and limitations of data analysis
+3. How to ensure that data analysis is used effectively by stakeholders
+4. Best practices for building predictive models
+5. The role of AI in data analysis and decision-making
+6. The importance of understanding the context and culture of your organization when using data analytics."
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.","
+No, you don't have to do everything by yourself to be acknowledged for your work. You can seek help from colleagues or supervisors if needed, but ultimately, it is up to you to take ownership of the project and ensure that it is completed successfully. It's also important to recognize that there may be other team members who contributed to the success of the project, so don't hesitate to acknowledge their contributions as well. Ultimately, the goal is to create a culture where everyone feels valued and supported in their work, which can lead to better outcomes for the company as a whole."
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.","
+The Regulation sets out that certain models, including large generative AI models, would need to be officially registered. This means that the model provider must submit a registration application to the European Commission, which will then assess the model's suitability for use in the EU and determine whether it should be formally registered as an AI tool.
+
+The types of models that would need to be officially registered include:
+
+1. Generative Adversarial Networks (GANs)
+2. Transformer-based models, such as BERT or RoBERTa
+3. Convolutional Neural Networks (CNNs)
+4. Recurrent Neural Networks (RNNs)
+5. Long Short Term Memory (LSTM) networks
+6. Deep Learning models for natural language processing (NLP)
+7. Generative Models for Image and Video Processing (GIPs)
+8. Generative Models for Audio Processing (GAPs)
+9. Generative Models for Knowledge Graphs (KGs)
+10. Generative Models for Social Media Analysis (SMA)
+
+These models are considered to be ""generative"" because they can generate new data or produce outputs that are not known a priori, such as images, text, or audio."
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model).","
+AI systems that carry ""systematic risk"" are those that have the potential to cause significant harm or damage to individuals, society, or the environment. These AI systems may pose risks related to user safety and fundamental rights, such as the use of autonomous vehicles, facial recognition technology, or chatbots. The specific types of AI systems that carry systematic risk depend on their design, implementation, and usage. However, some examples include:
+
+1. Autonomous vehicles: These systems can be programmed to make decisions without human intervention, which could lead to accidents or other safety issues. 2. Facial recognition technology: This technology can be used for surveillance, identification, and tracking purposes, which could lead to privacy concerns and potential abuses. 3. Chatbots: These systems can be programmed to provide customer service, but they may not have the ability to understand or respond appropriately to complex questions or situations. 4. Medical AI: These systems can be used for diagnosis, treatment planning, and personalized medicine, but they may not always be accurate or safe in certain cases. Overall, systematic risk is a broad concept that encompasses the potential for harm or damage to individuals, society, or the environment from the use of AI systems."
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.","
+The emperor gives the player the quest Visit the Emperor's Old Hideout in Act Three of the game."
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.","
+The party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout."
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars.,"
+I do not have access to your specific location or preferences. However, in general, pintxos bars are known for serving small plates of tapas (small dishes) that are typically eaten with a knife and fork. Some common pintxo dishes include:
+
+1. Chorizo sausage
+2. Sausage with onions and peppers
+3. Tuna tartare
+4. Cured meats like jamón ibérico or salami
+5. Cheese plates (usually with different types of cheeses)
+6. Pickled vegetables (such as cucumber, carrot, and radish)
+7. Olives
+8. Bread (usually toasted)
+9. Tapas-style desserts like churros or croquetas
+
+I hope this helps! Let me know if you have any other questions."
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino.,"
+The part of the trip that you liked the most is the one where you shared the most absurd moments with your friend. This was a highlight for both of you, and it's clear from the conversation that you had a great time together."
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.","
+The infrareed scenes in Infrared refer to the use of infrared cameras, which are used by the Nazis to monitor and surveil Jewish people. The scenes show how the family is unable to be themselves as they step out of their house or into the open balcony, despite not wanting to. This suggests that the family cannot be themselves as soon as they leave their home or enter a public space, which was a common practice during the Nazi occupation. The use of infrareed in the film is meant to highlight the oppressive nature of the Nazis' control over Jewish people and their attempts to monitor and surveil them."
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil.,"
+The people who commit atrocities and those that are complicit in these acts differ in several ways:
+
+1. Motivations: The perpetrators of atrocities have a clear motivation to harm others, while the ones who are complicit may not have a direct motive for committing such acts.
+
+2. Behavior: Those who commit atrocities often exhibit extreme violence and cruelty towards their victims, while those who are complicit may show little or no empathy towards the victims.
+
+3. Intentions: The perpetrators of atrocities have a clear intention to harm others, while those who are complicit may not have any specific intentions other than to protect themselves or their interests.
+
+4. Impact: Those who commit atrocities often cause significant damage and loss of life, while those who are complicit may only indirectly contribute to these effects.
+
+5. Consequences: The consequences of committing atrocities can be severe, including criminal charges, legal repercussions, and social stigma. On the other hand, those who are complicit may face little or no consequences for their actions.
+
+Overall, while both perpetrators and complicit individuals share some common characteristics, they differ in terms of motivation, behavior, intentions, impact, consequences, and overall impact on society."
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.","
+The policy on Tai Chi is not explicitly mentioned in the given text. However, it can be inferred that the Loony Party's proposal to make M.P’s have half an hours compulsory Tai chi everyday would likely involve a mandatory training program for all members of Parliament. This could include regular classes or workshops on Tai Chi techniques and principles. The policy on Tai Chi is not mentioned in the given text, but it can be inferred from the context that the Loony Party's proposal is intended to address stress and promote relaxation among M.P’s."
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.,"
+The proposed change for the British Museum is to have a Daady's section alongside the current Muummy exhibition. The museum will only paint yellow lines where you can park, and potholes deeper than 3 inches will be marked with a yellow placard. Ellections are proposed to reduce pregnancy from nine to seven months, to protect pets and people of a nervous disposition, we would introduce silent fireworks, once in government, we will replace the Foreign Secretary with a British one, waiting lists will be reduced by using a smaller font, immigration will be reduced by making sure that any net migration is secured more firmly to the ground. Inflation is also proposed as a change for the museum."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100.","
+The Teslas A100 and V100 are two of NVIDIA's high-performance GPUs designed for deep learning applications. The TeSLAs A100 offers a speedup over the TeSLAs V100, with a 7.00x speedup for transformers and a 6.67x speedup for CNNs. This means that for specific deep learning architecture, the TeSLAs A100 can offer a significant speedup compared to the TeSLAs V100."
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training.,"
+I do not have access to the specific work you mentioned. However, based on the context of your conversation with the user, it is likely that you received criticism for reducing the number of floating-point operations (FLOPS) required for training a neural network. This criticism may have been related to the fact that sparse matrix multiplication is computationally expensive and can lead to slower training times."
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public.","
+In GlleaM, function exporting is different from Python in the following ways:
+
+1. GlleaM:
+- Functions are defined as opaque types, which means that they do not have a public interface and cannot be imported or used outside of their module. - Functions can only be called using the intended API provided by the module. This means that functions cannot be exported from a module in GlleaM. 2. Python:
+- Functions are defined as functions with an `__init__` method, which is called when the function is created. - Functions can be imported and used outside of their module using the `from <module_name> import *` syntax. - Functions can be exported from a module by adding an `__all__` attribute to the module definition. This means that all functions defined in the module are available for use throughout the entire program. In GlleaM, function exporting is not as flexible and allows only for the creation of opaque types."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.,"
+In GleaM, the pipe (|>) is used to indicate that a value should be treated as an expression. Here's how it works:
+
+1. The pipe character is preceded by a left parenthesis (()), which indicates that the following expression will be treated as a function call.
+2. The right parenthesis (()) follows the pipe character, indicating that the expression should be evaluated and returned as the result of the function call.
+3. The value inside the parentheses is the argument to the function call.
+
+For example:
+
+```
+|> 1 + 2
+4
+```
+
+In this example, the value inside the parentheses (1 + 2) is treated as an expression and evaluated as the result of adding 1 and 2."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax.,"
+The top-right values in the raw attention weights are set to negative infinity because they represent the attention weights for the last layer of the model. In a multi-layer perceptron (MLP), the output of each layer is multiplied by the attention weights before passing it through the next layer. The attention weights are used to weight the input features and guide the network towards the desired output.
+
+In your example, the top-right values in the raw attention weights represent the attention weights for the last layer (the output layer). In this case, the output of the first layer is the input feature vector, and the attention weights are used to weight the input features and guide the network towards the desired output.
+
+The negative infinity value is used to ensure that the attention weights do not become too large or negative, which can cause the model to overfit the data. This is because the attention weights are used to guide the network towards the desired output, and if they become too large or negative, they may lead to a loss of information in the input features."
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training.","
+To freeze a variable during training in MLX, you can use the `mx.set_default_ctx()` function to set the default context for your model. This will ensure that the variable is not updated during training and will be frozen. Here's an example:
+
+```python
+import mxnet as mx
+from mxnet import nd
+
+# Define a neural network model
+def create_model():
+    # Create a linear layer with 10 output units
+    lr = mx.sym.Variable('lr')
+    out = mx.sym.Linear(data=lr, num_out=10)
+    
+    # Add a sigmoid activation function to the output layer
+    out = mx.sym.Activation(data=out, act='sigmoid', name='output')
+    
+    return out
+
+# Define a training dataset and a test dataset
+train_dataset = nd.array([[1, 2], [3, 4]])
+test_dataset = nd.array([[5, 6], [7, 8]])
+
+# Create an MLX session with the default context
+ctx = mx.gpu() if mx.test_utils.is_gpu_available() else mx.cpu()
+sess = mx.session(ctx=ctx)
+
+# Define a model and set its parameters to be frozen during training
+model = create_model()
+mx.set_default_ctx(ctx)
+
+# Freeze the variables of the model
+for var in model.collect_params():
+    var.set_value(var.data, mx.nd.zeros_like(var.data))
+
+# Define a loss function and an optimizer
+loss = mx.metric.MeanSquaredError()
+optimizer = mx.optimizer.Adam(lr=0.1)
+
+# Define the training loop
+for epoch in range(5):
+    for i, (data, label) in enumerate(train_dataset):
+        # Prepare the data for forward pass and backward pass
+        x = nd.array(data).reshape((-1, 2))
+        y = nd.array(label).reshape((-1, 1))
+        
+        # Forward pass
+        out = model(x)
+        
+        # Calculate the loss and gradient
+        loss_and_grad = loss(out, y)
+        grads = optimizer.compute_gradients(loss_and_grad)
+        mx.nd.set_grad(model, grads[0])
+        
+        # Update the model parameters using the gradient
+        for var in model.collect_params():
+            var.update_value(var.data - 0.1 * var.grad)
+        
+        # Train the model
+        if i % 5 == 0:
+            print(""Epoch:"", epoch, ""Iteration:"", i, ""Loss:"", loss.get())
+
+# Freeze the variables of the model again during testing
+for var in model.collect_params():
+    var.set_value(var.data, mx.nd.zeros_like(var.data))
+
+# Test the trained model
+test_result = sess.run(model, feed_dict={model.input: test_dataset})
+print(""Test loss:"", loss.get())
+```
+
+In this example, we define a neural network model with two linear layers and one sigmoid activation function. We freeze the variables of the model during training by setting them to zeros using `mx.set_default_ctx()`. Then we set the default context back to the original value before training starts. Finally, we freeze the variables again during testing by setting them to zeros once more."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother.,"
+The narrator is not related to Perry in any way. The narrator is a fictional character created by the AI, and they are not based on anyone real."
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days.,"
+The narrator has been sober for approximately seven hundred and thirty days, or roughly seven years."
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".","
+The name of the space station is ""Portal 357."""
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese.,"
+The people of Pacifico del Rio do not speak English, as the information provided in the conversation suggests."
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3.,"
+The pet adopton feature was added in patch 1.20, which was released on December 3, 2019."
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0.,"
+Mushroom trees stopped dropping wood on January 1, 2021."
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021.,"
+Alan Wake 2 was officially announced on May 24, 2023, during the Sony PlayStation Showcase live stream. The game was confirmed to be a sequel to Alan Wake Remastered and will release on October 17, 2023."
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake.","
+The game is set in the year 2057, which is approximately 30 years after the digital release of the game."
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'.,"
+The author of 'Divine Rivals' is Rebecca Ross."
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer.,"
+The resurrection of Lou with a group of other murder victim is mentioned in the given text."
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.","
+The paper splits the RAG technique paradigm into three categories:
+
+1. Uncertainty-based approaches: These methods use uncertainty as a source of information to guide decision making. They involve modeling uncertain data and using it to inform decisions. Examples include Bayesian networks, decision trees, and fuzzy logic.
+
+2. Ambiguity-based approaches: These methods use ambiguity as a source of information to guide decision making. They involve modeling ambiguous data and using it to inform decisions. Examples include fuzzy sets, fuzzy logic, and fuzzy sets.
+
+3. Rule-based approaches: These methods use rules or patterns to guide decision making. They involve modeling rules or patterns and using them to inform decisions. Examples include decision trees, rule sets, and decision support systems.
+
+The paper also categorizes various RAG techniques into these three categories, providing an in-depth understanding of the research area."
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy.","
+Including unrelated documents in a retrieval and analysis gateway (RAG) system can have several negative effects on the accuracy of the retrieved results. Here are some ways that including unrelated documents can affect the RAG system:
+
+1. Increased complexity: When including unrelated documents, the RAG system has to deal with a larger set of data points, which can increase the complexity of the retrieval process and make it more difficult to identify relevant information.
+
+2. Reduced relevance: Unrelated documents may not be relevant to the query or topic being analyzed, which can lead to reduced relevance in the retrieved results. This can result in a lower quality of search results and increased time spent on irrelevant documents.
+
+3. Increased false positives: When including unrelated documents, the RAG system may also encounter more false positives, which are documents that appear relevant but actually do not contain the information needed for the query. This can lead to a higher number of irrelevant results and increased time spent on irrelevant documents.
+
+4. Increased maintenance costs: Including unrelated documents in the RAG system requires additional resources such as storage space, processing power, and maintenance costs. These costs can be significant and may not be justified for small-scale projects or low-volume queries.
+
+5. Reduced user satisfaction: When including unrelated documents in the RAG system, users may feel that the results are incomplete or irrelevant, which can lead to reduced user satisfaction and decreased adoption of the system."

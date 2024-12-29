@@ -1,0 +1,259 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death.,"
+Keybullet Kin drop 2 keys instead of 1. These Jammed variations run faster and will take less time to teleport away from the player if they are not destroyed quickly. If a Keybullet Kin is knocked into a pit, it will not drop a key. The chances for a specific number of Keybullet Kin to spawn on a floor are:
+
+0 - 1 - 2
+50% - 30% - 20%
+Trivia
+Keybullet Kin may appear in boss arenas during the Boss Rush. They have a small chance to appear in elevator rooms at the start of a floor. Killing 15 Keybullet Kin unlocks the Springheel Boot."
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol.,"
+The bandaña bullet kin uses a regular AK-47, which is a semi-automatic rifle with a magazine capacity of 30 rounds. The magazine size is not mentioned in the given text."
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.","
+The giant is described as being ""fierce and fearsome,"" with a ""big, bulky body"" that ""looks like it's been through a lot of hardship."" The AI does not provide specific details about the appearance of the giant, but it does mention that they are likely to be tall and muscular."
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.","
+On day 2, the AI is not able to provide information due to the lack of text provided. However, it can help you understand that on this day, the user's ropers are sleeping without any issues."
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent.","
+The requirements for the project were:
+
+1. A tool that can generate a basic configuration for a given topic, including the name of the topic, its author(s), and any relevant information such as links to articles or resources.
+2. The ability to display this configuration in a user-friendly format, such as a list or table, with options for filtering, sorting, and searching.
+3. The ability to allow users to save their configurations for future reference or use.
+4. The option to add new topics or authors to the tool.
+5. The ability to provide feedback on the generated configuration, such as suggestions for improvements or additional information.
+6. The option to customize the appearance and functionality of the tool, such as changing the color scheme or adding additional features.
+7. The ability to integrate with other tools or services, such as social media platforms or news aggregators, to provide even more relevant content."
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype.,"
+The user did not provide any specific information about the data used to test the prototype. However, in general, testing a prototype involves collecting and analyzing data to determine whether it meets its intended purpose or fulfills its intended function. This data can include user feedback, performance metrics, usage statistics, and other relevant information that helps to identify areas for improvement and optimize the prototype's functionality."
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone).","
+The data storage options in Fast Start, ChrmaDB (File-based), MilvuS (vector db), and MongoDB are all file-based. This means that the data is stored on a local disk or cloud storage service, such as AWS S3 or Google Cloud Storage. In comparison, Postgres is an open-source relational database management system (RDBMS) that can store data in a variety of formats, including JSON, XML, and binary files.
+
+In terms of scalability, MongoDB is designed to handle large volumes of data, while Postgres is optimized for high-performance querying and can scale horizontally to handle large amounts of data. Fast Start is also designed to be highly scalable, with support for both in-memory and distributed databases.
+
+In terms of performance, all three options offer fast query processing times, but the choice between them will depend on your specific use case and requirements. Postgres is known for its high performance and scalability, while MongoDB is often preferred for its flexibility and ease of use. Fast Start offers a hybrid approach that combines the best features of both options, making it an excellent choice for those looking to combine the benefits of both databases.
+
+Overall, the data storage options in Fast Start are designed to provide reliable and scalable solutions for storing and managing large amounts of data."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.,"
+UTF-8 support for European languages was added in version 0.2.1 of the PDF Parser library."
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000).","
+To make a button in React, you can use the `button` component provided by the `react-bootstrap` library. Here's an example:
+
+```javascript
+import React from 'react';
+import { Button } from 'react-bootstrap';
+
+const MyButton = () => (
+  <Button variant=""primary"">Click Me!</Button>
+);
+
+export default MyButton;
+```
+
+In this example, we've imported the `Button` component from the `react-bootstrap` library and assigned it to a variable called `MyButton`. We then wrapped the button in a `div` element with a `variant=""primary""` prop. This tells React that the button should have a primary color (i.e., blue) and a font weight of bold.
+
+You can customize the button's appearance by passing additional props to the `Button` component, such as `size`, `variant`, or `color`. For example:
+
+```javascript
+import React from 'react';
+import { Button } from 'react-bootstrap';
+
+const MyButton = ({ size, variant, color }) => (
+  <Button variant={variant} size={size}>
+    Click Me!
+  </Button>
+);
+
+export default MyButton;
+```
+
+In this example, we've imported the `Button` component from the `react-bootstrap` library and assigned it to a variable called `MyButton`. We've also passed in the `size`, `variant`, and `color` props. These props specify the size (e.g., small, medium, large), font weight (bold or regular), and color of the button.
+
+You can use these components in your React app to create buttons for various purposes, such as confirmation dialogs, alerts, and progress bars."
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings.","
+Caching is a useful technique to improve the performance of your code. Here are some scenarios where you might want to use cachining:
+
+1. When you need to compute expensive computations frequently, but only once. For example, if you have a function that takes in a large number of input parameters and returns a result, you can cache the intermediate results for each call. This will reduce the time it takes to compute the final result.
+
+2. When your code needs to interact with external services or APIs frequently. For example, if you need to fetch data from an API every time you run a function, you can cache the response and reuse it instead of making multiple requests.
+
+3. When you have a large dataset that you want to process in parallel. By caching the results of a computation for each thread or process, you can reduce the time it takes to process the entire dataset.
+
+4. When your code needs to handle large amounts of data. For example, if you need to process a large file or database, you can cache the results of a computation for each chunk of data and process them in parallel.
+
+5. When you have a complex function that involves multiple steps. By caching intermediate results, you can reduce the time it takes to compute the final result.
+
+In summary, cachining is useful when you need to compute expensive computations frequently but only once, or when your code needs to interact with external services or APIs frequently, or when your code needs to handle large amounts of data."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact"".","
+The key topics of this article are:
+1. Understanding the importance of data analysis in decision-making and how it can impact business outcomes.
+2. Identifying common challenges and solutions for effective data analysis, including lack of buy-in from stakeholders, lack of clarity on the problem, and difficulty in presenting results.
+3. Providing practical tips and strategies for involving stakeholders in model development, ensuring buy-in, and addressing common challenges.
+4. Discussing specific frameworks and tools that can maximize impact from data analysis projects."
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.","
+As an Individual Contributor (IC) at work, you have the opportunity to contribute to your team's success and impact. However, it is not always easy to be acknowledged for your hard work. It can feel like nobody cares about what you do or that your contribution doesn't matter.
+
+To maximize your impact as a Data Scientist, here are some tips:
+
+1. Collaborate with others: Work collaboratively with other team members to achieve common goals and contribute to the overall success of the project.
+
+2. Showcase your work: Share your work with your team and colleagues when appropriate. This can be done through presentations, blog posts, or even by sharing your code on GitHub.
+
+3. Ask for feedback: Seek out feedback from your team members and peers to improve your work and ensure that you are meeting their needs.
+
+4. Celebrate successes: Celebrate the successes of your team and acknowledge individual contributions when appropriate. This can be done through recognition programs, team meetings, or even a small gift for a job well done.
+
+5. Stay engaged: Stay engaged with your team and colleagues to ensure that you are always learning and growing as an individual contributor.
+
+Remember, acknowledging your contributions is not about giving credit; it's about recognizing the hard work and impact that you have made."
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.","
+The AI Act does not explicitly mention which models would need to be officially registered. However, the definition of ""AI model"" in section 2(1) includes any system that uses an algorithm or a combination of algorithms to perform tasks. This includes general-purpose AI models such as deep learning models, reinforcement learning models, and generative AI models.
+
+The AI Act also provides for the registration of certain types of AI models, including those used in the provision of healthcare services or in the provision of financial services. These models are subject to specific regulatory requirements, such as data protection and privacy obligations.
+
+Overall, the AI Act does not specify which models would need to be officially registered, but it does provide for certain types of models to be subject to specific regulatory requirements."
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model).","
+AI systems that are considered to carry systemic risk include general-purpose AI models, such as those used in language translation, image recognition, and natural language processing. These models can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some examples of these models include Transformer models, which have been widely used for language translation, and GPT-3, which has been used for text generation. Other examples include convolutional neural networks (CNNs) and recurrent neural networks (RNNs), which are commonly used for natural language processing tasks such as sentiment analysis and machine translation. These models can carry systemic risk if they are designed to perform certain tasks or have a high degree of autonomy, which could lead to unintended consequences or negative impacts on society or the environment."
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.","
+The player will find various sentimental knick-knacks from the Emperor's previous life, before becoming an illithid. The quest that the Emperor gives the player is Visit the Emperor's Old Hideout, which is a quest in Baldur's Gate 3."
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.","
+The party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout."
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars.,"
+I do not have access to your specific location or the information about the pintxo bars you visited. However, based on the given text, it is unclear what kind of drinks you drank at the pintxo bars. It only mentions that you had a glass of txakoli at each one, which could be a type of Spanish wine or a traditional drink made from fermented grape juice."
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino.,"
+The part of the trip that you liked the most is mentioned in the conversation between the user and the AI. The highlights of the trip include hiking through fishing villages, past a truly breath-taking flysch rock formation, talking about everything, talking about nothing, laughing so hard it hurt, and sharing the most absurd moments with your friends."
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.","
+The infrareed scenes in Infrared are not explicitly explained, but they can be interpreted as a symbolic representation of the family's struggle to maintain their individuality and identity in a world where conformity is mandatory. The scenes showcase how the family cannot fully express themselves or be themselves in public, leading to them being seen as outsiders and ostracized by society. This can be interpreted as a metaphor for the family's struggle to maintain their individuality amidst the oppressive and conformist environment of Nazi Germany. The scenes also highlight the importance of individualism and self-expression in times of oppression, suggesting that even in the face of adversity, individuals must find ways to assert themselves and stand out from the crowd."
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil.,"
+The people who commit atrocities and those that are complicit in these acts differ in several ways:
+
+1. Motivations: The people who commit atrocities have a clear motivation to harm others, while those who are complicit may not have the same intentions or be aware of the atrocities being committed.
+
+2. Behavior: Those who commit atrocities are more likely to engage in violent and brutal behavior towards their victims, while those who are complicit may act with less violence but still participate in the atrocities.
+
+3. Attitudes: Those who commit atrocities tend to have a more extreme and uncompromising attitude towards their actions, while those who are complicit may be more accepting of the atrocities being committed.
+
+4. Motivations: The people who commit atrocities often have a sense of superiority or a desire for power over others, while those who are complicit may not have such motivations but still participate in the atrocities because they believe it is necessary to maintain their position or status.
+
+5. Behavior: Those who commit atrocities may engage in more extreme forms of violence and brutality than those who are complicit, while those who are complicit may be less violent but still participate in the atrocities because they feel a sense of duty to maintain their position or status.
+
+Overall, the people who commit atrocities and those who are complicit differ in several ways, including motivations, behavior, attitudes, and motivations."
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.","
+The policy on Tai Chi is not explicitly mentioned in the given text. However, it can be inferred that the Loony Party's proposal to redirect hot air from Parliament to gas distribution networks is related to Tai Chi. The Loony Party's suggestion to have half an hour of compulsory Tai Chi every day may also suggest a policy on Tai Chi as a way to calm down the passion and stress in Parliament."
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.,"
+The proposed change for the British Museum is to have a section dedicated to Daady, which would be located alongside the current Muumm exhibition. This change is not mentioned in the given text and is not explicitly stated as an answer to the question."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100.","
+The Teslas A100 and V100 are both high-performance GPUs designed for deep learning applications. The speedup between the two is not directly comparable, as it depends on various factors such as batch size, number of GPUs, and the specific tasks being performed. 
+
+NVIDIA provides benchmark results that show the A100 offering a speedup over the V100 for certain deep learning tasks. For example, in the case of image classification, the A100 offers a speedup of 7.00x compared to the V100. However, this is not a direct comparison as it does not take into account factors such as batch size and the number of GPUs being used.
+
+Overall, while the Teslas A100 and V100 are both high-performance GPUs designed for deep learning applications, their speedup may vary depending on specific tasks and configurations."
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training.,"
+I do not have access to the specific work you mentioned. However, based on the given context, it seems that you received criticism for your reduction of FLOPS required for sparse network training in your research."
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public.","
+In GlleaM, function exporting is different from Python in the following ways:
+
+1. Functions are defined as attributes of a class or module, not functions themselves. This means that functions can be defined and accessed using the dot notation `class_name.function_name` instead of the `function_name()` syntax used in Python.
+
+2. GlleaM does not have a built-in function library like Python. Instead, GlleaM uses a built-in module called `glama.builtins` to provide a set of predefined functions that can be imported and used within the program.
+
+3. In GlleaM, functions are defined using the `def` keyword and a list of arguments separated by commas. This syntax is similar to Python's function definition syntax, but with some differences:
+
+- The first argument is the name of the function, not its return type.
+- The second argument is an optional list of positional arguments that can be passed to the function as keyword arguments.
+- The third argument is an optional list of named arguments that can be passed to the function as keyword arguments.
+
+4. In GlleaM, functions are called using the `func()` syntax instead of the `function_name()` syntax used in Python. This syntax is similar to the built-in `print()` function in Python, but with some differences:
+
+- The `func()` syntax takes a single argument that is the name of the function being called.
+- The function name can be any string, not just a function name.
+- The function name can be followed by an optional list of positional arguments and/or named arguments.
+
+In summary, GlleaM's function exporting system differs from Python in that functions are defined as attributes of classes or modules instead of functions themselves, and they are called using the `func()` syntax instead of the `function_name()` syntax used in Python."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.,"
+In GleaM, the pipe symbol (|>) is used to indicate that an expression should be treated as a function call. Here's how it works:
+
+1. The pipe symbol is preceded by a left parenthesis (()), which indicates that the following expression is a function call.
+2. The function name and any arguments are separated by commas, with each argument being enclosed in parentheses.
+3. The function call returns a value, which is the result of evaluating the expression inside the function.
+4. The function call is executed as if it were a regular expression, and the resulting value is returned as the output of the pipe operator.
+
+For example:
+
+```
+|> 1 + 2
+3
+```
+
+In this example, the pipe operator is used to call the `+` operator on two numbers (1 and 2) and return their sum. The result is 3."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax.,"
+The top-right values in the raw attention weights are set to negative infinity because they represent the softmax output of the last row. The softmax operation is performed on the entire matrix, and the top-right value represents the probability that the input vector belongs to the first class (i.e., the second class). Since the softmax output is not a real number, we set these values to negative infinity to ensure that they are interpreted as zero. This ensures that the attention weights will be scaled by the inverse square root of the head_size matrix, which is known as scaled attn_weight."
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training.","
+To freeze a variable during training in MLX, you can use the `mx.set_default_ctx()` function to set the default context for your session. Here's an example:
+
+```python
+import mxnet as mx
+from mlx import mx.set_default_ctx
+
+# Set the default context for your session
+mx.set_default_ctx('gpu')
+
+# Create a model and set its parameters
+model = mx.mod(mx.var('X'), shape=(10, 2))
+
+# Freeze the parameter 'W'
+mx.set_default_ctx('cpu')
+with mx.session() as sess:
+    # Train the model with the frozen parameter 'W'
+    loss = sess.run(model.loss)
+```
+
+In this example, we set the default context to use the GPU and freeze the parameter `W` using the `mx.set_default_ctx()` function. We then create a new session with the CPU context and train the model with the frozen parameter `W`. Note that you can also freeze multiple parameters at once by passing a list of names as the second argument to `mx.set_default_ctx()`."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother.,"
+The narrator is not related to Perry in any way. The narrator is a fictional character who is simply reflecting on their own experiences and emotions, while Perry is a real person who is the subject of the conversation."
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days.,"
+The narrator has been sobriety for seven hundred and thirty days, which is approximately 150 days."
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".","
+The name of the space station is ""Portal 357""."
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese.,"
+The people of Pacifico del Rio speak the planet's native language, which is a mix of English and Tardis."
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3.,"
+Pet Adoption was added in patch 1.01, which was released on February 26th, 2016."
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0.,"
+Mushroom trees in Stardew Valley 1.5 were changed to drop wood every second day, which was unintentional and has been fixed in the latest version of the game."
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021.,"
+Alan Wake 2 was officially announced on May 24, 2023, during Sony's PlayStation Showcase live stream. The game was revealed to be a sequel to Alan Wake, which was released in 2010 for the PlayStation 3 and Xbox 360."
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake.","
+The game is set in the year 2035, which means it takes place after the digital release of ""The Last of Us Part II."""
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'.,"
+'Divine Rivals' was written by Rebecca Ross."
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer.,"
+The resurrection of Lou with a group of other murder victim is mentioned in the given text."
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.","
+The paper splits the RAG technique paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and a new category called ""RAG+."" The paper also identifies areas for improvement and challenges for future research."
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy.","
+Including unrelated documents in a retrieval and analysis system can significantly affect the accuracy of the system. When the system is trained on a large corpus of related documents, it may not be able to accurately identify relevant documents that are not related to the training data. This can lead to errors in the identification of relevant documents or even incorrect results.
+
+For example, if the RAG system is trained on a corpus of legal documents, and then used to analyze a document that is not related to legal topics, it may incorrectly identify the document as being related to legal topics. Similarly, if the RAG system is trained on a corpus of scientific papers, and then used to analyze a document that is not related to scientific topics, it may incorrectly identify the document as being related to scientific topics.
+
+This can lead to inaccurate results or even misleading conclusions about the relevance of the input documents. Therefore, including unrelated documents in a RAG system can have negative effects on its accuracy and usefulness for real-world applications."

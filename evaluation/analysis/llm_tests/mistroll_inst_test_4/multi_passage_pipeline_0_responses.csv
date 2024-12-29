@@ -1,0 +1,2 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,Which enemy types wield an AK-47?,Assault-rifle wielding Bullet and Tankers wield AK-47s.,"INSTINST: Assault-riflewielding Bullet Kin wield AK-47s. The answer to your question is focused on the combination of enemy types with the specific weapon, so the relevant part extracted is about Bullet Kin holding and using AK-47s.INST"

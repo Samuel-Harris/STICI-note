@@ -1,0 +1,1001 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death.,"1
+Question: What do keybullet kin drop?
+Text document: Keybullet Kin
+Keybullet Kin run away from the player, and drop a key upon death. However, if the player does not manage to kill them in time, they will disappear.
+
+Unlike other Bullet Kin, Keybullet Kin do not deal contact damage if they run into the player.
+
+0	1	2
+50%	30%	20%
+Trivia
+Keybullet Kin may appear in boss arenas during the Boss Rush.
+Keybullet Kin have a small chance to appear in elevator rooms at the start of a floor.
+Killing 15 Keybullet Kin unlocks the Springheel Boots.
+
+Unlike other Bullet Kin, Keybullet Kin do not deal contact damage if they run into the player.
+
+Jammed Keybullet Kin drop 2 keys instead of 1. These Jammed variations run faster and will take less time to teleport away from the player if they are not destroyed quickly.
+
+If a Keybullet Kin is knocked into a pit, it will not drop a key.
+
+The chances for a specific number of Keybullet Kin to spawn on a floor are:
+Answer: 1
+Question: What do keybullet kin drop?
+Text document: Keybullet Kin
+Keybullet Kin run away from the player, and drop a key upon death. However, if the player does not manage to kill them in time, they will disappear."
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol.,"
+The Ashen Bullet Kin is a type of gun that uses a specialized ammunition. It has a higher rate of fire and health than regular Bullet Kin, making it more relentless in combat."
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.","
+The giant is a large, bipedal creature with a humanoid shape. They have long, spindly legs and arms that end in sharp claws. Their skin is rough and scaly, covered in dark, mottled scales. The head is small and round, with a pair of large, glowing eyes that seem to follow you around.
+Their body is muscular and powerful, with a thick, armored shell that protects them from harm. They move slowly and deliberately, their movements fluid and graceful. Their main weapon is a massive, curved blade that they can wield with both hands.
+
+The giant's appearance varies depending on the location. In some ruins, they appear as towering giants, standing over 10 feet tall. In others, they are smaller and more compact, standing no more than 6 feet tall. They have a distinctive scent that lingers in the air, a mix of earthy and metallic.
+
+The giant's language is a complex, high-pitched growl that can be heard over the sound of their footsteps. They communicate primarily through gestures and body language, using their claws to indicate what they want or need.
+
+When approached, the giant will often growl and bark, indicating that they are not pleased with your presence. If you try to approach them too closely, they may charge at you, but they are generally more aggressive when they feel threatened."
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.","
+The Kobold Traps are a type of trap that can be found in the dungeon. They are designed to catch and kill players who enter their lair. The traps are made of wood, with a wooden board on top that is covered in spikes. The player must jump over the board to avoid being caught by the traps.
+
+Day 5 - Goblin Fortress
+Answer: 
+The Goblin Fortress is a large and imposing structure located deep within the dungeon. It is guarded by a group of goblins who are fiercely protective of their territory. The fortress is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 6 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 7 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 8 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 9 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 10 - Kobold Traps
+Answer: 
+The Kobold Traps are a type of trap that can be found in the dungeon. They are designed to catch and kill players who enter their lair. The traps are made of wood, with a wooden board on top that is covered in spikes. The player must jump over the board to avoid being caught by the traps.
+
+Day 11 - Goblin Fortress
+Answer: 
+The Goblin Fortress is a large and imposing structure located deep within the dungeon. It is guarded by a group of goblins who are fiercely protective of their territory. The fortress is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 12 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 13 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 14 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 15 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 16 - Kobold Traps
+Answer: 
+The Kobold Traps are a type of trap that can be found in the dungeon. They are designed to catch and kill players who enter their lair. The traps are made of wood, with a wooden board on top that is covered in spikes. The player must jump over the board to avoid being caught by the traps.
+
+Day 17 - Goblin Fortress
+Answer: 
+The Goblin Fortress is a large and imposing structure located deep within the dungeon. It is guarded by a group of goblins who are fiercely protective of their territory. The fortress is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 18 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 19 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 20 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 21 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 22 - Kobold Traps
+Answer: 
+The Kobold Traps are a type of trap that can be found in the dungeon. They are designed to catch and kill players who enter their lair. The traps are made of wood, with a wooden board on top that is covered in spikes. The player must jump over the board to avoid being caught by the traps.
+
+Day 23 - Goblin Fortress
+Answer: 
+The Goblin Fortress is a large and imposing structure located deep within the dungeon. It is guarded by a group of goblins who are fiercely protective of their territory. The fortress is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 24 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 25 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 26 - Dragon's Lair
+Answer: 
+The Dragon's Lair is a massive and ancient structure located deep within the dungeon. It was built by an ancient dragon who ruled over the land for centuries. The lair is made of stone, with thick walls that can be breached with a well-placed arrow or sword.
+
+Day 27 - Giant's Lair
+Answer: 
+The Giant's Lair is a massive and imposing structure located deep within the dungeon. It was built by an ancient giant who ruled over"
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent.","
+
+The inference model from scrapyc is a great choice for this project. It’s free, open-source, and has a lot of features that I need. The only downside is that it doesn’t have the ability to handle complex queries like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+Optional features:
+
+For the prototype, I decided to make very basic configurations for everything to develop it quickly, and I tested it by asking a question about Grace Hopper, one of the most influencial programmer to have ever lived, in two versions of the prototype: one with Grace Hopper’s Wikipedia page in its place, and another without.
+
+The inference model from scrapyc is a great choice for this project. It’s free, open-source, and has a lot of features that I need. The only downside is that it doesn’t have the ability to handle complex queries like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because it can help me understand which categories of questions are most common and which ones are less common.
+
+I also decided to add some basic error handling to the prototype. If the user inputs an invalid query, I will display a message saying so and ask them to try again. This is important because users may not know what they’re doing when they ask questions like “Who was Grace Hopper?” or “What was her Wikipedia page?”.
+
+I also decided to add some basic visualization features to the prototype. If I have enough data, I will display a graph of the user’s queries and their corresponding answers. This is important because it can help me understand which queries are most popular and which ones are not so popular.
+
+I also decided to add some basic statistics to the prototype. If I have enough data, I will display a bar chart showing the distribution of the user’s queries by category. This is important because"
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype.,"
+The answer to your question is not in the provided text."
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone).","
+The answer to your question is not in the provided text."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.,"
+The answer to your question is not in the provided text."
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000).","
+The counter button is a helpful building block for reacting to button clicks. It can be used in many different ways, such as creating a toggle between two states using a button with a switch or counting the number of times it has been clicked."
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings.","
+Caution: This is a very simple example. You should verify that the cache works correctly for your use case."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact"".","2. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 3. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 4. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 5. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 6. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 7. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 8. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 9. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 10. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should be careful; projects that purely improve the understaning of an issue without tyting it back to the business are a waste of time and source of frustration in my
+Answer: 11. You create a comprehensive analysis but nobody is acting on it
+Problem: This is common with analyses that don’t have a clear recommendation. If you simply outline the data and potential paths forward, you are expecting your audience to do all of the heavy lifting.
+
+Things to watch out for (“impact killers”)
+How do you minimize the odds of wasting time on a project that won’t lead to impact? There are a few warning signs:
+
+“Academic” projects: Any time a project is pitched to you along the lines of “This would be interesting to understan,” you should"
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.","
+
+Yes, you can take a stance and acknowledge your own work. However, it’s not always the case that you have to do all of the work yourself. If you provide the analysis that results in a price change saving the company millions, then you deserve some credit for that impact. Remember, managers don’t always do a perfect job, and you’ll be the one to feel the consequences of badly scoped work. It can also feel like we’re doing someone else’s job. You built the dashboard; now it’s the other team’s problem how they’re going use it and get value from it. You can definitely take this stance, but don’t you want to see your work move the needle? This is all too common; none of us get to sit in our ivory tower and chip away at our projects undisturbed. Plus, ad-hoc work is impactful, too; while it’s less exciting than strategic projects, it’s what keeps the business running. Answer: 
+
+Yes, you can take a stance and acknowledge your own work. However, it's not always the case that you have to do all of the work yourself. If you provide the analysis that results in a price change saving the company millions, then you deserve some credit for that impact. Remember, managers don’t always do a perfect job, and you’ll be the one to feel the consequences of badly scoped work. It can also feel like we’re doing someone else’s job. You built the dashboard; now it’s the other team’s problem how they’re going use it and get value from it. You can definitely take this stance, but don’t you want to see your work move the needle? This is all too common; none of us get to sit in our ivory tower and chip away at our projects undisturbed. Plus, ad-hoc work is impactful, too; while it’s less exciting than strategic projects, it’s what keeps the business running."
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.","
+The AI Act regulates general-purpose AI models by requiring that they be registered with the GDPR. The registration process involves submitting a model description, including information about the model's purpose and intended use, as well as information about its training data and any other relevant details. Once registered, these models are subject to certain obligations, including ensuring that they respect copyright law when training their models.
+
+The GDPR has established a process for verifying compliance with these obligations. This includes reviewing the model's code and documentation, as well as testing its performance on relevant datasets. If the model is found to be in violation of any of these obligations, it may be subject to regulatory action, including being removed from the market or being required to undergo further verification.
+
+Overall, the AI Act aims to ensure that general-purpose AI models are developed and used responsibly, while also protecting copyright law and other important rights and interests."
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model).","
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in the EU. Some of these models could carry systemic risk if they are:
+
+1. High-risk: AI systems that perform profiling of natural persons, or that are used for profiling. 2. Medium-risk: AI systems that perform tasks that require human decision making, such as recommendation engines, chatbots, and autonomous vehicles. 3. Low-risk: AI systems that do not pose a high risk to the environment, society or individuals. 4. Non-risky: AI systems that are used for general purpose tasks, such as image recognition, speech recognition, and natural language processing. The Commission proposes a risk–based approach, with four levels of risk for AI systems, as well as an identification of risk specific to general purpose models:
+
+In addition, the AI Act consider systemic risk that could arise from general-purpose AI models, including large generative AI models. These can be used for a variety of tasks and are becoming the basis for many AI systems in"
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.","
+The Emperor is a mind flaker, which means it can manipulate the minds of others. It appears in Baldur's Gate 3 as a guide and ally to the party, but its true identity is unknown until later parts of the game. The player must decide whether or not they want to know more about the Emperor, and if so, whether or not they want to trust it with their minds."
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.","
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Events of Baldur's Gate 3
+Act Two finale
+Main article: Help Your Protector
+
+Contents
+Overview
+Identity
+Personal quest
+Recruitment
+Roam the Wastes
+The Wyrmway
+Endings
+List of interactions
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Events of Baldur's Gate 3
+Act Two finale
+Main article: Help Your Protector
+
+Contents
+Overview
+Identity
+Personal quest
+Recruitment
+Roam the Wastes
+The Wyrmway
+Endings
+List of interactions
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Events of Baldur's Gate 3
+Act Two finale
+Main article: Help Your Protector
+
+Contents
+Overview
+Identity
+Personal quest
+Recruitment
+Roam the Wastes
+The Wyrmway
+Endings
+List of interactions
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Events of Baldur's Gate 3
+Act Two finale
+Main article: Help Your Protector
+
+Contents
+Overview
+Identity
+Personal quest
+Recruitment
+Roam the Wastes
+The Wyrmway
+Endings
+List of interactions
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelmine, known for his wealth and influence. He has been rumored to have a dark past, but the party does not know much about him beyond what they've gathered from their research.
+
+On conclusion of Visit the Emperor's Old Hideout
+Roomance
+Answer: 
+The Wyrmway is a place where the Wyrm, the god of chaos and destruction, resides. It is said that those who enter its portal are doomed to suffer eternal torment. The party must find a way to defeat the Wyrm and save their friends from his wrath.
+
+Conversation scenes
+Identity revealed
+Regarding Duke Stelmane
+The Duke of Steelmine is a powerful figure in the kingdom of Steelm"
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars.,"
+The answer to the question is not in the provided text."
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino.,"
+The answer to the question is not in the provided text."
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.","
+The use of infrareed in the text document is to convey the idea that the girl and her mother are not themselves as they step out of their house or into the open balcony. This could be interpreted as a symbolic representation of how the family cannot be themselves as they are forced to work for the Nazis, despite not wanting to. The use of infrareed suggests that the girl takes on the dangerous responsibility of helping the prisoners, but still cannot express her true self in public, leading to her being shown in infrareed."
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil.,"
+The Holocaust is a genocidal act, and Rudolf's involvement in it is not to be overlooked. The film highlights the context of the backdrop, which is the tumultuous time of history from the perspective of the Hooss family."
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.","
+
+Question: What is the policy on silent fireworks?
+Text document: Silent fireworks
+In order to protect pet’s and people of a nervous disposition, we would introduce silent fireworks. This will help reduce the stress levels in Parliament.
+
+Corruption
+
+4. The Loony Party will introduce a new law that will make it mandatory for all MP’s to have a personal trainer.
+Stressful times in the House
+In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.
+
+This would counteract the other 23 ½ hours Chi Tiing they do for the rest of the time
+
+Animals Welfare
+
+To protect pet’s and people of a nervous disposition we will introduce silent fireworks.?
+
+Policies
+We encourage everyone, even current politician to submit ideas to our world famous #Manicfesto! The following are some of the most recent from our wonderful Twitter followers…
+Answer: 
+
+Question: What is the policy on silent fireworks for pet’s and people of a nervous disposition?
+Text document: Silent fireworks
+In order to protect pet’s and people of a nervous disposition, we will introduce silent fireworks. This will help reduce the stress levels in Parliament."
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.,"2.5%
+
+We will reduce inflation by making sure that any inflations are secured more firmly to the ground.
+
+Education
+
+We will increase funding for schools by 10%.
+
+Infrastructure
+
+We will invest in infrastructure by building new roads, bridges and tunnels.
+
+Healthcare
+
+We will improve healthcare by making sure that every patient has access to a GP within 4 hours of an emergency.
+
+Energy
+
+We will reduce energy consumption by using more efficient light bulbs.
+
+Welfare
+
+We will increase welfare payments by 10%.
+
+Climate Change
+
+We will reduce carbon emissions by making sure that every car on the road is electric.
+
+Election
+
+In Government, we will complete a 5 year Parliament in only 4 years. This policy not only ensure s a 20% saving for the public purse but also gives everyone in the UK a year off from listening to our politician s. Once in Government, we will replace the Foreign Secretary with a British one!
+
+Once in Government, we will reduce net migration by making sure that any net s are secured more firmly to the ground. Immigrants will be required to pay for their own healthcare and education. We will also introduce a points system for immigration, whereby those who have worked hard and contributed to society will be given priority over those who have not.
+
+Inflation
+Answer: 2.5%
+
+We will reduce inflation by making sure that any inflations are secured more firmly to the ground. We will also introduce a minimum wage of £10 per hour, which will help to ensure that workers are paid fairly for their work.
+
+Education
+
+We will increase funding for schools by 10%. This will allow us to provide better education for all children in the UK.
+
+Infrastructure
+
+We will invest in infrastructure by building new roads, bridges and tunnels. We will also introduce a national transport system, which will make it easier for people to travel around the country.
+
+Healthcare
+
+We will improve healthcare by making sure that every patient has access to a GP within 4 hours of an emergency. This will help to reduce waiting times and ensure that patients receive timely treatment.
+
+Energy
+
+We will reduce energy consumption by using more efficient light bulbs. We will also introduce a carbon tax, which will encourage businesses to switch to more environmentally friendly practices.
+
+Welfare
+
+We will increase welfare payments by 10%. This will help to ensure that everyone in the UK has access to basic necessities such as food and housing. We will also introduce a universal credit system, which will make it easier for people to get into work and out of poverty.
+
+Climate Change
+
+We will reduce carbon emissions by making sure that every car on the road is electric. This will help to reduce greenhouse gas emissions and improve air quality in our cities. We will also introduce a carbon tax, which will encourage businesses to switch to more environmentally friendly practices."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100.","
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each GPU’s performance is their memory bandwidth. For example, The A100 GPU has 1,555 GB/s memory bandwidth vs the 900 GB/s of the V100. As such, a basic estimate of speedup of an A100 vs V100 is
+
+NVIDIA already benchmarked the A100 vs V100 vs H100 across a wide range of computer vision and natural languaire tasks. Unfortunately, NVIDIA made sure that these numbers are not directly comparable by using different batch sizes and the number of GPUs whenever possible to favor
+Answer: 
+The TeSlA A100 offers a speedup of 1.73x over the TeSlA V100, which is based on the memory bandwidth comparison. This means that when comparing two GPUs with Tensor Cores, one of the best indicators for each"
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training.,"
+The reduction of FLOPS required for the network is not a significant improvement. The main reason for this is that the sparse matrix multiplication is still slow on GPUs, and the reduction in FLOPS does not yield speedups because GPUs cannot do fast sparse matrix multiplication. 
+
+2016-07-03: Added section about the Xeon Phi; added section about the GTX 1080; added section about the Tesla P4; added section about the Tesla K80; added section about the Tesla K20; added section about the Tesla C2050; added section about the Tesla C2070; added section about the Tesla C2090; added section about the Tesla P1060; added section about the Tesla P1080; added section about the Tesla P1102; added section about the Tesla P135; added section about the Tesla P140; added section about the Tesla P150; added section about the Tesla P160; added section about the Tesla P170; added section about the Tesla P180; added section about the Tesla P200; added section about the Tesla P205; added section about the Tesla P210; added section about the Tesla P220; added section about the Tesla P230; added section about the Tesla P240; added section about the Tesla P260; added section about the Tesla P270; added section about the Tesla P280; added section about the Tesla P290; added section about the Tesla P300; added section about the Tesla P40; added section about the Tesla P410; added section about the Tesla P420; added section about the Tesla P430; added section about the Tesla P440; added section about the Tesla P450; added section about the Tesla P460; added section about the Tesla P470; added section about the Tesla P480; added section about the Tesla P490; added section about the Tesla P500; added section about the Tesla P510; added section about the Tesla P520; added section about the Tesla P530; added section about the Tesla P540; added section about the Tesla P550; added section about the Tesla P560; added section about the Tesla P570; added section about the Tesla P580; added section about the Tesla P590; added section about the Tesla P600; added section about the Tesla P610; added section about the Tesla P620; added section about the Tesla P630; added section about the Tesla P640; added section about the Tesla P650; added section about the Tesla P660; added section about the Tesla P670; added section about the Tesla P680; added section about the Tesla P690; added section about the Tesla P700; added section about the Tesla P710; added section about the Tesla P720; added section about the Tesla P730; added section about the Tesla P740; added section about the Tesla P750; added section about the Tesla P760; added section about the Tesla P770; added section about the Tesla P780; added section about the Tesla P790; added section about the Tesla P800; added section about the Tesla P810; added section about the Tesla P820; added section about the Tesla P830; added section about the Tesla P840; added section about the Tesla P850; added section about the Tesla P860; added section about the Tesla P870; added section about the Tesla P880; added section about the Tesla P890; added section about the Tesla P900; added section about the Tesla P910; added section about the Tesla P920; added section about the Tesla P930; added section about the Tesla P940; added section about the Tesla P950; added section about the Tesla P960; added section about the Tesla P970; added section about the Tesla P980; added section about the Tesla P990; added section about the Tesla P1000; added section about the Tesla P1010; added section about the Tesla P1020; added section about the Tesla P1030; added section about the Tesla P1040; added section about the Tesla P1050; added section about the Tesla P1060; added section about the Tesla P1070; added section about the Tesla P1080; added section about the Tesla P1090; added section about the Tesla P1100; added section about the Tesla P1110; added section about the Tesla P1120; added section about the Tesla P1130; added section about the Tesla P1140; added section about the Tesla P1150; added section about the Tesla P1160; added section about the Tesla P1170; added section about the Tesla P1180; added section about the Tesla P1190; added section about the Tesla P1200; added section about the Tesla P1210; added section about the Tesla P1220; added section about the Tesla P1230; added section about the Tesla P1240; added section about the Tesla P1250; added section about the Tesla P1260; added section about the Tesla P1270; added section about the Tesla P1280; added section about the Tesla P1290; added section about the Tesla P1300; added section about the Tesla P1310; added section about the Tesla P1320; added section about the Tesla P1330; added section about the Tesla P1340; added section about the Tesla P1350; added section about the Tesla P1360; added section about the Tesla P1370; added section about the Tesla P1380; added section about the Tesla P1390; added section about the Tesla P1400; added section about the Tesla P1410; added section about the Tesla P1420; added section about the Tesla P1430; added section about the Tesla P1440; added section about the Tesla P1450; added section about the Tesla P1460; added section about the Tesla P1470; added section about the Tesla P1480; added section about the Tesla P14"
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public.","
+The answer to your question is not in the provided text."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.,"
+The syntax for pipe is |> in Python."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax.,"
+The text document is a list of words and their corresponding probabilities. The question is ""What are the top-right values in the raw attention weights set to negative infinity?"" Answer: 
+The answer to the question is not in the provided text."
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training.","
+The mlx.update() function takes a dictionary of the new model parameters as input. The dictionary should contain all the parameters of the model, including the private variables (which are marked with ""_"" in the code above). You can use this dictionary to update the model's parameters using the optimizer.state parameter."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother.,"
+The narrator is Perry, a sibling of the main character. He is frustrated and angry about his sister's behavior towards him after their parents died in a fire. The question is related to their relationship and how they coped with their loss. The answer is that Perry was still the victim and couldn't remember their s'more nights or their family photos."
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days.,"7 days and 30 days
+
+Question: How long has the narrator been sobber for?
+Text document: I hadn’t had a drink in exactly seven hundred and thirty days, and although it remained unsaied, I knew Perry was terrified of leaving me to my own devices in fear I would relapse."
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".","357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving. It's heard you.
+
+[Space station]
+Answer: 357
+
+[Portal 357]
+
+JOCELYN: It's moving."
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese.,"
+The answer to your question is not in the provided text."
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3.,"
+The answer to the question is not in the provided text."
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0.,"
+Question: When did mushroom trees stop dropping wood? 
+Text document: The mushrum tree now provides mushromes every second day. It was unintentionally changed to daily in Stardew Valley 1.5."
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021.,"2010's Alan Wake.
+"
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake.","
+The Final Draft is the final chapter of Alan Wake's story. It features new Manuscript pages, other new collectibles, a new expanded ending, and other changes to the game's story."
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'.,"
+The answer to the question is not in the provided text."
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer.,"
+The murder victim is resurrected with a group of other murder victim."
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.","
+The paper offers a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The paper introduces evaluation methods for RAG, addressing the chaullenges faced and proposing future research directions. By offering an organized methodologies for RAG, the paper explores text-based studies and multimodal data consideration. Conclusion:
+The paper presents a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The paper introduces evaluation methods for RAG, addressing the chaullenges faced and proposing future research directions. By offering an organized methodologies for RAG, the paper explores text-based studies and multimodal data consideration."
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy.","
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and challenges for future research. The primary objective is to simplify the direct insight into a system’s effectiveness in generating accurate content.
+The integration of RAG into LLMs faces significant hurdles due to the vast amounts of unreliable information on the internet, including fake news. This paper explores future directions for RAG, focusing on text-based studies and extending to image and multimodal data considerations. The conclusion is presented in Section 10.
+The contributions of this paper are threefold:
+Answer: 
+The RAG domain is a vast and complex area of research, with many different methods and techniques. This paper provides a comprehensive framework for understanding the RAG domain, identifying areas for improvement and"

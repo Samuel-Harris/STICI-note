@@ -1,0 +1,8 @@
+{
+    "model_path": [
+      "models/model_weights/Phi-3-mini-4k-instruct-q4.gguf"
+    ],
+    "temperature": [0.5, 0.25],
+    "top_p": [0.5],
+    "top_k": [8, 16]
+  }

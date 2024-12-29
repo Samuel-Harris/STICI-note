@@ -1,4 +1,14 @@
+# IDE
 .idea/
-*/.ipynb_checkpoints/
-prototype/*.gguf
+
+# OS
 .DS_Store
+
+# Jupyter notebook
+**/.ipynb_checkpoints/
+
+# model files
+*.gguf
+
+# Chroma db
+*.sqlite3

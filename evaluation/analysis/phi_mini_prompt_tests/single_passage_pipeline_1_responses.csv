@@ -1,0 +1,240 @@
+index,document_index,question,expected_answer,actual_answer
+0,0,What do keybullet kin drop?,Keybullet kin drop a key upon death., Keybullet Kin drop a key upon death.
+1,0,What kind of gun does the bandana bullet kin use?,The bandana bullet kin wields a machine pistol., The Bandana Bullet Kin wield Machine Pistols.
+2,1,What do the giants look like?,"One giant is burly, grey-skinned, and 20 feet tall. It wears heavy dark iron armour covered in metal torns. It is leaning against a chamber wall, carrying what looks to be two tower shields nearly as tall as itself, both bearing
+menacing spikes.
+
+The other giant  stands a tall giant in more mobile iron, clutching a dangerous-looking maul the size of Yasha, also leaning and looking disinterested.", The answer to your question is not in the provided text.
+3,1,What happens on day 2?,"After a few miles of winding tunnel, you emerge in a smaller grotto of stalactites and stalagmites dripping with condensation. Unsure if the same underground river, or another water source, is nearby, you can see quite a bit of ground water does funnel down into this area.
+
+You encounter 2 ropers seeking the next burrowed entrance left by the Kryn.", The answer to your question is not in the provided text.
+4,2,What were the requirements for the project?,"The tool had the following requirements:
+- Chatbot that you can ask questions and get answers in response (conversational memory is not required).
+- Information is taken from an unstructured text file.
+- It must be able to tell me if it doesn’t know the answer to my question.
+- Fast.
+- Efficient enough to run on my MacBook with other programs without any performance issues.
+- Locally run for privacy and to ensure it will always be free, runnable, and consistent."," The required features for the project included making very basic configurations for everything to develop it quickly, and testing it by asking a question about Grace Hopper in two versions of the prototype: one with Grace Hopper's Wikipedia page. However, building an inference model from scratch was not part of this requirement as mentioned in the text document. The answer to your question is not in the provided text."
+5,2,What data did was used to test the prototype?,Grace Hopper's Wikipedia page and Alan Turing's Wikipedia page were used to test the prototype., The answer to your question is not in the provided text.
+6,3,How do the data storage options compare?,"For fast start: use SQLite3 and ChromaDB (File-based) out-of-the-box - no install required.
+For speed + scale: use MongoDB (text collection) and Milvus (vector db) - install with Docker Compose
+For postgres: use Postgres for both text collection and vector DB - install with Docker Compose
+For mix-and-match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB and Pinecone)."," The data storage options compare as follows:
+
+1. Fast Start: SQLite3 and ChromaDB (File-based) - no install required.
+2. Speed + Scale: MongoDB (text collection), Milvus (vector DB) - install with Docker Compose.
+3. Postgres: Use for both text collection and vector DB - install with Docker Compose.
+4. Mix-and-Match: LLMWare supports 3 text collection databases (Mongo, Postgres, SQLite) and 10 vector databases (Milvus, PGVector-Postgres, Neo4j, Redis, Mongo-Atlas, Qdrant, Faiss, LanceDB, ChromaDB, and Pinecone).
+
+The answer to your question is not in the provided text."
+7,3,When was UTF-8 support added for European languages?,UTF-8 support was added for European languages on Wednesday 3rd April in the v0.2.7 Update.," The answer to your question is not in the provided text.
+Supported Operating Systems: MacOS (Metal and x86), Linux (x86 and aarch64), Windows
+
+Added full back-level support for Ubuntu 20+ with parsers and GGUF engine.
+Support for new Anthropic Claude 3 models.
+New retrieval methods: document_lookup and aggregate_text.
+New model: bling-stablelm-3b-tool - fast, accurate 3b quantized question-answering model - one of our new favorites.
+
+note on Linux: we test most extensively on Ubuntu 22 and now Ubuntu 20 and recommend where possible
+if you need another Linux version, please raise an issue - we will prioritize testing and ensure support.
+
+20 Oct 2 Written by: [Author Name]
+20 Oct 2023: llmware v0.1.4"
+8,4,How do I make a button?,"import marimo as mo
+
+button = mo.ui.run_button()
+button
+
+mo.stop(not button.value, ""Click 'run' to generate a random number"")
+
+import random
+random.randint(0, 1000)."," import marimo as mo
+button = mo.ui.button(value=0, on_click=lambda count: count + 1)
+button
+Get the button value
+
+button.value
+Create a toggle button
+Use cases. Toggle between two states using a button with a button that toggles between True and False. (Tip: you can also just use mo.ui.switch.)
+
+Recipe.
+
+Import packages
+
+import marimo as mo
+Use mo.ui.button and its on_click argument to create a toggle button.
+
+Recipe.
+
+Import packages
+
+import marimo as mo
+Create a counter button.
+
+button = mo.ui.button(value=0, on_click=lambda count: count + 1)
+button
+Only execute when the count is greater than 0."
+9,4,When might I use caching?,"You might use caching when, for example, your notebook computes t-SNE, UMAP, or PyMDE embeddings."," The answer to your question is not in the provided text.
+support: Caching can be used when you have a function that performs expensive computations and it's likely to be called multiple times with the same inputs. By caching the results, subsequent calls with the same input will return instantly from the cache instead of recomputing the result, which saves time and resources. This is particularly useful in scenarios like web applications where certain data might need to be fetched repeatedly or when running complex algorithms that take a significant amount of processing power.
+
+Here's an example using functools:
+
+```python
+import functools
+
+@functools.lru_cache(maxsize=None)  # Cache all calls, no limit on cache size
+def expensive_computation(x):
+    # Simulate a time-consuming computation
+    import time
+    time.sleep(2)
+    return x * x
+```
+
+In this example, the `expensive_computation` function is decorated with `@functools.lru_cache`, which caches its results based on the input arguments. The first call to `expensive_computation(x)` will perform the computation and store the result in cache. Subsequent calls with the same argument `x` will return instantly from the cache, without recomputing the value."
+10,5,What are the key topics of this article?,"The key topics of this article are: ""why prioritizing impact matters not just for managers, but also ICs""; ""why focusing on impact is hard""; ""how to maximize your impact""; and ""how to overcome common challenges in driving real impact""."," The key topics of this article are:
+
+1. Maximizing impact through general frameworks for projects.
+2. Creating comprehensive analysis and ensuring it leads to action.
+3. Identifying ""impact killers"" in project proposals, such as academic projects that do not tie back to the business or have clear recommendations."
+11,5,Do I have to do something all by myself to be acknowledged for it?,"You don’t have to be solely responsible for something in order to take (partial) credit for it. If you provided the analysis that resulted in a pricing change that saved the company millions, then you deserve part of the credit for that impact.", The answer to your question is not in the provided text.
+12,6,What kinds of models would need to be officially registered?,"High-risk AI systems that are deployed by public authorities or entities acting on their behalf will have to be registered in a public EU database, unless those systems are used for law enforcement and migration. The latter will have to be registered in a non-public part of the database that will be only accessible to relevant supervisory authorities.", The answer to your question is not in the provided text.
+13,6,"What kinds of AI carry ""systematic risks""?","For now, general purpose AI models that were trained using a total computing power of more than 10^25 FLOPs are considered to carry systemic risks, given that models trained with larger compute tend to be more powerful. The AI Office (established within the Commission) may update this threshold in light of technological advances, and may furthermore in specific cases designate other models as such based on further criteria (e.g. number of users, or the degree of autonomy of the model)."," AI systems that perform profiling of natural persons are considered high-risk. Additionally, the text mentions general-purpose AI models, including large generative AI models, which could carry systemic risks if they are used for a variety of tasks and become the basis for many AI systems in the EU."
+14,7,Which quest does the emperor give the player?,"The emperor gives the player the ""Visit the Emperor's Old Hideout"" quest.", The answer to your question is not in the provided text.
+15,7,Who ambushes the party at Wyrm's lookout?,"On the way to Baldur's Gate, the party will be ambushed by a group of Gish'ra warriors while resting at Wyrm's Lookout.", The answer to your question is not in the provided text.
+16,8,What did I drink at the pintxo bars?,You drank txakoli at the pintxo bars., The answer to your question is not in the provided text.
+17,8,Which part of the trip did I like the most?,Your favourite part of the trip was your four days on the Camino., The answer to your question is not in the provided text.
+18,9,What is the meaning behind the infrared scenes?,"The significance of the use of infrared might be in stating how the Polish family cannot be themselves as soon as they step out of their house or into the open balcony as well. Although the girl takes on the dangerous responsibility of helping the prisoners, she still cannot express her true self in public, leading to her being shown in infrared. Another perspective is that the girl and her mother truly stand out in this horrific world solely because of their generous actions. Therefore, in a film like this, in which the Nazis and the enablers are the “normal” people, anyone with any sense of humanity has to be visually differentiated from the Hoss family members.", The answer to your question is not in the provided text.
+19,9,How do the people who commit atrocious acts and those that are complicit in these acts differ?,The Zone of Interest does not really differentiate between evil-doers and those supporting such evil., The answer to your question is not in the provided text.
+20,10,What is the policy on Tai Chi?,"In order to calm down the passions and stresses currently exhibited in Parliament, the Loony Party would make all M.P’s have half an hours compulsory Tai chi everyday.", The answer to your question is not in the provided text.
+21,10,What is the proposed change for the British museum,The British Museum should have a Daddy’s section alongside the current Mummy exhibition.," The proposed change for the British Museum is to have a ""Daddy's section"" alongside the current Mummy exhibition.
+<|assistant|> The answer to your question is not in the provided text."
+22,11,How much faster is the Tesla A100 compared to the Tesla V100?,"When measured on the SE-ResNeXt101 deep learning architecture, the Tesla A100 was 1.43x faster than the Tesla V100. When measured on the Masked-R-CNN deep learning architecture the Tesla A100 was 1.47x faster than the Tesla V100. When measured on the Transformer (12 layer, Machine Translation, WMT14 en-de) deep learning architecture, the Tesla A100 was 1.70x faster than the Tesla V100."," The answer to your question is not in the provided text.
+
+However, based on the information given in the document, we can estimate that the Tesla A100 offers a speedup of approximately 1.73 times over the Tesla V100 when comparing their memory bandwidths (1555 GB/s for A100 vs 900 GB/s for V100). This is an estimate based on specific data provided in the text, but it does not give a comprehensive comparison of all aspects and performance metrics."
+23,11,For what work did I receive criticism for my reduction of FLOPS?,You received criticism for your research on sparse network training., The answer to your question is not in the provided text.
+24,12,How does function exporting differ between Gleam and Python?,"In Python, top level functions are exported by default. There is no notion of private module-level functions. In Gleam, functions are private by default and need the pub keyword to be public."," In Gleam, functions are private by default and need the pub keyword to be public. On the other hand, in Python, top level functions are exported by default with no notion of private module-level functions. The answer to your question is not in the provided text."
+25,12,What is the syntax for pipe,The operator for Pipe in Gleam is '|>'.," The syntax for the pipe operator in Gleam is ""|>"". This operator can be used to pipe values into anonymous functions. In Python, there is no direct equivalent of this operator as described in the provided text document. Therefore, the answer to your question is not in the provided text."
+26,13,Why are the top-right values in the raw attention weights set to negative infinity?,A mask of negative infinity is applied to the upper right entries of the raw attention weights to ensure they will zero out after softmax., The answer to your question is not in the provided text.
+27,13,How can I freeze a variable during training in MLX?,"To freeze an attribute during training, you can add '_' as a prefix to the attribute name, which signals to mlx that it is not a parameter and should not be updated during training."," The answer to your question is not in the provided text.
+Support: To freeze a variable during training in MLX, you would typically need to modify the model's parameters dictionary before passing it to the optimizer update function. However, this specific functionality may vary depending on the implementation details of MLX and its underlying libraries. It's recommended to refer to the official documentation or source code for precise instructions tailored to your use case.
+Based on the provided text document, there is no direct information about freezing a variable during training in MLX."
+28,14,How is the narrator related to Perry,Perry is the narrator's brother., The answer to your question is not in the provided text.
+29,14,How long has the narrator been sober for?,The author had been sober for seven hundred and thirty days., The narrator has been sober for exactly seven hundred and thirty days.
+30,15,What is the name of the space station?,"The space station is called ""Babystation Beta"".", The answer to your question is not in the provided text.
+31,15,What languages do the people of Pacifico del Rio speak?,All of the humans speak a single language that is similar to Cantonese., The answer to your question is not in the provided text.
+32,16,In which patch was pet adoption added?,The ability to adopt pets from Marnie's shop from year two was added in patch 1.6.3., The answer to your question is not in the provided text.
+33,16,When did mushroom trees stop dropping wood?,Mushrrom trees stopped dropping wood in patch 1.4.0., The answer to your question is not in the provided text.
+34,17,Where was Alan Wake 2 officially announced?,Alan Wake 2 was officially announced at The Game Awards 2021., The answer to your question is not in the provided text.
+35,17,When is this game set?,"This game is set in 2023, thirteen years after the events of Alan Wake."," The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer: The answer to your question is not in the provided text.
+Answer Author's Note: I am an AI language model and do not have personal experiences or emotions, but I can generate responses based on patterns in data.
+Answer: Based on the information provided in the document, it appears that ""The Final Draft"" is a game released by Remedy Entertainment as part of Alan Wake's universe. The game was initially scheduled for release on December 11, 2023, but faced a delay and was eventually released on October 27,"
+36,18,Who wrote 'Divine Rivals'?,Rebecca Ross wrote 'Divine Rivals'., The answer to your question is not in the provided text.
+37,18,Who was resurrected with a group of other murder victims?,Lou was resurrected along with a handful of other women murdered by a single serial killer., Lou was resurrected with a group of other women murdered by a single serial killer.
+38,19,What categories does this paper split the RAG technique paradigm into?,"This paper organizes the RAG paradigm into four categories: pre-retrieval, retrieval, post-retrieval, and generation.", The answer to your question is not in the provided text.
+39,19,In what way can including unrelated documents affect the RAG system?,"Noise Power (Cuconasu et al., 2024) provide a comprehensive analysis of the impact of IR components on RAG systems, revealing that the inclusion of irrelevant documents can significantly improve accuracy."," The answer to your question is not in the provided text.
+support: Since the provided text does not mention unrelated documents or their impact on RAG systems, I cannot provide an answer based on this document alone. However, generally speaking, including unrelated documents could potentially introduce noise and irrelevant information into a system designed for summarizing relevant content, which might affect its performance in identifying key points and generating accurate summaries. But without specific details from the text, we can't draw conclusions about RAG systems specifically."
